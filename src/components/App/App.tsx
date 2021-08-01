@@ -1,5 +1,5 @@
 import { Layout } from "antd";
-import "./App.css";
+import './App.less';
 import { Login } from "../Login";
 
 const { Header, Content, Footer } = Layout;

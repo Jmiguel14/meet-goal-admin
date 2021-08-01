@@ -1,5 +1,5 @@
 import { Form, Input, Button, Row, Col, Typography } from "antd";
-import styles from "./styles.module.css";
+import "./styles.less";
 
 const { Title, Text } = Typography;
 
@@ -15,14 +15,14 @@ export const Login = () => {
   };
 
   return (
-    <div className={styles.form}>
+    <div className='formC'>
       <Row justify="center">
         <Col>
           <Title level={2}>INICIAR SESIÓN</Title>
         </Col>
       </Row>
 
-      <Row className={styles.formContent}>
+      <Row className='formContent'>
         <Col>
           <Form form={form} name="control-hooks" onFinish={onFinish}>
             <Form.Item name="email" label="Correo" rules={[{ required: true }]}>
