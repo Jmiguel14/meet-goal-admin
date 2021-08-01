@@ -1,0 +1,22 @@
+.form {
+    border: 2px;
+    border-radius: 25px;
+    background-color: antiquewhite;
+    height: 300px;
+    width: 500px;
+}
+
+.formContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 580px) {
+    .form {
+      height: 100%;
+      width: 100vh;
+      border-radius: 0px;
+      flex-direction: column;
+    }
+  }
