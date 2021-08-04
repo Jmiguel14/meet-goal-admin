@@ -42,11 +42,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   return (
     <AuthContext.Provider value={value}>
-      {loading ? (
-        <Loading size='large'/>
-      ) : (
-        children
-      )}
+      {loading ? <Loading size="large" /> : children}
     </AuthContext.Provider>
   );
 };

@@ -3,7 +3,7 @@ import { Button, Col, Layout, Popover, Row } from "antd";
 import "./styles.less";
 import MeetGoalIcon from "../../icons/MeetGoalIcon";
 import { Navigation } from "../Navigation";
-import MenuIcon  from "../../icons/MenuIcon";
+import MenuIcon from "../../icons/MenuIcon";
 
 const { Header, Content, Footer } = Layout;
 
@@ -22,7 +22,7 @@ export const MainLayout: React.FC = ({ children }) => {
 
           <Col xs={2} className="responsive-menu">
             <Popover content={<Navigation mode="vertical" />} trigger="click">
-              <Button type='primary'>
+              <Button type="primary">
                 <MenuIcon />
               </Button>
             </Popover>

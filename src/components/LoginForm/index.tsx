@@ -2,14 +2,14 @@ import { Form, Input, Button, Row, Col, Typography, FormInstance } from "antd";
 import "./styles.less";
 
 interface LoginFormProps {
- form: FormInstance<any> | undefined
-  onFinish: ((values: any) => void) | undefined
-  onReset: React.MouseEventHandler<HTMLElement> | undefined
+  form: FormInstance<any> | undefined;
+  onFinish: ((values: any) => void) | undefined;
+  onReset: React.MouseEventHandler<HTMLElement> | undefined;
 }
 
 const { Title, Text } = Typography;
 
-export const LoginForm = ({form, onFinish, onReset}: LoginFormProps) => {
+export const LoginForm = ({ form, onFinish, onReset }: LoginFormProps) => {
   return (
     <>
       <Row justify="center">

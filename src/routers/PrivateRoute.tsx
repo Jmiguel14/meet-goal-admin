@@ -5,7 +5,7 @@ import { useAuth } from "../contexts/AuthContext";
 
 type PrivateRoutesProps = {
   component: React.ComponentType;
-} & RouteProps
+} & RouteProps;
 
 export const PrivateRoutes = ({
   component: Component,
@@ -20,5 +20,5 @@ export const PrivateRoutes = ({
     );
   };
 
-  return <Route {...rest} render={render}/>;
+  return <Route {...rest} render={render} />;
 };

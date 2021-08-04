@@ -19,7 +19,7 @@ export const Navigation = ({ mode }: NavigationProps) => {
   const { currentUser, logout } = useAuth();
   const history = useHistory();
   const location = useLocation();
-  const [menuLocation, setMenuLocation] = useState(location.pathname)
+  const [menuLocation, setMenuLocation] = useState(location.pathname);
 
   const handleSigout = async () => {
     try {
@@ -30,38 +30,45 @@ export const Navigation = ({ mode }: NavigationProps) => {
     }
   };
 
-  useEffect(()=>{
-      setMenuLocation(location.pathname)
-  }, [location])
+  useEffect(() => {
+    setMenuLocation(location.pathname);
+  }, [location]);
 
   const handleClick = (e: MenuInfo) => {
-    console.log('menuInfo', e)
-    const keySelected = e.key
-    setMenuLocation(keySelected)
-  }
+    console.log("menuInfo", e);
+    const keySelected = e.key;
+    setMenuLocation(keySelected);
+  };
 
   return (
-    <Menu mode={mode} className="menu" selectedKeys={[menuLocation]} onClick={handleClick}>
+    <Menu
+      mode={mode}
+      className="menu"
+      selectedKeys={[menuLocation]}
+      onClick={handleClick}
+    >
       {currentUser ? (
         <>
           <Item icon={<FutbolIcon />} key={Routes.PLAYERS}>
-              <Link to={Routes.PLAYERS}>Futbolistas</Link>
+            <Link to={Routes.PLAYERS}>Futbolistas</Link>
           </Item>
           <Item icon={<ClubIcon />} key={Routes.CLUBS}>
-              <Link to={Routes.CLUBS}>Clubes</Link>
+            <Link to={Routes.CLUBS}>Clubes</Link>
           </Item>
           <Item icon={<NewsIcon />} key={Routes.NEWS}>
-              <Link to={Routes.NEWS}>Noticias</Link>
+            <Link to={Routes.NEWS}>Noticias</Link>
           </Item>
-          <SubMenu icon={<UserOutlined />} title="Admin" key='Admin'>
+          <SubMenu icon={<UserOutlined />} title="Admin" key="Admin">
             <Item key={Routes.PROFILE}>
-                <Link to={Routes.PROFILE}>Perfil</Link>
+              <Link to={Routes.PROFILE}>Perfil</Link>
             </Item>
-            <Item onClick={handleSigout} key='signout'>Cerrar sesión</Item>
+            <Item onClick={handleSigout} key="signout">
+              Cerrar sesión
+            </Item>
           </SubMenu>
         </>
       ) : location.pathname === Routes.LOGIN ? (
-        <Item key='goHome'>
+        <Item key="goHome">
           <Link to={Routes.HOME}>Ir al inicio</Link>
         </Item>
       ) : location.pathname === Routes.HOME ||
@@ -70,7 +77,7 @@ export const Navigation = ({ mode }: NavigationProps) => {
           <Item key={Routes.HOME}>
             <Link to={Routes.HOME}>Inicio</Link>
           </Item>
-          <Item key=''>Servicios</Item>
+          <Item key="">Servicios</Item>
           <Item key={Routes.ABOUT}>
             <Link to={Routes.ABOUT}>Nosotros</Link>
           </Item>

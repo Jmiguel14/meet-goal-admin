@@ -5,35 +5,34 @@ import { Routes } from "../../constants/routes";
 import { useAuth } from "../../contexts/AuthContext";
 import "./styles.less";
 
-
 interface LoginFormValues {
   email: string;
-  password: string
+  password: string;
 }
 
 const Login = () => {
   const [form] = Form.useForm();
-  const { login } = useAuth()
-  const history = useHistory()
+  const { login } = useAuth();
+  const history = useHistory();
 
   const onFinish = async (values: LoginFormValues) => {
-    const {email, password} = values;
+    const { email, password } = values;
     try {
-      await login(email, password)
-      history.push(Routes.NEWS)
+      await login(email, password);
+      history.push(Routes.NEWS);
       form.resetFields();
-    } catch(error) {
-      console.log(error)
+    } catch (error) {
+      console.log(error);
     }
-    };
+  };
 
   const onReset = () => {
     form.resetFields();
   };
 
   return (
-    <div className='form'>
-      <LoginForm form={form} onFinish={onFinish} onReset={onReset}/>
+    <div className="form">
+      <LoginForm form={form} onFinish={onFinish} onReset={onReset} />
     </div>
   );
 };
