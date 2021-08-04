@@ -1,28 +1,24 @@
-import { Form, Input, Button, Row, Col, Typography } from "antd";
+import { Form, Input, Button, Row, Col, Typography, FormInstance } from "antd";
 import "./styles.less";
+
+interface LoginFormProps {
+ form: FormInstance<any> | undefined
+  onFinish: ((values: any) => void) | undefined
+  onReset: React.MouseEventHandler<HTMLElement> | undefined
+}
 
 const { Title, Text } = Typography;
 
-export const Login = () => {
-  const [form] = Form.useForm();
-
-  const onFinish = (values: any) => {
-    console.log(values);
-  };
-
-  const onReset = () => {
-    form.resetFields();
-  };
-
+export const LoginForm = ({form, onFinish, onReset}: LoginFormProps) => {
   return (
-    <div className='formC'>
+    <>
       <Row justify="center">
         <Col>
           <Title level={2}>INICIAR SESIÓN</Title>
         </Col>
       </Row>
 
-      <Row className='formContent'>
+      <Row className="formContent">
         <Col>
           <Form form={form} name="control-hooks" onFinish={onFinish}>
             <Form.Item name="email" label="Correo" rules={[{ required: true }]}>
@@ -37,7 +33,7 @@ export const Login = () => {
             >
               <Input.Password />
             </Form.Item>
-            <Row justify='center'>
+            <Row justify="center">
               <Col>
                 <Button type="primary" htmlType="submit">
                   Ingresar
@@ -51,13 +47,14 @@ export const Login = () => {
             </Row>
           </Form>
         </Col>
-      </Row><br/>
+      </Row>
+      <br />
 
       <Row justify="center">
         <Col>
           <Text type="secondary">¿Olvidó su contraseña?</Text>
         </Col>
       </Row>
-    </div>
+    </>
   );
 };
