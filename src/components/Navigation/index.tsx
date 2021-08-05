@@ -35,7 +35,6 @@ export const Navigation = ({ mode }: NavigationProps) => {
   }, [location]);
 
   const handleClick = (e: MenuInfo) => {
-    console.log("menuInfo", e);
     const keySelected = e.key;
     setMenuLocation(keySelected);
   };
@@ -77,13 +76,13 @@ export const Navigation = ({ mode }: NavigationProps) => {
           <Item key={Routes.HOME}>
             <Link to={Routes.HOME}>Inicio</Link>
           </Item>
-          <Item key="">Servicios</Item>
+          <Item key="services">Servicios</Item>
           <Item key={Routes.ABOUT}>
             <Link to={Routes.ABOUT}>Nosotros</Link>
           </Item>
         </>
       ) : (
-        <Item></Item>
+        <Item key='void'></Item>
       )}
     </Menu>
   );
