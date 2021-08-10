@@ -11,6 +11,7 @@ const AsyncAbout = loadable(() => import("../pages/About"));
 const AsyncPlayers = loadable(() => import("../pages/Players"));
 const AsyncClubs = loadable(() => import("../pages/Clubs"));
 const AsyncProfile = loadable(() => import("../pages/Profile"));
+const AsyncCreateNews = loadable(() => import("../pages/CreateNews"));
 
 export const AppRouter = () => {
   return (
@@ -22,8 +23,9 @@ export const AppRouter = () => {
       <PrivateRoutes path={Routes.PLAYERS} component={AsyncPlayers} />
       <PrivateRoutes path={Routes.CLUBS} component={AsyncClubs} />
       <PrivateRoutes path={Routes.PROFILE} component={AsyncProfile} />
+      <PrivateRoutes path={Routes.CREATE_NEWS} component={AsyncCreateNews}/>
       <Route exact path="/">
-        <Redirect to={Routes.HOME} />
+        <Redirect to={Routes.NEWS} />
       </Route>
       <Route>No found</Route>
     </Switch>

@@ -1,6 +1,6 @@
 const PublicRoutes = {
   LOGIN: "/iniciar-sesion",
-  HOME: "/home",
+  HOME: "/inicio",
   ABOUT: "/nosotros",
 };
 
@@ -9,6 +9,7 @@ const PrivateRoutes = {
   PLAYERS: "/jugadores",
   CLUBS: "/clubes",
   PROFILE: "/perfil",
+  CREATE_NEWS: "/crear-noticia"
 };
 
 export const Routes = {
