@@ -72,3 +72,7 @@ export const updateNewsItem = (id: string, {
     image,
   })
 }
+
+export const deleteNewsItem = (id: string) => {
+  return firestore.collection('news').doc(id).delete()
+}

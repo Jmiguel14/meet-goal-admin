@@ -1,29 +1,34 @@
-import { EditOutlined, EyeOutlined } from "@ant-design/icons";
-import { Card, Col, Row, Form, Input, Button, message } from "antd";
-import Modal from "antd/lib/modal/Modal";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
+import { Col, Row, Form, Button, message, Modal } from "antd";
 import firebase from "firebase";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { ListOfNews } from "../../components/ListOfNews";
+import { UpdateNewsModal } from "../../components/UpdateNewsModal";
 import { Routes } from "../../constants/routes";
-import { listtenLatestNews, updateNewsItem, uploadImage } from "../../firebase/client";
+import {
+  deleteNewsItem,
+  listtenLatestNews,
+  updateNewsItem,
+  uploadImage,
+} from "../../firebase/client";
 import { NewsFormValues } from "../../types";
 import "./styles.less";
 
 const News = () => {
   const [news, setNews] = useState<firebase.firestore.DocumentData>();
   const [isVisibleModal, setIsVisibleModal] = useState(false);
-  console.log("news", news);
   const [newsItem, setNewsItem] = useState<NewsFormValues>(
     {} as NewsFormValues
   );
-  console.log("newsItemState", newsItem);
 
   const [imgURL, setImgURL] = useState<string>("");
-  const [task, setTask] = useState<firebase.storage.UploadTask>()
+  const [task, setTask] = useState<firebase.storage.UploadTask>();
 
   const history = useHistory();
-  const { Meta } = Card;
   const [form] = Form.useForm();
+
+  const { confirm } = Modal;
 
   useEffect(() => {
     const unsubscribe = listtenLatestNews(setNews);
@@ -47,10 +52,8 @@ const News = () => {
     }
   }, [task]);
 
-  const showModal = (index: number, newsItem: NewsFormValues) => {
+  const showModal = (newsItem: NewsFormValues) => {
     setIsVisibleModal(true);
-    console.log("index", index);
-    console.log("newsItem", newsItem);
     const { image } = newsItem;
     setImgURL(image);
     setNewsItem(newsItem);
@@ -62,26 +65,54 @@ const News = () => {
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files![0]
-    const task = uploadImage(file)
-    setTask(task)
+    const file = e.target.files![0];
+    const task = uploadImage(file);
+    setTask(task);
   };
 
   const handleClick = () => {
     history.push(Routes.CREATE_NEWS);
   };
 
-  const onFinish = async (values: NewsFormValues) => {
-    console.log("newsItemFromOnFinish", newsItem);
-    const { title, description, source } = values;
-    console.log("values", values);
-    console.log('imgURL', imgURL);
+  const handleDelete = async (id: string) => {
     try {
-      await updateNewsItem(newsItem.id!, { title, description, source, image: imgURL });
-      message.success('Noticia actualizada exitosamente!')
-    } catch(e) {
-      console.log(e)
-      message.error(`Ocurrio un error del tipo ${e}`)
+      await deleteNewsItem(id);
+      message.success("Noticia eliminada exitosamente!");
+    } catch (e) {
+      message.error(`Ocurrió un error de tipo ${e}`);
+    }
+  };
+
+  const showDeleteConfirm = (id: string) => {
+    confirm({
+      title: "¿Esta seguro que desea eliminar la noticia?",
+      icon: <ExclamationCircleOutlined />,
+      okText: "Sí",
+      okType: "danger",
+      cancelText: "No",
+      onOk() {
+        handleDelete(id);
+      },
+      onCancel() {
+        console.log("Cancel");
+      },
+    });
+  };
+
+  const onFinish = async (values: NewsFormValues) => {
+    const { title, description, source } = values;
+    if (imgURL === "")
+      return message.error("Debe establecer una imagen en la noticia!");
+    try {
+      await updateNewsItem(newsItem.id!, {
+        title,
+        description,
+        source,
+        image: imgURL,
+      });
+      message.success("Noticia actualizada exitosamente!");
+    } catch (e) {
+      message.error(`Ocurrio un error del tipo ${e}`);
     }
   };
 
@@ -95,57 +126,23 @@ const News = () => {
           <Button onClick={handleClick}>Ir a crear</Button>
         </Col>
       </Row>
-      <div className="list_of_news">
-        {news?.map((newsItem: NewsFormValues, index: number) => {
-          return (
-            <Card
-              className="card"
-              key={index}
-              cover={<img className="card_image" src={newsItem.image} />}
-              actions={[
-                <EyeOutlined key="watch"/>,
-                <EditOutlined
-                  key="edit"
-                  onClick={() => showModal(index, newsItem)}
-                />,
-              ]}
-            >
-              <Meta title={newsItem.title} description={newsItem.description}/>
-            </Card>
-          );
-        })}
-      </div>
-      <Modal
-        onOk={() => setIsVisibleModal(false)}
-        onCancel={() => setIsVisibleModal(false)}
-        visible={isVisibleModal}
-        okButtonProps={{ htmlType: "submit", form: "news_edit_form" }}
-      >
-        <Form
-          form={form}
-          onFinish={onFinish}
-          id="news_edit_form"
-          initialValues={{
-            title: newsItem?.title,
-            description: newsItem?.description,
-          }}
-        >
-          <div className="image">
-            <img className="edit_image" src={imgURL} />
-          </div>
-          <input type="file" onChange={handleImageChange} />
 
-          <Form.Item name="title">
-            <Input />
-          </Form.Item>
-          <Form.Item name="description">
-            <Input />
-          </Form.Item>
-          <Form.Item name="source">
-            <Input />
-          </Form.Item>
-        </Form>
-      </Modal>
+      <ListOfNews
+        news={news}
+        onShowModal={showModal}
+        onShowDeleteConfirm={showDeleteConfirm}
+      />
+
+      <UpdateNewsModal
+        onSetIsVisibleModal={setIsVisibleModal}
+        onSetImgURL={setImgURL}
+        onFinish={onFinish}
+        onHandleImageChange={handleImageChange}
+        isVisibleModal={isVisibleModal}
+        form={form}
+        newsItem={newsItem}
+        imgURL={imgURL}
+      />
     </>
   );
 };

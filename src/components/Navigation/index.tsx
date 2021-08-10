@@ -1,4 +1,4 @@
-import { Menu } from "antd";
+import { Menu, message } from "antd";
 import { MenuMode, MenuInfo } from "rc-menu/lib/interface";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
@@ -26,7 +26,7 @@ export const Navigation = ({ mode }: NavigationProps) => {
       await logout();
       history.push(Routes.LOGIN);
     } catch (e) {
-      console.log(e);
+      message.error(`Ocurrió un error del tipo ${e}`)
     }
   };
 
