@@ -1,9 +1,11 @@
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Form, Input, Button, Row, Col, Typography, FormInstance } from "antd";
+import { LoginFormValues } from "../../types";
 import "./styles.less";
 
 interface LoginFormProps {
   form: FormInstance<any> | undefined;
-  onFinish: ((values: any) => void) | undefined;
+  onFinish: ((values: LoginFormValues) => void) | undefined;
   onReset: React.MouseEventHandler<HTMLElement> | undefined;
 }
 
@@ -21,17 +23,19 @@ export const LoginForm = ({ form, onFinish, onReset }: LoginFormProps) => {
       <Row className="formContent">
         <Col>
           <Form form={form} name="control-hooks" onFinish={onFinish}>
-            <Form.Item name="email" label="Correo" rules={[{ required: true }]}>
-              <Input />
+            <Form.Item name="email" rules={[{ required: true, message: "Por favor, ingrese su correo!"  }]}>
+              <Input prefix={<UserOutlined />} placeholder="Correo"/>
             </Form.Item>
             <Form.Item
-              label="Contraseña"
               name="password"
               rules={[
-                { required: true, message: "Please input your password!" },
+                { required: true, message: "Por favor, ingrese su contraseña!" },
               ]}
             >
-              <Input.Password />
+              <Input.Password 
+              prefix={<LockOutlined className="site-form-item-icon" />}
+              placeholder='Contraseña'
+              />
             </Form.Item>
             <Row justify="center">
               <Col>

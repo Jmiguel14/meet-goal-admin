@@ -4,12 +4,8 @@ import { LoginForm } from "../../components/LoginForm";
 import { Routes } from "../../constants/routes";
 import { USERS_MAIL } from "../../constants/users";
 import { useAuth } from "../../contexts/AuthContext";
+import { LoginFormValues } from "../../types";
 import "./styles.less";
-
-interface LoginFormValues {
-  email: string;
-  password: string;
-}
 
 const Login = () => {
   const [form] = Form.useForm();
@@ -37,8 +33,10 @@ const Login = () => {
   };
 
   return (
-    <div className="form">
-      <LoginForm form={form} onFinish={onFinish} onReset={onReset} />
+    <div className='form_login_container'>
+      <div className="form">
+        <LoginForm form={form} onFinish={onFinish} onReset={onReset} />
+      </div>
     </div>
   );
 };
