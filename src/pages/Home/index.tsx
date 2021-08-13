@@ -130,18 +130,20 @@ const Home = () => {
             </div>
           </Col>
           <Col span={12} className="gutter-row">
-            <div className="home_info_container">
-              <Image
-                src={MiguelProfile}
-                width={270}
-                className="developers_photos"
-              />
-              <Image
-                src={FreddyProfile}
-                width={270}
-                className="developers_photos"
-              />
-            </div>
+            <Row justify="space-around" align="middle">
+              <div className="home_info_container">
+                <Image
+                  src={MiguelProfile}
+                  width={270}
+                  className="developers_photos"
+                />
+                <Image
+                  src={FreddyProfile}
+                  width={270}
+                  className="developers_photos"
+                />
+              </div>
+            </Row>
           </Col>
         </Row>
       </div>

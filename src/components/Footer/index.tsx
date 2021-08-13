@@ -2,6 +2,7 @@ import { Col, Row } from "antd";
 import Text from "antd/lib/typography/Text";
 import "./styles.less";
 import React from "react";
+import GitHubIcon from "../../icons/GitHubIcon";
 
 const index = () => {
   return (
@@ -15,9 +16,14 @@ const index = () => {
             <div className="home_info_container">
               <Row>
                 <Col>
-                  <Text className="footer_details">
-                    Miguel Ángel Jurado Cedeño
-                  </Text>
+                  <Row>
+                    <Text className="footer_details">
+                      Miguel Ángel Jurado Cedeño
+                    </Text>
+                  </Row>
+                  <Row justify="center">
+                    <GitHubIcon />
+                  </Row>
                 </Col>
               </Row>
             </div>
@@ -41,9 +47,18 @@ const index = () => {
           </Col>
           <Col span={8} className="gutter-row">
             <div className="home_info_container">
-              <Text className="footer_details">
-                Freddy Geovanny Valverde Gallardo
-              </Text>
+              <Row>
+                <Col>
+                  <Row>
+                    <Text className="footer_details">
+                      Freddy Geovanny Valverde Gallardo
+                    </Text>
+                  </Row>
+                  <Row justify="center">
+                    <GitHubIcon />
+                  </Row>
+                </Col>
+              </Row>
             </div>
           </Col>
         </Row>
