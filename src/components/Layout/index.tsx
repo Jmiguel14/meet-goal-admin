@@ -4,6 +4,7 @@ import "./styles.less";
 import MeetGoalIcon from "../../icons/MeetGoalIcon";
 import { Navigation } from "../Navigation";
 import MenuIcon from "../../icons/MenuIcon";
+import FooterActions from "../Footer/index";
 
 const { Header, Content, Footer } = Layout;
 
@@ -30,7 +31,9 @@ export const MainLayout: React.FC = ({ children }) => {
         </Row>
       </Header>
       <Content className="content">{children}</Content>
-      <Footer className="footer"></Footer>
+      <Footer className="footer">
+        <FooterActions />
+      </Footer>
     </Layout>
   );
 };
