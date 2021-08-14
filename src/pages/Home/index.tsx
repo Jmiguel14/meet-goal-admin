@@ -7,8 +7,15 @@ import MeetGoalIcon from "../../icons/MeetGoalIcon";
 import "./styles.less";
 import MiguelProfile from "../../icons/MiguelProfile.jpg";
 import FreddyProfile from "../../icons/FreddyProfile.jpg";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 const Home = () => {
+  let location = useLocation();
+
+  useEffect(() => {
+    console.log(location.pathname);
+  }, [location]);
   return (
     <>
       <div className="home_info_container">
@@ -19,7 +26,7 @@ const Home = () => {
           <Row justify="center">
             <Title level={2} className="primary_title">
               Meet Goal es una aplicación creada en beneficio al desarrollo
-              futbolistico, permitiendo a los clubes crear convocatorias en una
+              futbolístico, permitiendo a los clubes crear convocatorias en una
               red global de futbolistas.
             </Title>
           </Row>
