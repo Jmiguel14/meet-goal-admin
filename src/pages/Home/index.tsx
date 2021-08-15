@@ -1,4 +1,4 @@
-import { Button, Card, Col, Divider, Image, Row } from "antd";
+import { Card, Col, Divider, Image, Row } from "antd";
 import Text from "antd/lib/typography/Text";
 import Title from "antd/lib/typography/Title";
 import CoverHomeIcon from "../../icons/CoverHomeIcon";
@@ -9,9 +9,8 @@ import MiguelProfile from "../../icons/MiguelProfile.jpg";
 import FreddyProfile from "../../icons/FreddyProfile.jpg";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { Element, scroller, animateScroll as scroll } from "react-scroll";
+import { Element, scroller } from "react-scroll";
 import { Routes } from "../../constants/routes";
-import { CaretUpOutlined } from "@ant-design/icons";
 
 const Home = () => {
   let location = useLocation();
@@ -23,9 +22,6 @@ const Home = () => {
   };
 
   useEffect(() => {
-    if (location.pathname === Routes.HOME) {
-      scroller.scrollTo("home_info", scrollType);
-    }
     if (location.pathname === Routes.SERVICES) {
       scroller.scrollTo("services_info", scrollType);
     }
@@ -34,10 +30,6 @@ const Home = () => {
     }
     console.log(location.pathname);
   });
-
-  function goToTop() {
-    scroll.scrollToTop();
-  }
   return (
     <>
       <Element name="home_info">
@@ -197,22 +189,6 @@ const Home = () => {
           style={{ borderWidth: 2, borderColor: "#99ff98", color: "#99ff98" }}
         ></Divider>
       </Element>
-      <Button
-        style={{
-          position: "fixed",
-          bottom: "5%",
-          right: "5%",
-          width: "50px",
-          height: "50px",
-          borderColor: "#99ff98",
-          background: "transparent",
-        }}
-        icon={
-          <CaretUpOutlined style={{ fontSize: "40px", color: "#99ff98" }} />
-        }
-        shape="circle"
-        onClick={() => goToTop()}
-      ></Button>
     </>
   );
 };
