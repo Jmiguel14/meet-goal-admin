@@ -47,57 +47,64 @@ const Home = () => {
             </Row>
           </Col>
         </div>
-        <div className="home_info_with_cover">
-          <Col>
-            <CoverHomeIcon width={391} height={378} />
-          </Col>
-          <Col>
-            <Row justify="center">
-              <Title level={2} className="primary_title">
-                Si eres un futbolista con sueños de crear una carrera.
-              </Title>
-            </Row>
-            <Row>
-              <Divider
-                style={{
-                  borderWidth: 2,
-                  borderColor: "#99ff98",
-                  color: "#99ff98",
-                }}
-              >
-                O
-              </Divider>
-            </Row>
-            <Row justify="center">
-              <Title level={2} className="primary_title">
-                Perteneces a un club profesional o amateur, una Academia o eres
-                un DT, con ganas de formar un equipo competitivo.
-              </Title>
-            </Row>
-            <Row justify="center">
-              <Title level={2} className="primary_title">
-                Descarga nuestra aplicación. Disponible Ya en Google Play!
-              </Title>
-            </Row>
-            <Row justify="center">
-              <GooglePlayIcon width={50} height={50} />
-            </Row>
-          </Col>
+
+        <div className="home_info_container">
+          <Row justify="center">
+            <Col lg={12} xl={12}>
+              <CoverHomeIcon width={361} height={348} />
+            </Col>
+            <Col lg={12} xl={12}>
+              <Row justify="center">
+                <Title level={2} className="primary_title">
+                  Si eres un futbolista con sueños de crear una carrera.
+                </Title>
+              </Row>
+              <Row>
+                <Divider
+                  style={{
+                    borderWidth: 2,
+                    borderColor: "#99ff98",
+                    color: "#99ff98",
+                  }}
+                >
+                  O
+                </Divider>
+              </Row>
+              <Row justify="center">
+                <Title level={2} className="primary_title">
+                  Perteneces a un club profesional o amateur, una Academia o
+                  eres un DT, con ganas de formar un equipo competitivo.
+                </Title>
+              </Row>
+              <Row justify="center">
+                <Title level={2} className="primary_title">
+                  Descarga nuestra aplicación. Disponible Ya en Google Play!
+                </Title>
+              </Row>
+              <Row justify="center">
+                <GooglePlayIcon width={50} height={50} />
+              </Row>
+            </Col>
+          </Row>
         </div>
       </Element>
       <Element name="services_info">
         <Divider
           style={{ borderWidth: 2, borderColor: "#99ff98", color: "#99ff98" }}
         ></Divider>
-        <div className="site-card-wrapper" style={{ textAlign: "center" }}>
-          <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-            <Col span={8} className="gutter-row">
+
+        <div
+          className="site-card-wrapper"
+          style={{ textAlign: "center", width: "100%" }}
+        >
+          <Row justify="center">
+            <Col lg={8} xl={8} className="gutter-row">
               <div className="home_info_container">
                 <Card
                   title="Crear Convocatorias"
                   bordered={true}
                   style={{
-                    width: 240,
+                    width: 250,
                     height: 200,
                     backgroundColor: "#d0dde1",
                   }}
@@ -109,13 +116,13 @@ const Home = () => {
                 </Card>
               </div>
             </Col>
-            <Col span={8} className="gutter-row">
+            <Col lg={8} xl={8} className="gutter-row">
               <div className="home_info_container">
                 <Card
                   title="Ver perfil de jugadores"
                   bordered={true}
                   style={{
-                    width: 240,
+                    width: 250,
                     height: 200,
                     backgroundColor: "#d0dde1",
                   }}
@@ -127,13 +134,13 @@ const Home = () => {
                 </Card>
               </div>
             </Col>
-            <Col span={8} className="gutter-row">
+            <Col lg={8} xl={8} className="gutter-row">
               <div className="home_info_container">
                 <Card
                   title="Ver Noticias deportivas"
                   bordered={true}
                   style={{
-                    width: 240,
+                    width: 250,
                     height: 200,
                     backgroundColor: "#d0dde1",
                   }}
@@ -151,10 +158,11 @@ const Home = () => {
       <Divider
         style={{ borderWidth: 2, borderColor: "#99ff98", color: "#99ff98" }}
       ></Divider>
+
       <Element name="about_info">
-        <div>
-          <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-            <Col span={12} className="gutter-row">
+        <div className="home_info_container" style={{ width: "100%" }}>
+          <Row justify="center">
+            <Col lg={12} xl={12}>
               <div className="home_info_container">
                 <Text className="our_description">
                   El equipo de desarrollo, esta conformado por estudiantes de la
@@ -167,17 +175,20 @@ const Home = () => {
                 </Text>
               </div>
             </Col>
-            <Col span={12} className="gutter-row">
-              <Row justify="space-around" align="middle">
-                <div className="home_info_container">
+            <Col lg={12} xl={12}>
+              <Row justify="center" align="middle">
+                <div
+                  className="home_info_container"
+                  style={{ alignItems: "center" }}
+                >
                   <Image
                     src={MiguelProfile}
-                    width={270}
+                    width={"100%"}
                     className="developers_photos"
                   />
                   <Image
                     src={FreddyProfile}
-                    width={270}
+                    width={"100%"}
                     className="developers_photos"
                   />
                 </div>
