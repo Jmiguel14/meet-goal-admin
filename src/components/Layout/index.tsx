@@ -4,7 +4,7 @@ import "./styles.less";
 import MeetGoalIcon from "../../icons/MeetGoalIcon";
 import { Navigation } from "../Navigation";
 import MenuIcon from "../../icons/MenuIcon";
-import FooterActions from "../Footer/index";
+import FooterActions from "../Footer/Footer";
 import { useLocation } from "react-router-dom";
 import { animateScroll as scroll } from "react-scroll";
 import { Routes } from "../../constants/routes";

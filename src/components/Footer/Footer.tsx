@@ -3,6 +3,7 @@ import Text from "antd/lib/typography/Text";
 import "./styles.less";
 import React from "react";
 import GitHubIcon from "../../icons/GitHubIcon";
+import { Link } from "react-router-dom";
 
 const index = () => {
   return (
@@ -21,9 +22,14 @@ const index = () => {
                       Miguel Ángel Jurado Cedeño
                     </Text>
                   </Row>
-                  <Row justify="center">
-                    <GitHubIcon />
-                  </Row>
+                  <Link
+                    to={{ pathname: "https://github.com/Jmiguel14" }}
+                    target="_blank"
+                  >
+                    <Row justify="center">
+                      <GitHubIcon />
+                    </Row>
+                  </Link>
                 </Col>
               </Row>
             </div>
@@ -54,9 +60,14 @@ const index = () => {
                       Freddy Geovanny Valverde Gallardo
                     </Text>
                   </Row>
-                  <Row justify="center">
-                    <GitHubIcon />
-                  </Row>
+                  <Link
+                    to={{ pathname: "https://github.com/FreddyJR1995" }}
+                    target="_blank"
+                  >
+                    <Row justify="center">
+                      <GitHubIcon />
+                    </Row>
+                  </Link>
                 </Col>
               </Row>
             </div>

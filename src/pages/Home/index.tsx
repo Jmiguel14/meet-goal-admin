@@ -1,4 +1,4 @@
-import { Button, Card, Col, Divider, Image, Row } from "antd";
+import { Card, Col, Divider, Image, Row } from "antd";
 import Text from "antd/lib/typography/Text";
 import Title from "antd/lib/typography/Title";
 import CoverHomeIcon from "../../icons/CoverHomeIcon";
@@ -7,7 +7,7 @@ import MeetGoalIcon from "../../icons/MeetGoalIcon";
 import "./styles.less";
 import MiguelProfile from "../../icons/MiguelProfile.jpg";
 import FreddyProfile from "../../icons/FreddyProfile.jpg";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { Element, scroller } from "react-scroll";
 import { Routes } from "../../constants/routes";
@@ -54,7 +54,8 @@ const Home = () => {
             <Col lg={12} xl={12}>
               <Row justify="center" style={{ width: "100%" }}>
                 <Title level={2} className="primary_title">
-                  Si eres un futbolista con sueños de crear una carrera.
+                  Si eres un futbolista con sueños de formar tu carrera
+                  deportiva.
                 </Title>
               </Row>
               <Row>
@@ -157,13 +158,10 @@ const Home = () => {
             </Col>
           </Row>
           <Row justify="center">
-            <Button
-              href="/nosotros"
-              type="link"
-              style={{ color: "#d0dde1", fontSize: "22px" }}
-            >
-              Saber más...
-            </Button>
+            <Link to="/nosotros" style={{ color: "#d0dde1", fontSize: "22px" }}>
+              {" "}
+              Saber más...{" "}
+            </Link>
           </Row>
         </div>
       </Element>
