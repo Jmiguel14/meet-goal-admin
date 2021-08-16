@@ -1,4 +1,4 @@
-import { Card, Col, Divider, Image, Row } from "antd";
+import { Button, Card, Col, Divider, Image, Row } from "antd";
 import Text from "antd/lib/typography/Text";
 import Title from "antd/lib/typography/Title";
 import CoverHomeIcon from "../../icons/CoverHomeIcon";
@@ -17,7 +17,7 @@ const Home = () => {
   const scrollType = {
     duration: 500,
     delay: 50,
-    smooth: true, // linear “easeInQuint” “easeOutCubic”
+    smooth: true,
     offset: -10,
   };
 
@@ -28,7 +28,6 @@ const Home = () => {
     if (location.pathname === Routes.TEAM) {
       scroller.scrollTo("about_info", scrollType);
     }
-    console.log(location.pathname);
   });
   return (
     <>
@@ -47,14 +46,13 @@ const Home = () => {
             </Row>
           </Col>
         </div>
-
         <div className="home_info_container">
           <Row justify="center">
             <Col lg={12} xl={12}>
-              <CoverHomeIcon width={361} height={348} />
+              <CoverHomeIcon width={"100%"} />
             </Col>
             <Col lg={12} xl={12}>
-              <Row justify="center">
+              <Row justify="center" style={{ width: "100%" }}>
                 <Title level={2} className="primary_title">
                   Si eres un futbolista con sueños de crear una carrera.
                 </Title>
@@ -97,6 +95,11 @@ const Home = () => {
           className="site-card-wrapper"
           style={{ textAlign: "center", width: "100%" }}
         >
+          <Row justify="center">
+            <Title level={1} style={{ color: "#99ff98" }}>
+              SERVICIOS
+            </Title>
+          </Row>
           <Row justify="center">
             <Col lg={8} xl={8} className="gutter-row">
               <div className="home_info_container">
@@ -152,6 +155,15 @@ const Home = () => {
                 </Card>
               </div>
             </Col>
+          </Row>
+          <Row justify="center">
+            <Button
+              href="/nosotros"
+              type="link"
+              style={{ color: "#d0dde1", fontSize: "22px" }}
+            >
+              Saber más...
+            </Button>
           </Row>
         </div>
       </Element>
