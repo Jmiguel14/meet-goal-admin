@@ -18,12 +18,14 @@ export const AppRouter = () => {
     <Switch>
       <PublicRoute path={Routes.LOGIN} component={AsyncLogin} />
       <PublicRoute path={Routes.HOME} component={AsyncHome} />
+      <PublicRoute path={Routes.SERVICES} component={AsyncHome} />
+      <PublicRoute path={Routes.TEAM} component={AsyncHome} />
       <PublicRoute path={Routes.ABOUT} component={AsyncAbout} />
       <PrivateRoutes path={Routes.NEWS} component={AsyncNews} />
       <PrivateRoutes path={Routes.PLAYERS} component={AsyncPlayers} />
       <PrivateRoutes path={Routes.CLUBS} component={AsyncClubs} />
       <PrivateRoutes path={Routes.PROFILE} component={AsyncProfile} />
-      <PrivateRoutes path={Routes.CREATE_NEWS} component={AsyncCreateNews}/>
+      <PrivateRoutes path={Routes.CREATE_NEWS} component={AsyncCreateNews} />
       <Route exact path="/">
         <Redirect to={Routes.NEWS} />
       </Route>

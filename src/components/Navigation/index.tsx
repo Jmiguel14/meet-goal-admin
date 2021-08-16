@@ -26,7 +26,7 @@ export const Navigation = ({ mode }: NavigationProps) => {
       await logout();
       history.push(Routes.LOGIN);
     } catch (e) {
-      message.error(`Ocurrió un error del tipo ${e}`)
+      message.error(`Ocurrió un error del tipo ${e}`);
     }
   };
 
@@ -48,12 +48,19 @@ export const Navigation = ({ mode }: NavigationProps) => {
     >
       {currentUser ? (
         location.pathname === Routes.HOME ||
+        location.pathname === Routes.SERVICES ||
+        location.pathname === Routes.TEAM ||
         location.pathname === Routes.ABOUT ? (
           <>
             <Item key={Routes.HOME}>
               <Link to={Routes.HOME}>Inicio</Link>
             </Item>
-            <Item key="services">Servicios</Item>
+            <Item key={Routes.SERVICES}>
+              <Link to={Routes.SERVICES}>Servicios</Link>
+            </Item>
+            <Item key={Routes.TEAM}>
+              <Link to={Routes.TEAM}>Equipo</Link>
+            </Item>
             <Item key={Routes.ABOUT}>
               <Link to={Routes.ABOUT}>Nosotros</Link>
             </Item>
@@ -88,12 +95,19 @@ export const Navigation = ({ mode }: NavigationProps) => {
           <Link to={Routes.HOME}>Ir al inicio</Link>
         </Item>
       ) : location.pathname === Routes.HOME ||
+        location.pathname === Routes.SERVICES ||
+        location.pathname === Routes.TEAM ||
         location.pathname === Routes.ABOUT ? (
         <>
           <Item key={Routes.HOME}>
             <Link to={Routes.HOME}>Inicio</Link>
           </Item>
-          <Item key="services">Servicios</Item>
+          <Item key={Routes.SERVICES}>
+            <Link to={Routes.SERVICES}>Servicios</Link>
+          </Item>
+          <Item key={Routes.TEAM}>
+            <Link to={Routes.TEAM}>Equipo</Link>
+          </Item>
           <Item key={Routes.ABOUT}>
             <Link to={Routes.ABOUT}>Nosotros</Link>
           </Item>
