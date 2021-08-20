@@ -10,3 +10,14 @@ export interface NewsFormValues {
     source: string 
     image: string
 }
+
+export interface Player {
+    id: string
+    name: string;
+    email: string;
+    phone: string;
+    pospri?: string
+    userType: string;
+    avatarURL: string;
+    coverURL: string;
+}

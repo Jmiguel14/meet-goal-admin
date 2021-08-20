@@ -35,7 +35,9 @@ const Login = () => {
   return (
     <div className='form_login_container'>
       <div className="form">
-        <LoginForm form={form} onFinish={onFinish} onReset={onReset} />
+        <div className='form_content'>
+          <LoginForm form={form} onFinish={onFinish} onReset={onReset} />
+        </div>
       </div>
     </div>
   );
