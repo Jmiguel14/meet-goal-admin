@@ -20,13 +20,14 @@ const PlayersSearcher = () => {
   console.log("allPlayers", allPlayers);
   console.log("searchText", searchText);
   console.log("filteredPlayers", filteredPlayers);
+  
   useEffect(() => {
     const unsubscribe = listenLatestPlayers(setPlayers);
     return () => unsubscribe && unsubscribe();
   }, []);
 
   useEffect(() => {
-    const playersToLowerCase = players?.map((player) => {
+    const playersToLowerCase = allPlayers?.map((player) => {
       const { name, pospri } = player;
       const nameToLowerCase = name?.toLowerCase();
       const pospriToLowerCase = pospri?.toLowerCase();
@@ -37,27 +38,31 @@ const PlayersSearcher = () => {
       };
     });
     setPlayerToLowerCase(playersToLowerCase);
-  }, [players]);
+  }, [allPlayers]);
 
   useEffect(() => {
-    const newListOfPlayers = playersToLowerCase?.filter(
-      (player) =>
-        player.name?.includes(searchText.toLowerCase()) ||
-        player.pospri?.includes(searchText.toLowerCase())
-    );
+    if (searchText){
 
-    const newListMapped = newListOfPlayers?.map((player) => {
-      const { name, pospri } = player;
-      const nameToTitleCase = toTitleCase(name)!;
-      const pospriToTitleCase = toTitleCase(pospri);
-      return {
-        ...player,
-        name: nameToTitleCase,
-        pospri: pospriToTitleCase,
-      };
-    });
-
-    setFilteredPayers(newListMapped);
+      const newListOfPlayers = playersToLowerCase?.filter(
+        (player) =>
+          player.name?.includes(searchText.toLowerCase()) ||
+          player.pospri?.includes(searchText.toLowerCase())
+      );
+  
+      const newListMapped = newListOfPlayers?.map((player) => {
+        const { name, pospri } = player;
+        const nameToTitleCase = toTitleCase(name)!;
+        const pospriToTitleCase = toTitleCase(pospri);
+        return {
+          ...player,
+          name: nameToTitleCase,
+          pospri: pospriToTitleCase,
+        };
+      });
+      setFilteredPayers(newListMapped);
+    } else {
+      setFilteredPayers(players)
+    }
   }, [playersToLowerCase, searchText]);
 
   return (
