@@ -6,14 +6,15 @@ import './styles.less'
 
 interface PlayerPersonalInfoProps {
  player: Player | undefined
+ onShowModal: () => void
 }
 
-export const PlayerPersonalnfo = ({player}: PlayerPersonalInfoProps) => {
+export const PlayerPersonalnfo = ({player, onShowModal}: PlayerPersonalInfoProps) => {
     
     return (
         <Row justify="center">
             <Col>
-              <Card className="player_info_card" actions={[<EditOutlined />]}>
+              <Card className="player_info_card" actions={[<EditOutlined onClick={onShowModal}/>]}>
                 <Descriptions title="Información personal">
                   <Descriptions.Item
                     label="Correo"

@@ -1,5 +1,5 @@
-import { ArrowLeftOutlined, CameraOutlined } from "@ant-design/icons";
-import { Col, Form, Input, message, Modal, Row, Typography } from "antd";
+import { ArrowLeftOutlined } from "@ant-design/icons";
+import { Col, Form, message, Row, Typography } from "antd";
 import Avatar from "antd/lib/avatar/avatar";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
@@ -14,6 +14,7 @@ import { uploadImage } from "../../firebase/client";
 import { PlayerPersonalnfo } from "../../components/PlayerPersonalnfo";
 import { PlayerTacticalInfo } from "../../components/PlayerTacticalInfo";
 import { UpdatePlayerTacticalInfoModal } from "../../components/UpdatePlayerTacticalInfoModal";
+import { UpdatePlayerPersonalInfoModal } from "../../components/UpdatePlayerPersonalInfoModal";
 
 const { Title } = Typography;
 
@@ -24,9 +25,13 @@ const Players = () => {
   const [playerAttributes, setPlayerAattributes] =
     useState<(string | undefined)[]>();
   const [isVisibleModal, setIsVisibleModal] = useState(false);
-  const [isVisiblePlayerPersonalInfoModal, setIsVisiblePlayerPersonalInfoModal] = useState(false);
+  const [
+    isVisiblePlayerPersonalInfoModal,
+    setIsVisiblePlayerPersonalInfoModal,
+  ] = useState(false);
 
   const [form] = Form.useForm();
+  const [playerPersonalInfoForm] = Form.useForm();
 
   const [coverTask, setCoverTask] = useState<firebase.storage.UploadTask>();
   const [avatarTask, setAvatarTask] = useState<firebase.storage.UploadTask>();
@@ -110,6 +115,29 @@ const Players = () => {
     }
   };
 
+  const onUpdatePlayerPersonalInfo = async (values: Player) => {
+    const { pospri, attributes } = values;
+    console.log('values', values)
+    // const settedValues = {
+    //   pospri,
+    //   possec,
+    //   firstAttribute,
+    //   secondAttribute,
+    //   thirdAttribute,
+    //   fourthAttribute,
+    //   coverURL,
+    //   avatarURL,
+    // };
+
+    // try {
+    //   await updatePlayerTacticalInfo(player?.id!, settedValues);
+    //   message.success("Información táctica actualizada exitosamente!");
+    //   form.resetFields();
+    // } catch (e) {
+    //   message.error(`Ocurrio un error del tipo ${e}`);
+    // }
+  };
+
   const handleCoverChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0];
     const task = uploadImage(file);
@@ -124,9 +152,9 @@ const Players = () => {
 
   const showModal = () => {
     setIsVisibleModal(true);
-    setCoverURL(player?.coverURL!);
-    setAvatarURL(player?.avatarURL!);
-    form.setFieldsValue({
+    setCoverURL(player?.coverURL!)
+    setAvatarURL(player?.avatarURL!)
+    playerPersonalInfoForm.setFieldsValue({
       pospri: player?.pospri,
       possec: player?.possec,
       attributes: [
@@ -140,15 +168,12 @@ const Players = () => {
 
   const showPlayerPersonalInfoModal = () => {
     setIsVisiblePlayerPersonalInfoModal(true);
-    form.setFieldsValue({
-      pospri: player?.pospri,
-      possec: player?.possec,
-      attributes: [
-        player?.firstAttribute,
-        player?.secondAttribute,
-        player?.thirdAttribute,
-        player?.fourthAttribute,
-      ],
+    playerPersonalInfoForm.setFieldsValue({
+      name: player?.name,
+      phone: player?.phone,
+      city: player?.city,
+      country: player?.country,
+      //birth: player?.birth
     });
   };
 
@@ -170,7 +195,17 @@ const Players = () => {
             </Col>
           </Row>
 
-          <PlayerPersonalnfo player={player} />
+          <PlayerPersonalnfo
+            player={player}
+            onShowModal={showPlayerPersonalInfoModal}
+          />
+
+          <UpdatePlayerPersonalInfoModal
+            setIsVisibleModal={setIsVisiblePlayerPersonalInfoModal}
+            isVisibleModal={isVisiblePlayerPersonalInfoModal}
+            form={playerPersonalInfoForm}
+            onFinish={onUpdatePlayerPersonalInfo}
+          />
 
           <PlayerTacticalInfo
             player={player}

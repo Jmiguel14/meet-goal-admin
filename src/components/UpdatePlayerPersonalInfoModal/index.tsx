@@ -1,22 +1,21 @@
-import { Form, Input, Modal } from "antd";
+import { DatePicker, Form, FormInstance, Input, Modal } from "antd";
 import React from "react";
 import { Player } from "../../types";
 
 interface UpdatePlayerTacticalInfoModalProps {
   setIsVisibleModal: (value: React.SetStateAction<boolean>) => void;
   isVisibleModal: boolean;
+  form: FormInstance<any>
+  onFinish: (values: Player) => Promise<void>;
 }
 
-export const UpdatePlayerPersonalInfo = ({
+export const UpdatePlayerPersonalInfoModal = ({
   setIsVisibleModal,
   isVisibleModal,
+  form,
+  onFinish
 }: UpdatePlayerTacticalInfoModalProps) => {
-  const [form] = Form.useForm();
-
-  const onFinish = (values: Player) => {
-      
-  };
-
+ 
   return (
     <Modal
       bodyStyle={{ height: "100%" }}
@@ -28,13 +27,13 @@ export const UpdatePlayerPersonalInfo = ({
       visible={isVisibleModal}
       okButtonProps={{
         htmlType: "submit",
-        form: "player_tactical_info_edit_form",
+        form: "player_personal_info_edit_form",
       }}
     >
-      <Form form={form} onFinish={onFinish} id="player_tactical_info_edit_form">
+      <Form form={form} onFinish={onFinish} id="player_personal_info_edit_form">
         <Form.Item
-          name="pospri"
-          label="Posición principal"
+          name="name"
+          label="Nombre"
           rules={[
             {
               required: true,
@@ -44,11 +43,17 @@ export const UpdatePlayerPersonalInfo = ({
         >
           <Input />
         </Form.Item>
-        <Form.Item name="possec" label="Posición secundaria">
+        <Form.Item name="phone" label="Teléfono">
           <Input />
         </Form.Item>
-        <Form.Item name="attributes">
+        <Form.Item name="city" label='Ciudad'>
           <Input />
+        </Form.Item>
+        <Form.Item name="country" label='País'>
+          <Input />
+        </Form.Item>
+        <Form.Item name="birth" label='Fecha de Nac.'>
+          <DatePicker />
         </Form.Item>
       </Form>
     </Modal>
