@@ -1,5 +1,5 @@
 import { firestore } from "./client";
-import { Player, PlayerTacticalInfo } from "../types";
+import { Player, PlayerPersonalInfo, PlayerTacticalInfo } from "../types";
 import { USER_TYPE } from "../constants/userType";
 
 export const listenLatestPlayers = (
@@ -81,5 +81,28 @@ export const updatePlayerTacticalInfo = (
     fourthAttribute,
     coverURL,
     avatarURL,
+  });
+};
+
+export const updatePlayerPersonalInfo = (
+  id: string,
+  {
+    name,
+    phone,
+    city,
+    country,
+    birth,
+    category,
+    contract,
+  }: PlayerPersonalInfo
+) => {
+  return firestore.collection("users").doc(id).update({
+    name,
+    phone,
+    city,
+    country,
+    birth,
+    category,
+    contract,
   });
 };

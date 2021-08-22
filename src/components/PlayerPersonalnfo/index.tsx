@@ -1,7 +1,7 @@
 import { EditOutlined } from '@ant-design/icons'
 import { Card, Col, Descriptions, Row } from 'antd'
+import moment from 'moment'
 import { Player } from '../../types'
-import { formatDate } from '../../utils/formatDate'
 import './styles.less'
 
 interface PlayerPersonalInfoProps {
@@ -38,7 +38,7 @@ export const PlayerPersonalnfo = ({player, onShowModal}: PlayerPersonalInfoProps
                     label="Nacimiento"
                     labelStyle={{ fontWeight: "bold" }}
                   >
-                    {formatDate(player?.birth)}
+                    {moment(player?.birth).format('DD-MM-YYYY')}
                   </Descriptions.Item>
                   <Descriptions.Item
                     label="Categoría"

@@ -33,6 +33,18 @@ export interface Player {
   fourthAttribute: string;
 }
 
+export interface PlayerPersonalInfo {
+  id?: string;
+  name: string;
+  email?: string;
+  phone: string;
+  birth: string | moment.Moment;
+  city: string;
+  country: string;
+  category: string;
+  contract: string;
+}
+
 export interface PlayerTacticalInfo {
   id?: string;
   pospri?: string;

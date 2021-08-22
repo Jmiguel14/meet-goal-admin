@@ -1,4 +1,4 @@
-import { DeleteOutlined, EyeOutlined } from "@ant-design/icons";
+import { EyeOutlined } from "@ant-design/icons";
 import { Card, Col, Row, Skeleton } from "antd";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -34,10 +34,6 @@ export const ListOfPlayers = ({ players }: ListOfNewsProps) => {
                   )
                 }
                 actions={[
-                  <DeleteOutlined
-                    key="delete"
-                    //onClick={() => onShowDeleteConfirm(newsItem.id!)}
-                  />,
                   <Link to={`/jugadores/${player.id}`}>
                     <EyeOutlined key="watch" />,
                   </Link>,

@@ -1,21 +1,20 @@
 import { DatePicker, Form, FormInstance, Input, Modal } from "antd";
 import React from "react";
-import { Player } from "../../types";
+import { PlayerPersonalInfo } from "../../types";
 
 interface UpdatePlayerTacticalInfoModalProps {
   setIsVisibleModal: (value: React.SetStateAction<boolean>) => void;
   isVisibleModal: boolean;
-  form: FormInstance<any>
-  onFinish: (values: Player) => Promise<void>;
+  form: FormInstance<any>;
+  onFinish: (values: PlayerPersonalInfo) => Promise<void>;
 }
 
 export const UpdatePlayerPersonalInfoModal = ({
   setIsVisibleModal,
   isVisibleModal,
   form,
-  onFinish
+  onFinish,
 }: UpdatePlayerTacticalInfoModalProps) => {
- 
   return (
     <Modal
       bodyStyle={{ height: "100%" }}
@@ -37,23 +36,65 @@ export const UpdatePlayerPersonalInfoModal = ({
           rules={[
             {
               required: true,
-              message: "Por favor, ingrese la posición principal!",
+              message: "Por favor, ingrese un nombre",
             },
           ]}
         >
           <Input />
         </Form.Item>
-        <Form.Item name="phone" label="Teléfono">
+        <Form.Item
+          name="phone"
+          label="Teléfono"
+          rules={[
+            {
+              required: true,
+              message: "Por favor, ingrese el teléfono",
+            },
+          ]}
+        >
           <Input />
         </Form.Item>
-        <Form.Item name="city" label='Ciudad'>
+        <Form.Item
+          name="city"
+          label="Ciudad"
+          rules={[
+            {
+              required: true,
+              message: "Por favor, ingrese la ciudad",
+            },
+          ]}
+        >
           <Input />
         </Form.Item>
-        <Form.Item name="country" label='País'>
+        <Form.Item
+          name="country"
+          label="País"
+          rules={[
+            {
+              required: true,
+              message: "Por favor, ingrese el país",
+            },
+          ]}
+        >
           <Input />
         </Form.Item>
-        <Form.Item name="birth" label='Fecha de Nac.'>
+        <Form.Item
+          name="birth"
+          label="Fecha de Nacimiento"
+          rules={[
+            {
+              required: true,
+              message: "Por favor, ingrese la fecha de nacimiento",
+            },
+          ]}
+        >
           <DatePicker />
+        </Form.Item>
+        <Form.Item name="category" label="Categoría">
+          <Input />
+        </Form.Item>
+        <Form.Item name="contract" label="Contrato">
+          <Input />
         </Form.Item>
       </Form>
     </Modal>
