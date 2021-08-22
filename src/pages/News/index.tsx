@@ -6,12 +6,12 @@ import { useHistory } from "react-router-dom";
 import { ListOfNews } from "../../components/ListOfNews";
 import { UpdateNewsModal } from "../../components/UpdateNewsModal";
 import { Routes } from "../../constants/routes";
+import { uploadImage } from "../../firebase/client";
 import {
   deleteNewsItem,
-  listtenLatestNews,
+  listenLatestNews,
   updateNewsItem,
-  uploadImage,
-} from "../../firebase/client";
+} from "../../firebase/NewsServices";
 import { NewsFormValues } from "../../types";
 import "./styles.less";
 
@@ -31,7 +31,7 @@ const News = () => {
   const { confirm } = Modal;
 
   useEffect(() => {
-    const unsubscribe = listtenLatestNews(setNews);
+    const unsubscribe = listenLatestNews(setNews);
     return () => unsubscribe && unsubscribe();
   }, []);
 
@@ -123,7 +123,9 @@ const News = () => {
           <p className="title_of_news_page">Noticias</p>
         </Col>
         <Col>
-          <Button onClick={handleClick}>Ir a crear</Button>
+          <Button onClick={handleClick} type="primary">
+            Ir a crear
+          </Button>
         </Col>
       </Row>
 
