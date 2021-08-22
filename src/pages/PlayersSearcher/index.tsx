@@ -13,13 +13,7 @@ const PlayersSearcher = () => {
 
   const [searchText, setSearchText] = useState("");
 
-  console.log("players", players);
-
   const allPlayers = usePlayers();
-
-  console.log("allPlayers", allPlayers);
-  console.log("searchText", searchText);
-  console.log("filteredPlayers", filteredPlayers);
   
   useEffect(() => {
     const unsubscribe = listenLatestPlayers(setPlayers);
@@ -63,7 +57,7 @@ const PlayersSearcher = () => {
     } else {
       setFilteredPayers(players)
     }
-  }, [playersToLowerCase, searchText]);
+  }, [playersToLowerCase, searchText, players]);
 
   return (
     <>

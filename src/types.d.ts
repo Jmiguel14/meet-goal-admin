@@ -26,6 +26,20 @@ export interface Player {
   userType: string;
   avatarURL: string;
   coverURL: string;
+  attributes?: string[];
+  firstAttribute: string;
+  secondAttribute: string;
+  thirdAttribute: string;
+  fourthAttribute: string;
+}
+
+export interface PlayerTacticalInfo {
+  id?: string;
+  pospri?: string;
+  possec: string;
+  avatarURL: string;
+  coverURL: string;
+  attributes?: string[];
   firstAttribute: string;
   secondAttribute: string;
   thirdAttribute: string;

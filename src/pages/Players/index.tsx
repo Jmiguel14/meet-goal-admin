@@ -1,40 +1,21 @@
-import {
-  ArrowLeftOutlined,
-  EditOutlined,
-  MailOutlined,
-} from "@ant-design/icons";
-import {
-  Badge,
-  Card,
-  Col,
-  Descriptions,
-  Input,
-  Row,
-  Tag,
-  Typography,
-} from "antd";
+import { ArrowLeftOutlined, CameraOutlined } from "@ant-design/icons";
+import { Col, Form, Input, message, Modal, Row, Typography } from "antd";
 import Avatar from "antd/lib/avatar/avatar";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { Dragger } from "../../components/Dragger";
-import { getSinglePlayer } from "../../firebase/PlayerServices";
+import {
+  listeningSinglePlayer,
+  updatePlayerTacticalInfo,
+} from "../../firebase/PlayerServices";
 import { Player } from "../../types";
-import { formatDate } from "../../utils/formatDate";
 import firebase from "firebase/app";
 import "./styles.less";
 import { uploadImage } from "../../firebase/client";
-import Text from "antd/lib/typography/Text";
+import { PlayerPersonalnfo } from "../../components/PlayerPersonalnfo";
+import { PlayerTacticalInfo } from "../../components/PlayerTacticalInfo";
+import { UpdatePlayerTacticalInfoModal } from "../../components/UpdatePlayerTacticalInfoModal";
 
 const { Title } = Typography;
-const { Meta } = Card;
-
-const DRAG_IMAGE_STATES = {
-  ERROR: -1,
-  NONE: 0,
-  DRAG_OVER: 1,
-  UPLOADING: 2,
-  COMPLETE: 3,
-};
 
 const Players = () => {
   const { id } = useParams<{ id: string }>();
@@ -42,14 +23,18 @@ const Players = () => {
   const [player, setPlayer] = useState<Player>();
   const [playerAttributes, setPlayerAattributes] =
     useState<(string | undefined)[]>();
+  const [isVisibleModal, setIsVisibleModal] = useState(false);
+  const [isVisiblePlayerPersonalInfoModal, setIsVisiblePlayerPersonalInfoModal] = useState(false);
 
-  const [task, setTask] = useState<firebase.storage.UploadTask>();
-  const [imgURL, setImgURL] = useState<string>("");
-  const [file, setFile] = useState<File | null>(null);
-  const [drag, setDrag] = useState(DRAG_IMAGE_STATES.NONE);
+  const [form] = Form.useForm();
+
+  const [coverTask, setCoverTask] = useState<firebase.storage.UploadTask>();
+  const [avatarTask, setAvatarTask] = useState<firebase.storage.UploadTask>();
+  const [coverURL, setCoverURL] = useState<string>("");
+  const [avatarURL, setAvatarURL] = useState<string>("");
 
   useEffect(() => {
-    if (task) {
+    if (coverTask) {
       const onProgress = () => {
         console.log("onProgress");
       };
@@ -58,58 +43,33 @@ const Players = () => {
       };
       const onComplete = () => {
         console.log("onComplete");
-        task.snapshot.ref.getDownloadURL().then(setImgURL);
+        coverTask.snapshot.ref.getDownloadURL().then(setCoverURL);
       };
 
-      task.on("state_changed", onProgress, onError, onComplete);
+      coverTask.on("state_changed", onProgress, onError, onComplete);
     }
-  }, [task]);
+    if (avatarTask) {
+      const onProgress = () => {
+        console.log("onProgress");
+      };
+      const onError = () => {
+        console.log("onError");
+      };
+      const onComplete = () => {
+        console.log("onComplete");
+        avatarTask.snapshot.ref.getDownloadURL().then(setAvatarURL);
+      };
 
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    setDrag(DRAG_IMAGE_STATES.NONE);
-    const file = e.dataTransfer.files[0];
-    setFile(file);
-    const task = uploadImage(file);
-    setTask(task);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files![0];
-    setFile(file);
-    const task = uploadImage(file);
-    setTask(task);
-  };
-
-  const handleDragEnter = (e: React.DragEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    setDrag(DRAG_IMAGE_STATES.DRAG_OVER);
-  };
-
-  const handleDragLeave = (e: React.DragEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    setDrag(DRAG_IMAGE_STATES.NONE);
-  };
-
-  const setStyleLabel = () => {
-    const style =
-      drag === DRAG_IMAGE_STATES.DRAG_OVER
-        ? "custom-file-upload-dashed"
-        : "custom-file-upload";
-    return style;
-  };
+      avatarTask.on("state_changed", onProgress, onError, onComplete);
+    }
+  }, [coverTask, avatarTask]);
 
   const history = useHistory();
 
-  console.log("player", player);
-
   useEffect(() => {
-    getSinglePlayer(id)
-      .then((doc) => {
-        const player = doc.data() as Player;
-        setPlayer(player);
-      })
-      .catch((e) => console.log(e));
-  }, []);
+    const unsubscribe = listeningSinglePlayer(id, setPlayer);
+    return () => unsubscribe && unsubscribe();
+  }, [id]);
 
   useEffect(() => {
     const playerAttributes = [
@@ -121,7 +81,76 @@ const Players = () => {
     setPlayerAattributes(playerAttributes);
   }, [player]);
 
-  console.log("playerAttributes", playerAttributes);
+  const onFinish = async (values: Player) => {
+    const { pospri, attributes } = values;
+    const possec = values.possec ? values.possec : "";
+
+    const firstAttribute = attributes![0] ? attributes![0] : "";
+    const secondAttribute = attributes![1] ? attributes![1] : "";
+    const thirdAttribute = attributes![2] ? attributes![2] : "";
+    const fourthAttribute = attributes![3] ? attributes![3] : "";
+
+    const settedValues = {
+      pospri,
+      possec,
+      firstAttribute,
+      secondAttribute,
+      thirdAttribute,
+      fourthAttribute,
+      coverURL,
+      avatarURL,
+    };
+
+    try {
+      await updatePlayerTacticalInfo(player?.id!, settedValues);
+      message.success("Información táctica actualizada exitosamente!");
+      form.resetFields();
+    } catch (e) {
+      message.error(`Ocurrio un error del tipo ${e}`);
+    }
+  };
+
+  const handleCoverChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files![0];
+    const task = uploadImage(file);
+    setCoverTask(task);
+  };
+
+  const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files![0];
+    const task = uploadImage(file);
+    setAvatarTask(task);
+  };
+
+  const showModal = () => {
+    setIsVisibleModal(true);
+    setCoverURL(player?.coverURL!);
+    setAvatarURL(player?.avatarURL!);
+    form.setFieldsValue({
+      pospri: player?.pospri,
+      possec: player?.possec,
+      attributes: [
+        player?.firstAttribute,
+        player?.secondAttribute,
+        player?.thirdAttribute,
+        player?.fourthAttribute,
+      ],
+    });
+  };
+
+  const showPlayerPersonalInfoModal = () => {
+    setIsVisiblePlayerPersonalInfoModal(true);
+    form.setFieldsValue({
+      pospri: player?.pospri,
+      possec: player?.possec,
+      attributes: [
+        player?.firstAttribute,
+        player?.secondAttribute,
+        player?.thirdAttribute,
+        player?.fourthAttribute,
+      ],
+    });
+  };
 
   return (
     <>
@@ -141,86 +170,24 @@ const Players = () => {
             </Col>
           </Row>
 
-          <Row justify="center">
-            <Col>
-              <Card className="player_info_card" actions={[<EditOutlined />]}>
-                <Descriptions title="Información personal">
-                  <Descriptions.Item
-                    label="Correo"
-                    labelStyle={{ fontWeight: "bold" }}
-                  >
-                    {player?.email}
-                  </Descriptions.Item>
-                  <Descriptions.Item
-                    label="Teléfono"
-                    labelStyle={{ fontWeight: "bold" }}
-                  >
-                    {player?.phone}
-                  </Descriptions.Item>
-                  <Descriptions.Item
-                    label="Ciudad/País"
-                    labelStyle={{ fontWeight: "bold" }}
-                  >
-                    {player?.city + ", " + player?.country}
-                  </Descriptions.Item>
-                  <Descriptions.Item
-                    label="Nacimiento"
-                    labelStyle={{ fontWeight: "bold" }}
-                  >
-                    {formatDate(player?.birth)}
-                  </Descriptions.Item>
-                  <Descriptions.Item
-                    label="Categoría"
-                    labelStyle={{ fontWeight: "bold" }}
-                  >
-                    {player?.category}
-                  </Descriptions.Item>
-                  <Descriptions.Item
-                    label="Contrato"
-                    labelStyle={{ fontWeight: "bold" }}
-                  >
-                    {player?.contract}
-                  </Descriptions.Item>
-                </Descriptions>
-              </Card>
-            </Col>
-          </Row>
+          <PlayerPersonalnfo player={player} />
 
-          <Row justify="center">
-            <Col className="photo_and_position" md={24} sm={24} xs={24}>
-              <Card
-                hoverable
-                className="player_photo_card"
-                actions={[<EditOutlined />]}
-                cover={<img src={player?.coverURL} />}
-              >
-                <Meta
-                  avatar={<Avatar src={player?.avatarURL} />}
-                  title={`${player?.pospri} y ${player?.possec}`}
-                  description={
-                    <>
-                      <Text>Atributos</Text>
-                      <br />
-                      <Row>
-                        {playerAttributes?.map((attribute, index) => {
-                          return (
-                            <Col md={12} xs={12}>
-                              <Tag
-                                key={index}
-                                style={{ margin: "5px 5px", color: "#315C79" }}
-                              >
-                                {attribute}
-                              </Tag>
-                            </Col>
-                          );
-                        })}
-                      </Row>
-                    </>
-                  }
-                />
-              </Card>
-            </Col>
-          </Row>
+          <PlayerTacticalInfo
+            player={player}
+            onShowModal={showModal}
+            playerAttributes={playerAttributes}
+          />
+
+          <UpdatePlayerTacticalInfoModal
+            setIsVisibleModal={setIsVisibleModal}
+            form={form}
+            isVisibleModal={isVisibleModal}
+            coverURL={coverURL}
+            avatarURL={avatarURL}
+            onFinish={onFinish}
+            onHandleCoverChange={handleCoverChange}
+            onHandleAvatarChange={handleAvatarChange}
+          />
         </div>
       </div>
     </>

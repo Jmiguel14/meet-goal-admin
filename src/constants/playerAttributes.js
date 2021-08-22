@@ -1,0 +1,23 @@
+export const PLAYER_ATTRIBUTES = {
+    strength: 'Fuerza',
+    accurateInputs: 'Entradas precisas',
+    captain: 'Capitán',
+    marking: 'Marcaje',
+    rhythm: 'Ritmo',
+    centers: 'Centros',
+    reaction: 'Reacción',
+    destroyer: 'Destructor',
+    interceptor: 'Interceptor',
+    longPasses: 'Pases largos',
+    allCamper: 'Todo campista',
+    dribbling: 'Regateador',
+    ballControl: 'Control de balón',
+    longShot: 'Tiro lejano',
+    counterAttack: 'Contra ataque',
+    offensive: 'Ofensivo',
+    velocity: 'Velocidad',
+    agility: 'Agilidad',
+    shots: 'Tiros',
+    ending: 'Finalización',
+    reference: 'Referencia'
+}
