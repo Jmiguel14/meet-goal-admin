@@ -14,7 +14,7 @@ import "./styles.less";
 import { uploadImage } from "../../firebase/client";
 import { PlayerPersonalnfo } from "../../components/PlayerPersonalnfo";
 import { UpdatePlayerTacticalInfoModal } from "../../components/UpdatePlayerTacticalInfoModal";
-import { PlayerTacticalInfo } from "../../components/playerTacticalInfo";
+import { PlayerTacticalInfo } from "../../components/PlayerTacticalInfo";
 import { UpdatePlayerPersonalInfoModal } from "../../components/UpdatePlayerPersonalInfoModal";
 import moment from "moment";
 
