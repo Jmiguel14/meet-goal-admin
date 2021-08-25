@@ -30,7 +30,7 @@ export const ListOfCalls = ({ calls }: ListOfCallsProps) => {
               style={{ justifyContent: "center", display: "flex" }}
             >
               <Card
-                className="card"
+                className="card_calls_details"
                 key={index}
                 cover={
                   loading ? (

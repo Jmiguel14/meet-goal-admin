@@ -9,6 +9,7 @@ import NewsIcon from "../../icons/NewsIcon";
 import "./styles.less";
 import { Routes } from "../../constants/routes";
 import { useEffect, useState } from "react";
+import CallsIcon from "../../icons/CallsIcon";
 
 const { Item, SubMenu } = Menu;
 interface NavigationProps {
@@ -79,6 +80,9 @@ export const Navigation = ({ mode }: NavigationProps) => {
             </Item>
             <Item icon={<NewsIcon />} key={Routes.NEWS}>
               <Link to={Routes.NEWS}>Noticias</Link>
+            </Item>
+            <Item icon={<CallsIcon />} key={Routes.CALLS}>
+              <Link to={Routes.CALLS_SEARCHER}>Convocatorias</Link>
             </Item>
             <SubMenu icon={<UserOutlined />} title="Admin" key="Admin">
               <Item key={Routes.PROFILE}>
