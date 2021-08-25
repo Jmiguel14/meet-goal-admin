@@ -12,7 +12,9 @@ const PrivateRoutes = {
   CLUBS: "/clubes",
   PROFILE: "/perfil",
   CREATE_NEWS: "/crear-noticia",
-  PLAYERS_SEARCHER: "/buscar-jugadores"
+  PLAYERS_SEARCHER: "/buscar-jugadores",
+  CALLS: "/convocatorias/:id",
+  CALLS_SEARCHER: "/buscar-convocatorias",
 };
 
 export const Routes = {

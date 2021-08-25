@@ -57,3 +57,16 @@ export interface PlayerTacticalInfo {
   thirdAttribute: string;
   fourthAttribute: string;
 }
+
+export interface CallData {
+  id?: string;
+  ageRequired: string | undefined;
+  posRequired: string;
+  startDate: string;
+  endDate: string;
+  extraDetails: string;
+  clubId?: string;
+  postulatedPlayers?: any;
+  postulatedPlayersId?: Array;
+  isClosed?: boolean;
+}
