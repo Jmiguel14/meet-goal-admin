@@ -89,6 +89,6 @@ export function updateCallInfo(
     });
 }
 
-export function deleteCall(id: string) {
+export function deleteCall(id: string | undefined) {
   firestore.collection("calls").doc(id).delete();
 }
