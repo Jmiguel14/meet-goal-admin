@@ -26,7 +26,7 @@ export const MainLayout: React.FC = ({ children }) => {
             <MeetGoalIcon height={50} width={50} />
           </Col>
 
-          <Col md={18} lg={14} xl={10} className="main-menu">
+          <Col md={22} lg={22} xl={22} className="main-menu">
             <Navigation mode="horizontal" />
           </Col>
 
