@@ -74,8 +74,8 @@ export const Navigation = ({ mode }: NavigationProps) => {
             <Item icon={<FutbolIcon />} key={Routes.PLAYERS_SEARCHER}>
               <Link to={Routes.PLAYERS_SEARCHER}>Futbolistas</Link>
             </Item>
-            <Item icon={<ClubIcon />} key={Routes.CLUBS}>
-              <Link to={Routes.CLUBS}>Clubes</Link>
+            <Item icon={<ClubIcon />} key={Routes.CLUBS_SEARCHER}>
+              <Link to={Routes.CLUBS_SEARCHER}>Clubes</Link>
             </Item>
             <Item icon={<NewsIcon />} key={Routes.NEWS}>
               <Link to={Routes.NEWS}>Noticias</Link>

@@ -1,7 +1,6 @@
 import { Col, Row } from "antd";
 import Text from "antd/lib/typography/Text";
 import "./styles.less";
-import React from "react";
 import GitHubIcon from "../../icons/GitHubIcon";
 import { Link } from "react-router-dom";
 

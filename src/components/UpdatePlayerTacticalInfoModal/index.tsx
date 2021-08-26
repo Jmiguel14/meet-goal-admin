@@ -74,7 +74,6 @@ export const UpdatePlayerTacticalInfoModal = ({
   return (
     <Modal
       bodyStyle={{ height: "100%" }}
-      onOk={() => setIsVisibleModal(false)}
       onCancel={() => {
         setIsVisibleModal(false);
         form.resetFields();

@@ -1,61 +1,61 @@
 import { EditOutlined } from "@ant-design/icons";
 import { Card, Col, Descriptions, Row } from "antd";
 import moment from "moment";
-import { Player } from "../../types";
+import { Club } from "../../types";
 import "./styles.less";
 
-interface PlayerPersonalInfoProps {
-  player: Player | undefined;
+interface ClubInstitutionalInfoProps {
+  club: Club | undefined;
   onShowModal: () => void;
 }
 
-export const PlayerPersonalnfo = ({
-  player,
+export const ClubInstitutionallnfo = ({
+  club,
   onShowModal,
-}: PlayerPersonalInfoProps) => {
+}: ClubInstitutionalInfoProps) => {
   return (
     <Row justify="center">
       <Col>
         <Card
-          className="player_info_card"
+          className="club_info_card"
           actions={[<EditOutlined onClick={onShowModal} />]}
         >
-          <Descriptions title="Información personal">
+          <Descriptions title="Información institucional">
             <Descriptions.Item
               label="Correo"
               labelStyle={{ fontWeight: "bold" }}
             >
-              {player?.email}
+              {club?.email}
+            </Descriptions.Item>
+            <Descriptions.Item
+              label="Nombre"
+              labelStyle={{ fontWeight: "bold" }}
+            >
+              {club?.name}
+            </Descriptions.Item>
+            <Descriptions.Item
+              label="Razón social"
+              labelStyle={{ fontWeight: "bold" }}
+            >
+              {club?.socialName}
+            </Descriptions.Item>
+            <Descriptions.Item
+              label="Fundación"
+              labelStyle={{ fontWeight: "bold" }}
+            >
+              {moment(club?.foundation).format("DD-MM-YYYY")}
             </Descriptions.Item>
             <Descriptions.Item
               label="Teléfono"
               labelStyle={{ fontWeight: "bold" }}
             >
-              {player?.phone}
+              {club?.phone}
             </Descriptions.Item>
             <Descriptions.Item
               label="Ciudad/País"
               labelStyle={{ fontWeight: "bold" }}
             >
-              {player?.city + ", " + player?.country}
-            </Descriptions.Item>
-            <Descriptions.Item
-              label="Nacimiento"
-              labelStyle={{ fontWeight: "bold" }}
-            >
-              {moment(player?.birth).format("DD-MM-YYYY")}
-            </Descriptions.Item>
-            <Descriptions.Item
-              label="Categoría"
-              labelStyle={{ fontWeight: "bold" }}
-            >
-              {player?.category}
-            </Descriptions.Item>
-            <Descriptions.Item
-              label="Contrato"
-              labelStyle={{ fontWeight: "bold" }}
-            >
-              {player?.contract}
+              {club?.city + ", " + club?.country}
             </Descriptions.Item>
           </Descriptions>
         </Card>

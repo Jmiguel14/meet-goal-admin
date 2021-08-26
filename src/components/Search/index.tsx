@@ -3,9 +3,10 @@ import "./styles.less";
 
 type SearchProps = {
   onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
+  placeholder?: string | undefined;
 };
 
-export const Search = ({ onChange, ...rest }: SearchProps) => {
+export const Search = ({ onChange, placeholder, ...rest }: SearchProps) => {
   return (
     <div className="search_container">
       <input
@@ -13,7 +14,7 @@ export const Search = ({ onChange, ...rest }: SearchProps) => {
         {...rest}
         className="search__input"
         type="text"
-        placeholder="Buscar por nombre o posición"
+        placeholder={placeholder}
       ></input>
     </div>
   );

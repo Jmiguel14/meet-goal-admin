@@ -57,3 +57,40 @@ export interface PlayerTacticalInfo {
   thirdAttribute: string;
   fourthAttribute: string;
 }
+
+export interface Club {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  foundation: string;
+  city: string;
+  country: string;
+  maxIntGoal: string;
+  maxNacGoal: string;
+  socialName: string;
+  totalWins: string;
+  userType: string;
+  avatarURL: string;
+  coverURL: string;
+}
+
+export interface ClubInstitutionalInfo {
+  id?: string;
+  name: string;
+  email?: string;
+  phone: string;
+  foundation: string;
+  city: string;
+  country: string;
+  socialName: string;
+}
+
+export interface ClubSportsAhievements {
+  id?: string;
+  maxIntGoal: string;
+  maxNacGoal: string;
+  totalWins: string;
+  avatarURL: string;
+  coverURL: string;
+}

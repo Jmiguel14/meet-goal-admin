@@ -14,7 +14,7 @@ const PlayersSearcher = () => {
   const [searchText, setSearchText] = useState("");
 
   const allPlayers = usePlayers();
-  
+
   useEffect(() => {
     const unsubscribe = listenLatestPlayers(setPlayers);
     return () => unsubscribe && unsubscribe();
@@ -35,14 +35,13 @@ const PlayersSearcher = () => {
   }, [allPlayers]);
 
   useEffect(() => {
-    if (searchText){
-
+    if (searchText) {
       const newListOfPlayers = playersToLowerCase?.filter(
         (player) =>
           player.name?.includes(searchText.toLowerCase()) ||
           player.pospri?.includes(searchText.toLowerCase())
       );
-  
+
       const newListMapped = newListOfPlayers?.map((player) => {
         const { name, pospri } = player;
         const nameToTitleCase = toTitleCase(name)!;
@@ -55,13 +54,16 @@ const PlayersSearcher = () => {
       });
       setFilteredPayers(newListMapped);
     } else {
-      setFilteredPayers(players)
+      setFilteredPayers(players);
     }
   }, [playersToLowerCase, searchText, players]);
 
   return (
     <>
-      <Search onChange={(e) => setSearchText(e.target.value)} />
+      <Search
+        onChange={(e) => setSearchText(e.target.value)}
+        placeholder="Buscar por nombre o posición"
+      />
       <ListOfPlayers players={filteredPlayers} />
     </>
   );

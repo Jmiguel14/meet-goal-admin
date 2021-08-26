@@ -33,7 +33,7 @@ const Players = () => {
   ] = useState(false);
 
   const [form] = Form.useForm();
-  const [playerPersonalInfoForm] = Form.useForm()
+  const [playerPersonalInfoForm] = Form.useForm();
 
   const [coverTask, setCoverTask] = useState<firebase.storage.UploadTask>();
   const [avatarTask, setAvatarTask] = useState<firebase.storage.UploadTask>();
@@ -108,31 +108,49 @@ const Players = () => {
       avatarURL,
     };
 
-    try {
-      await updatePlayerTacticalInfo(player?.id!, settedValues);
-      message.success("Información táctica actualizada exitosamente!");
-      form.resetFields();
-    } catch (e) {
-      message.error(`Ocurrio un error del tipo ${e}`);
+    if (pospri !== "") {
+      try {
+        await updatePlayerTacticalInfo(player?.id!, settedValues);
+        message.success("Información táctica actualizada exitosamente!");
+        form.resetFields();
+      } catch (e) {
+        message.error(`Ocurrio un error del tipo ${e}`);
+      }
+      setIsVisibleModal(false);
     }
   };
-
 
   const onUpdatePlayerPersonalInfo = async (values: PlayerPersonalInfo) => {
     const { name, phone, city, country, birth } = values;
 
-    const newBirth = moment(birth).toISOString()
-    const category = values.category ? values.category : ''
-    const contract  = values.contract ? values.contract : ''
-    try {
-      await updatePlayerPersonalInfo(player?.id!, { name, phone, city, country, birth: newBirth, category, contract });
-      message.success("Información personal actualizada exitosamente!");
-      form.resetFields();
-    } catch (e) {
-      message.error(`Ocurrio un error del tipo ${e}`);
+    const newBirth = moment(birth).toISOString();
+    const category = values.category ? values.category : "";
+    const contract = values.contract ? values.contract : "";
+    if (
+      name !== "" &&
+      phone !== "" &&
+      city !== "" &&
+      country !== "" &&
+      birth !== ""
+    ) {
+      try {
+        await updatePlayerPersonalInfo(player?.id!, {
+          name,
+          phone,
+          city,
+          country,
+          birth: newBirth,
+          category,
+          contract,
+        });
+        message.success("Información personal actualizada exitosamente!");
+        form.resetFields();
+      } catch (e) {
+        message.error(`Ocurrio un error del tipo ${e}`);
+      }
+      setIsVisiblePlayerPersonalInfoModal(false);
     }
   };
-
 
   const handleCoverChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0];
@@ -164,8 +182,7 @@ const Players = () => {
 
   const showPlayerPersonalInfoModal = () => {
     setIsVisiblePlayerPersonalInfoModal(true);
-    const birth = moment(player?.birth)
-    console.log('birth', birth)
+    const birth = moment(player?.birth);
     playerPersonalInfoForm.setFieldsValue({
       name: player?.name,
       phone: player?.phone,
@@ -173,7 +190,7 @@ const Players = () => {
       country: player?.country,
       birth: birth,
       category: player?.category,
-      contract: player?.contract
+      contract: player?.contract,
     });
   };
 
