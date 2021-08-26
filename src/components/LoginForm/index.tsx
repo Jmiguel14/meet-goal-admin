@@ -23,18 +23,26 @@ export const LoginForm = ({ form, onFinish, onReset }: LoginFormProps) => {
       <Row className="formContent">
         <Col>
           <Form form={form} name="control-hooks" onFinish={onFinish}>
-            <Form.Item name="email" rules={[{ required: true, message: "Por favor, ingrese su correo!"  }]}>
-              <Input prefix={<UserOutlined />} placeholder="Correo"/>
+            <Form.Item
+              name="email"
+              rules={[
+                { required: true, message: "Por favor, ingrese su correo!" },
+              ]}
+            >
+              <Input prefix={<UserOutlined />} placeholder="Correo" />
             </Form.Item>
             <Form.Item
               name="password"
               rules={[
-                { required: true, message: "Por favor, ingrese su contraseña!" },
+                {
+                  required: true,
+                  message: "Por favor, ingrese su contraseña!",
+                },
               ]}
             >
-              <Input.Password 
-              prefix={<LockOutlined className="site-form-item-icon" />}
-              placeholder='Contraseña'
+              <Input.Password
+                prefix={<LockOutlined className="site-form-item-icon" />}
+                placeholder="Contraseña"
               />
             </Form.Item>
             <Row justify="center">

@@ -31,7 +31,7 @@ export const ListOfNews = ({
             key={index}
             cover={
               loading ? (
-                <Skeleton.Image className="img_skeleton"/>
+                <Skeleton.Image className="img_skeleton" />
               ) : (
                 <img alt="" className="card_image" src={newsItem.image} />
               )
@@ -41,10 +41,7 @@ export const ListOfNews = ({
                 key="watch"
                 onClick={() => onShowDeleteConfirm(newsItem.id!)}
               />,
-              <EditOutlined
-                key="edit"
-                onClick={() => onShowModal(newsItem)}
-              />,
+              <EditOutlined key="edit" onClick={() => onShowModal(newsItem)} />,
             ]}
           >
             <Skeleton loading={loading} active>

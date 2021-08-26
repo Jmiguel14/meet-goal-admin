@@ -2,25 +2,25 @@ import { EyeOutlined } from "@ant-design/icons";
 import { Card, Col, Row, Skeleton } from "antd";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Player } from "../../types";
+import { Club } from "../../types";
 import "./styles.less";
 
 const { Meta } = Card;
 
-interface ListOfPlayersProps {
-  players: Player[];
+interface ListOfClubsProps {
+  clubs: Club[];
 }
 
-export const ListOfPlayers = ({ players }: ListOfPlayersProps) => {
+export const ListOfClubs = ({ clubs }: ListOfClubsProps) => {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    players?.length === 0 ? setLoading(true) : setLoading(false);
-  }, [players]);
+    clubs?.length === 0 ? setLoading(true) : setLoading(false);
+  }, [clubs]);
 
   return (
     <div>
       <Row gutter={[16, 16]}>
-        {players.map((player: Player, index: number) => {
+        {clubs.map((club: Club, index: number) => {
           return (
             <Col md={{ span: "6" }} xs={{ span: "24" }} key={index}>
               <Card
@@ -30,17 +30,17 @@ export const ListOfPlayers = ({ players }: ListOfPlayersProps) => {
                   loading ? (
                     <Skeleton.Image className="img_skeleton" />
                   ) : (
-                    <img alt="" className="card_image" src={player.avatarURL} />
+                    <img alt="" className="card_image" src={club.avatarURL} />
                   )
                 }
                 actions={[
-                  <Link to={`/jugadores/${player.id}`}>
+                  <Link to={`/clubes/${club.id}`}>
                     <EyeOutlined key="watch" />,
                   </Link>,
                 ]}
               >
                 <Skeleton loading={loading} active>
-                  <Meta title={player.name} description={player.email} />
+                  <Meta title={club.name} description={club.socialName} />
                 </Skeleton>
               </Card>
             </Col>
