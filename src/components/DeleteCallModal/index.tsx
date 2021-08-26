@@ -22,7 +22,6 @@ export const DeleteCallModal = ({
     }
     setIsVisibleModal(false);
   };
-  console.log(callId);
   return (
     <Modal
       bodyStyle={{ height: "100%" }}
