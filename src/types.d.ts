@@ -58,6 +58,19 @@ export interface PlayerTacticalInfo {
   fourthAttribute: string;
 }
 
+export interface CallData {
+  id?: string;
+  ageRequired: string | undefined;
+  posRequired: string;
+  startDate: firebase.firestore.Timestamp;
+  endDate: firebase.firestore.Timestamp;
+  extraDetails: string;
+  clubId?: string;
+  postulatedPlayers?: any;
+  postulatedPlayersId?: Array;
+  isClosed?: boolean;
+}
+
 export interface Club {
   id: string;
   name: string;

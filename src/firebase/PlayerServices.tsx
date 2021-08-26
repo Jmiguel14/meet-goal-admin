@@ -42,7 +42,7 @@ export const listenAllPlayers = (callback: (newPlayers: Player[]) => void) => {
 };
 
 export const listeningSinglePlayer = (
-  id: string,
+  id: string | undefined,
   callback: (newPlayer: Player) => void
 ) => {
   return firestore

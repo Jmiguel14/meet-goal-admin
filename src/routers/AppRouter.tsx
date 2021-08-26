@@ -13,6 +13,8 @@ const AsyncClubs = loadable(() => import("../pages/Clubs"));
 const AsyncProfile = loadable(() => import("../pages/Profile"));
 const AsyncCreateNews = loadable(() => import("../pages/CreateNews"));
 const AsyncPlayersSearcher = loadable(() => import("../pages/PlayersSearcher"));
+const AsyncCalls = loadable(() => import("../pages/Calls"));
+const AsyncCallsSearcher = loadable(() => import("../pages/CallSearcher"));
 const AsyncClubsSearcher = loadable(() => import("../pages/clubsSearcher"));
 
 export const AppRouter = () => {
@@ -31,6 +33,11 @@ export const AppRouter = () => {
       <PrivateRoutes
         path={Routes.PLAYERS_SEARCHER}
         component={AsyncPlayersSearcher}
+      />
+      <PrivateRoutes path={Routes.CALLS} component={AsyncCalls} />
+      <PrivateRoutes
+        path={Routes.CALLS_SEARCHER}
+        component={AsyncCallsSearcher}
       />
       <PrivateRoutes
         path={Routes.CLUBS_SEARCHER}
