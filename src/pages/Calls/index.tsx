@@ -1,8 +1,9 @@
 import { ArrowLeftOutlined } from "@ant-design/icons";
-import { Collapse, Form, message, Row, Typography } from "antd";
+import { Col, Collapse, Form, message, Row, Typography } from "antd";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
+import "./styles.less";
 import { CallDatalnfo } from "../../components/CallDataInfo";
 import { ClubOwnInfo } from "../../components/ClubOwnInfo";
 import PostulantName from "../../components/PostulantName";
@@ -12,7 +13,6 @@ import {
   updateCallInfo,
 } from "../../firebase/CallServices";
 import { CallData } from "../../types";
-import "./styles.less";
 
 const { Title } = Typography;
 
@@ -61,36 +61,34 @@ const Calls = () => {
   };
   return (
     <>
-      <div className="body_call">
-        <Row justify="center">
-          <div className="single_call_header">
+      <div className="body-call">
+        <Col className="call-container" lg={16} xl={16}>
+          <div className="single-call-header">
             <ArrowLeftOutlined
               className="go_back_button"
               onClick={() => history.goBack()}
             />
             <Title level={4}>{call?.posRequired}</Title>
           </div>
-        </Row>
-        <br />
-        <Row justify="center">
-          <div className="ownData">
-            <CallDatalnfo call={call} onShowModal={showCallDetailsInfoModal} />
-          </div>
-        </Row>
-        <br />
-        <Row justify="center">
+          <br />
+          <Row justify="center">
+            <Col className="ownData">
+              <CallDatalnfo
+                call={call}
+                onShowModal={showCallDetailsInfoModal}
+              />
+            </Col>
+          </Row>
           <UpdateCallInfoModal
             setIsVisibleModal={setIsVisibleCallInfoModal}
             isVisibleModal={isVisibleCallInfoModal}
             form={callInfoForm}
             onFinish={onUpdateCallInfo}
           />
-        </Row>
-        <br />
-        <Row justify="center">
+          <br />
           {call?.postulatedPlayersId ? (
             <>
-              <Collapse style={{ width: "85%", borderRadius: "5px" }}>
+              <Collapse style={{ width: "100%", borderRadius: "5px" }}>
                 <Panel header="Jugadores Postulantes" key="1">
                   {call.postulatedPlayersId.map(
                     (playerId: string, index: number) => (
@@ -101,17 +99,15 @@ const Calls = () => {
               </Collapse>
             </>
           ) : (
-            <p style={{ color: "#99ff98" }}>
+            <p style={{ color: "#99ff98", textAlign: "center" }}>
               No hay jugadores postulados en esta convocatoria
             </p>
           )}
-        </Row>
-        <br />
-        <Row justify="center">
+          <br />
           <div className="ownData">
             <ClubOwnInfo clubId={call?.clubId} />
           </div>
-        </Row>
+        </Col>
       </div>
     </>
   );

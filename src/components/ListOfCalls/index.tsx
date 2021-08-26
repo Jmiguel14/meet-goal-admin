@@ -19,8 +19,15 @@ export const ListOfCalls = ({ calls }: ListOfCallsProps) => {
   }, [calls]);
 
   return (
-    <div>
-      <Row gutter={[16, 16]}>
+    <div className="body_calls">
+      <Row
+        gutter={[16, 16]}
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
         {calls.map((call: CallData, index: number) => {
           return (
             <Col
@@ -39,7 +46,9 @@ export const ListOfCalls = ({ calls }: ListOfCallsProps) => {
                   loading ? (
                     <Skeleton.Image className="img_skeleton" />
                   ) : (
-                    <Title level={2}>{call.posRequired}</Title>
+                    <Title level={2} style={{ width: "100%" }}>
+                      {call.posRequired}
+                    </Title>
                   )
                 }
                 actions={[
