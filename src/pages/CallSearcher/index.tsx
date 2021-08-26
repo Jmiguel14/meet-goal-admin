@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ListOfCalls } from "../../components/ListOfCalls";
-import { SearchCall } from "../../components/SearchCall";
+import { Search } from "../../components/Search";
 import { listenLatestCalls } from "../../firebase/CallServices";
 import { useCalls } from "../../hooks/usCalls";
 import { CallData } from "../../types";
@@ -61,7 +61,10 @@ const CallSearcher = () => {
 
   return (
     <>
-      <SearchCall onChange={(e) => setSearchText(e.target.value)} />
+      <Search
+        onChange={(e) => setSearchText(e.target.value)}
+        placeholder={"Buscar por categoria o posición"}
+      />
       <ListOfCalls calls={filteredCalls} />
     </>
   );

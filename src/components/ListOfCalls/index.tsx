@@ -1,4 +1,4 @@
-import { EyeOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EyeOutlined } from "@ant-design/icons";
 import { Card, Col, Row, Skeleton } from "antd";
 import Title from "antd/lib/typography/Title";
 import { useEffect, useState } from "react";
@@ -27,7 +27,10 @@ export const ListOfCalls = ({ calls }: ListOfCallsProps) => {
               md={{ span: "6" }}
               xs={{ span: "24" }}
               key={index}
-              style={{ justifyContent: "center", display: "flex" }}
+              style={{
+                justifyContent: "center",
+                display: "flex",
+              }}
             >
               <Card
                 className="card_calls_details"
@@ -43,6 +46,7 @@ export const ListOfCalls = ({ calls }: ListOfCallsProps) => {
                   <Link to={`/convocatorias/${call.id}`}>
                     <EyeOutlined key="watch" />
                   </Link>,
+                  <DeleteOutlined />,
                 ]}
               >
                 <Skeleton loading={loading} active>
