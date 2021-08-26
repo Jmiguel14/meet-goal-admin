@@ -61,7 +61,7 @@ const PlayersSearcher = () => {
 
   return (
     <>
-      <Search onChange={(e) => setSearchText(e.target.value)} />
+      <Search onChange={(e) => setSearchText(e.target.value)} placeholder="Buscar por nombre o posición"/>
       <ListOfPlayers players={filteredPlayers} />
     </>
   );

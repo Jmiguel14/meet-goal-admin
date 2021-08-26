@@ -9,10 +9,11 @@ const PublicRoutes = {
 const PrivateRoutes = {
   NEWS: "/noticias",
   PLAYERS: "/jugadores/:id",
-  CLUBS: "/clubes",
+  CLUBS: "/clubes/:id",
   PROFILE: "/perfil",
   CREATE_NEWS: "/crear-noticia",
-  PLAYERS_SEARCHER: "/buscar-jugadores"
+  PLAYERS_SEARCHER: "/buscar-jugadores",
+  CLUBS_SEARCHER: "/buscar-clubes"
 };
 
 export const Routes = {

@@ -108,12 +108,15 @@ const Players = () => {
       avatarURL,
     };
 
-    try {
-      await updatePlayerTacticalInfo(player?.id!, settedValues);
-      message.success("Información táctica actualizada exitosamente!");
-      form.resetFields();
-    } catch (e) {
-      message.error(`Ocurrio un error del tipo ${e}`);
+    if (pospri !== "") {
+      try {
+        await updatePlayerTacticalInfo(player?.id!, settedValues);
+        message.success("Información táctica actualizada exitosamente!");
+        form.resetFields();
+      } catch (e) {
+        message.error(`Ocurrio un error del tipo ${e}`);
+      }
+      setIsVisibleModal(false)
     }
   };
 
@@ -124,12 +127,21 @@ const Players = () => {
     const newBirth = moment(birth).toISOString()
     const category = values.category ? values.category : ''
     const contract  = values.contract ? values.contract : ''
-    try {
-      await updatePlayerPersonalInfo(player?.id!, { name, phone, city, country, birth: newBirth, category, contract });
-      message.success("Información personal actualizada exitosamente!");
-      form.resetFields();
-    } catch (e) {
-      message.error(`Ocurrio un error del tipo ${e}`);
+    if (
+      name !== "" && 
+      phone !== "" &&
+      city !== "" && 
+      country !== "" &&
+      birth !== "" 
+    ){
+      try {
+        await updatePlayerPersonalInfo(player?.id!, { name, phone, city, country, birth: newBirth, category, contract });
+        message.success("Información personal actualizada exitosamente!");
+        form.resetFields();
+      } catch (e) {
+        message.error(`Ocurrio un error del tipo ${e}`);
+      }
+      setIsVisiblePlayerPersonalInfoModal(false)
     }
   };
 
@@ -165,7 +177,6 @@ const Players = () => {
   const showPlayerPersonalInfoModal = () => {
     setIsVisiblePlayerPersonalInfoModal(true);
     const birth = moment(player?.birth)
-    console.log('birth', birth)
     playerPersonalInfoForm.setFieldsValue({
       name: player?.name,
       phone: player?.phone,

@@ -1,7 +1,7 @@
 import { EditOutlined } from "@ant-design/icons";
 import { Avatar, Card, Col, Row, Tag, Typography } from "antd";
 import { Player } from "../../types";
-import './styles.less'
+import "./styles.less";
 
 interface PlayerTacticalInfoProps {
   player: Player | undefined;
@@ -24,7 +24,7 @@ export const PlayerTacticalInfo = ({
           hoverable
           className="player_photo_card"
           actions={[<EditOutlined onClick={onShowModal} />]}
-          cover={<img alt='' src={player?.coverURL} />}
+          cover={<img alt="" src={player?.coverURL} />}
         >
           <Meta
             avatar={<Avatar src={player?.avatarURL} />}
