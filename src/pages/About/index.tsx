@@ -78,7 +78,7 @@ const About = () => {
           >
             <p style={{ fontSize: "18px", textAlign: "justify" }}>
               Meet Goal permite gestionar convocatorias para prueba o selección
-              de jugadores por parte de los clubes de futbol. Los jugadores con
+              de jugadores por parte de los clubes de fútbol. Los jugadores con
               su perfil se postularán a las convocatorias, mismo que será
               analizado por los clubes para una posterior selección.
             </p>
@@ -91,7 +91,7 @@ const About = () => {
           >
             <p style={{ fontSize: "18px", textAlign: "justify" }}>
               Los usuarios se pueden registrar con un correo y una contraseña.
-              Además, tienen la opcíon de registrarse con el servicio de Google.
+              Además, tienen la opción de registrarse con el servicio de Google.
             </p>
           </Panel>
           <Panel
