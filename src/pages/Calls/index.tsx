@@ -44,12 +44,19 @@ const Calls = () => {
 
   const onUpdateCallInfo = async (values: CallData) => {
     const { extraDetails, startDate, endDate } = values;
-    try {
-      await updateCallInfo(call?.id!, startDate, endDate, extraDetails);
-      message.success("La convocatoria fue actualizada exitosamente!");
-      form.resetFields();
-    } catch (e) {
-      message.error(`Ocurrio un error del tipo ${e}`);
+    if (
+      (extraDetails !== "" || extraDetails !== undefined) &&
+      (startDate !== "" || startDate !== undefined) &&
+      (endDate !== "" || endDate !== undefined)
+    ) {
+      try {
+        await updateCallInfo(call?.id!, startDate, endDate, extraDetails);
+        message.success("La convocatoria fue actualizada exitosamente!");
+        form.resetFields();
+      } catch (e) {
+        message.error(`Ocurrio un error del tipo ${e}`);
+      }
+      setIsVisibleCallInfoModal(false);
     }
   };
   return (
