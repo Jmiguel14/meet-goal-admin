@@ -4,7 +4,7 @@ import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { CallDatalnfo } from "../../components/CallDataInfo";
-import { ClubInstitutionalInfo } from "../../components/ClubInstitutionalInfo";
+import { ClubOwnInfo } from "../../components/ClubOwnInfo";
 import PostulantName from "../../components/PostulantName";
 import { UpdateCallInfoModal } from "../../components/UpdateCallInfoModal";
 import {
@@ -29,7 +29,6 @@ const Calls = () => {
     const unsubscribe = listeningSingleCall(id, setCall);
     return () => unsubscribe && unsubscribe();
   }, [id]);
-  console.log(call);
   const showCallDetailsInfoModal = () => {
     setIsVisibleCallInfoModal(true);
     const startDate = moment(call?.startDate.toDate());
@@ -103,7 +102,7 @@ const Calls = () => {
         <br />
         <Row justify="center">
           <div className="ownData">
-            <ClubInstitutionalInfo clubId={call?.clubId} />
+            <ClubOwnInfo clubId={call?.clubId} />
           </div>
         </Row>
       </div>

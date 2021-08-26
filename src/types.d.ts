@@ -58,7 +58,6 @@ export interface PlayerTacticalInfo {
   fourthAttribute: string;
 }
 
-<<<<<<< HEAD
 export interface CallData {
   id?: string;
   ageRequired: string | undefined;
@@ -72,22 +71,6 @@ export interface CallData {
   isClosed?: boolean;
 }
 
-export interface Club {
-  id?: string;
-  avatarURL: string;
-  coverURL: string;
-  city: string;
-  country: string;
-  email: string;
-  foudnation: string;
-  maxIntGoal: string;
-  maxNacGoal: string;
-  name: string;
-  phone: string;
-  socialName: string;
-  totalWins: number;
-  upserType?: string;
-=======
 export interface Club {
   id: string;
   name: string;
@@ -123,5 +106,4 @@ export interface ClubSportsAhievements {
   totalWins: string;
   avatarURL: string;
   coverURL: string;
->>>>>>> 3aa54bb8987ccfe8172cbb5df516a8eceb3fc76c
 }

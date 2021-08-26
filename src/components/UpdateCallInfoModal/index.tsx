@@ -29,6 +29,7 @@ export const UpdateCallInfoModal = ({
         form: "call_info_edit_form",
       }}
     >
+      <br />
       <Form form={form} onFinish={onFinish} id="call_info_edit_form">
         <Form.Item
           name="extraDetails"
