@@ -1,4 +1,4 @@
-import { CallData } from "../types";
+import { CallData, Club } from "../types";
 import { firestore } from "./client";
 import firebase from "firebase/app";
 
@@ -55,13 +55,29 @@ export const listeningSingleCall = (
     });
 };
 
+export const listeningCallOwner = (
+  id: string,
+  callback: (newOwn: Club) => void
+) => {
+  return firestore
+    .collection("users")
+    .doc(id)
+    .onSnapshot((doc) => {
+      const data = doc.data();
+      const id = doc.id;
+      const newOwn = {
+        ...data,
+        id,
+      } as Club;
+      callback(newOwn);
+    });
+};
+
 export function updateCallInfo(
   id: string,
   startDate: string,
   endDate: string,
-  extraDetails: string,
-  ageRequired: string,
-  posRequired: string
+  extraDetails: string
 ) {
   firestore
     .collection("calls")
@@ -70,8 +86,6 @@ export function updateCallInfo(
       startDate: firebase.firestore.Timestamp.fromDate(new Date(startDate)),
       endDate: firebase.firestore.Timestamp.fromDate(new Date(endDate)),
       extraDetails,
-      ageRequired,
-      posRequired,
     });
 }
 

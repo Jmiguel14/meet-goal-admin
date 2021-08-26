@@ -62,11 +62,28 @@ export interface CallData {
   id?: string;
   ageRequired: string | undefined;
   posRequired: string;
-  startDate: string;
-  endDate: string;
+  startDate: firebase.firestore.Timestamp;
+  endDate: firebase.firestore.Timestamp;
   extraDetails: string;
   clubId?: string;
   postulatedPlayers?: any;
   postulatedPlayersId?: Array;
   isClosed?: boolean;
+}
+
+export interface Club {
+  id?: string;
+  avatarURL: string;
+  coverURL: string;
+  city: string;
+  country: string;
+  email: string;
+  foudnation: string;
+  maxIntGoal: string;
+  maxNacGoal: string;
+  name: string;
+  phone: string;
+  socialName: string;
+  totalWins: number;
+  upserType?: string;
 }

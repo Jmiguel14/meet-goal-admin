@@ -42,7 +42,7 @@ export const listenAllPlayers = (callback: (newPlayers: Player[]) => void) => {
 };
 
 export const listeningSinglePlayer = (
-  id: string,
+  id: string | undefined,
   callback: (newPlayer: Player) => void
 ) => {
   return firestore
@@ -86,15 +86,7 @@ export const updatePlayerTacticalInfo = (
 
 export const updatePlayerPersonalInfo = (
   id: string,
-  {
-    name,
-    phone,
-    city,
-    country,
-    birth,
-    category,
-    contract,
-  }: PlayerPersonalInfo
+  { name, phone, city, country, birth, category, contract }: PlayerPersonalInfo
 ) => {
   return firestore.collection("users").doc(id).update({
     name,
