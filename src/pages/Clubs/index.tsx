@@ -88,7 +88,7 @@ const Clubs = () => {
   ) => {
     const { name, phone, foundation, city, country } = values;
     const newFoundation = moment(foundation).toISOString();
-    const socialName = values.socialName ? values.socialName : ''
+    const socialName = values.socialName ? values.socialName : "";
     const settedValues = {
       name,
       phone,
@@ -98,12 +98,13 @@ const Clubs = () => {
       country,
     };
 
-    if (name !== "" &&
-      phone !== "" && 
-      foundation !== "" && 
+    if (
+      name !== "" &&
+      phone !== "" &&
+      foundation !== "" &&
       city !== "" &&
       country !== ""
-    ){
+    ) {
       try {
         await updateClubInstitutionalInfo(club?.id!, settedValues);
         message.success("Información intitucional actualizada exitosamente!");
@@ -111,7 +112,7 @@ const Clubs = () => {
       } catch (e) {
         message.error(`Ocurrio un error del tipo ${e}`);
       }
-      setIsVisibleClubInstitutionalInfoModal(false)
+      setIsVisibleClubInstitutionalInfoModal(false);
     }
   };
 
@@ -119,11 +120,8 @@ const Clubs = () => {
     values: ClubSportsAhievements
   ) => {
     const { totalWins, maxIntGoal, maxNacGoal } = values;
-    
-    if (
-      maxIntGoal !== "" && 
-      maxNacGoal !== "" 
-    ){
+
+    if (maxIntGoal !== "" && maxNacGoal !== "") {
       try {
         await updateClubSportsAchievements(club?.id!, {
           totalWins,
@@ -137,7 +135,7 @@ const Clubs = () => {
       } catch (e) {
         message.error(`Ocurrio un error del tipo ${e}`);
       }
-      setIsVisibleSportsAchievementsModal(false)
+      setIsVisibleSportsAchievementsModal(false);
     }
   };
 
@@ -157,7 +155,7 @@ const Clubs = () => {
     setIsVisibleSportsAchievementsModal(true);
     setCoverURL(club?.coverURL!);
     setAvatarURL(club?.avatarURL!);
-    const totalWins = club?.totalWins ? club.totalWins : 0
+    const totalWins = club?.totalWins ? club.totalWins : 0;
     sportsAchievementsForm.setFieldsValue({
       totalWins: totalWins,
       maxIntGoal: club?.maxIntGoal,

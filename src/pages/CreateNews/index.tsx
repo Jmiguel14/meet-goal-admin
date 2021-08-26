@@ -24,7 +24,7 @@ const CreateNews = () => {
   const [file, setFile] = useState<File | null>(null);
   const [drag, setDrag] = useState(DRAG_IMAGE_STATES.NONE);
   const [form] = Form.useForm();
-  const history = useHistory()
+  const history = useHistory();
 
   useEffect(() => {
     if (task) {
@@ -79,18 +79,18 @@ const CreateNews = () => {
   const onFinish = (values: NewsFormValues) => {
     const { title, description, source } = values;
     try {
-      addNewsItem({ title, description, source, image: imgURL});
+      addNewsItem({ title, description, source, image: imgURL });
       message.success("Noticia creada con éxito");
       form.resetFields();
       setImgURL("");
-      history.push(Routes.NEWS)
+      history.push(Routes.NEWS);
     } catch (e) {
       message.error(`Ocurrió un error al crear una noticia de tipo ${e}`);
     }
   };
 
   return (
-    <div className='compose_news'>
+    <div className="compose_news">
       <Row className="container">
         <Col md={12}>
           <Row justify="start">

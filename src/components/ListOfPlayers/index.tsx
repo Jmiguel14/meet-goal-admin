@@ -19,7 +19,7 @@ export const ListOfPlayers = ({ players }: ListOfPlayersProps) => {
 
   return (
     <div>
-      <Row gutter={[16, 16]} >
+      <Row gutter={[16, 16]}>
         {players.map((player: Player, index: number) => {
           return (
             <Col md={{ span: "6" }} xs={{ span: "24" }} key={index}>

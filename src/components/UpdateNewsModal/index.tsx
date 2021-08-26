@@ -42,13 +42,15 @@ export const UpdateNewsModal = ({
         }}
       >
         <div className="image">
-          
-            <CameraOutlined className="edit_image_button"/>
-            <input className='file_input' type="file" onChange={onHandleImageChange} />
-          
+          <CameraOutlined className="edit_image_button" />
+          <input
+            className="file_input"
+            type="file"
+            onChange={onHandleImageChange}
+          />
+
           <img alt="" className="edit_image" src={imgURL} />
         </div>
-        
 
         <Form.Item name="title">
           <Input />

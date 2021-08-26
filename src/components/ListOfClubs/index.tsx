@@ -19,7 +19,7 @@ export const ListOfClubs = ({ clubs }: ListOfClubsProps) => {
 
   return (
     <div>
-      <Row gutter={[16, 16]} >
+      <Row gutter={[16, 16]}>
         {clubs.map((club: Club, index: number) => {
           return (
             <Col md={{ span: "6" }} xs={{ span: "24" }} key={index}>

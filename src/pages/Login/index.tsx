@@ -33,9 +33,9 @@ const Login = () => {
   };
 
   return (
-    <div className='form_login_container'>
+    <div className="form_login_container">
       <div className="form">
-        <div className='form_content'>
+        <div className="form_content">
           <LoginForm form={form} onFinish={onFinish} onReset={onReset} />
         </div>
       </div>

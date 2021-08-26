@@ -1,17 +1,17 @@
 import { InboxOutlined } from "@ant-design/icons";
 import Text from "antd/lib/typography/Text";
 import React from "react";
-import './styles.less'
+import "./styles.less";
 
 interface DraggerProps {
-    imgURL: string 
-    onSetImgURL: (value: React.SetStateAction<string>) => void
-    file?: File | null
-    onSetStyleLabel: () => "custom-file-upload-dashed" | "custom-file-upload"
-    onHandleDragEnter: (e: React.DragEvent<HTMLInputElement>) => void
-    onHandleDragLeave: (e: React.DragEvent<HTMLInputElement>) => void
-    onHandleDrop: (e: React.DragEvent<HTMLDivElement>) => void
-    onHandleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  imgURL: string;
+  onSetImgURL: (value: React.SetStateAction<string>) => void;
+  file?: File | null;
+  onSetStyleLabel: () => "custom-file-upload-dashed" | "custom-file-upload";
+  onHandleDragEnter: (e: React.DragEvent<HTMLInputElement>) => void;
+  onHandleDragLeave: (e: React.DragEvent<HTMLInputElement>) => void;
+  onHandleDrop: (e: React.DragEvent<HTMLDivElement>) => void;
+  onHandleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const Dragger = ({

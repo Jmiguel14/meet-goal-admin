@@ -14,7 +14,7 @@ const ClubsSearcher = () => {
   const [searchText, setSearchText] = useState("");
 
   const allClubs = useClubs();
-  
+
   useEffect(() => {
     const unsubscribe = listenLatestClubs(setClubs);
     return () => unsubscribe && unsubscribe();
@@ -33,13 +33,11 @@ const ClubsSearcher = () => {
   }, [allClubs]);
 
   useEffect(() => {
-    if (searchText){
-
-      const newListOfClubs = clubsToLowerCase?.filter(
-        (player) =>
-          player.name?.includes(searchText.toLowerCase())
+    if (searchText) {
+      const newListOfClubs = clubsToLowerCase?.filter((player) =>
+        player.name?.includes(searchText.toLowerCase())
       );
-  
+
       const newListMapped = newListOfClubs?.map((club) => {
         const { name } = club;
         const nameToTitleCase = toTitleCase(name)!;
@@ -50,13 +48,16 @@ const ClubsSearcher = () => {
       });
       setFilteredClubs(newListMapped);
     } else {
-      setFilteredClubs(clubs)
+      setFilteredClubs(clubs);
     }
   }, [clubsToLowerCase, searchText, clubs]);
 
   return (
     <>
-      <Search onChange={(e) => setSearchText(e.target.value)} placeholder="Buscar por nombre"/>
+      <Search
+        onChange={(e) => setSearchText(e.target.value)}
+        placeholder="Buscar por nombre"
+      />
       <ListOfClubs clubs={filteredClubs} />
     </>
   );

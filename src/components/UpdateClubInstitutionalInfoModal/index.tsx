@@ -15,7 +15,6 @@ export const UpdateClubInstitutionalInfoModal = ({
   form,
   onFinish,
 }: UpdateClubInstitutionalInfoModalProps) => {
-
   return (
     <Modal
       bodyStyle={{ height: "100%" }}

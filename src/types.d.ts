@@ -94,4 +94,3 @@ export interface ClubSportsAhievements {
   avatarURL: string;
   coverURL: string;
 }
-

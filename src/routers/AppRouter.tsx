@@ -12,8 +12,8 @@ const AsyncPlayers = loadable(() => import("../pages/Players"));
 const AsyncClubs = loadable(() => import("../pages/Clubs"));
 const AsyncProfile = loadable(() => import("../pages/Profile"));
 const AsyncCreateNews = loadable(() => import("../pages/CreateNews"));
-const AsyncPlayersSearcher = loadable(() => import("../pages/PlayersSearcher"))
-const AsyncClubsSearcher = loadable(() => import("../pages/clubsSearcher"))
+const AsyncPlayersSearcher = loadable(() => import("../pages/PlayersSearcher"));
+const AsyncClubsSearcher = loadable(() => import("../pages/clubsSearcher"));
 
 export const AppRouter = () => {
   return (
@@ -28,8 +28,14 @@ export const AppRouter = () => {
       <PrivateRoutes path={Routes.CLUBS} component={AsyncClubs} />
       <PrivateRoutes path={Routes.PROFILE} component={AsyncProfile} />
       <PrivateRoutes path={Routes.CREATE_NEWS} component={AsyncCreateNews} />
-      <PrivateRoutes path={Routes.PLAYERS_SEARCHER} component={AsyncPlayersSearcher}/>
-      <PrivateRoutes path={Routes.CLUBS_SEARCHER} component={AsyncClubsSearcher}/>
+      <PrivateRoutes
+        path={Routes.PLAYERS_SEARCHER}
+        component={AsyncPlayersSearcher}
+      />
+      <PrivateRoutes
+        path={Routes.CLUBS_SEARCHER}
+        component={AsyncClubsSearcher}
+      />
       <Route exact path="/">
         <Redirect to={Routes.NEWS} />
       </Route>

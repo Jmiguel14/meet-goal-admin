@@ -4,7 +4,6 @@ import React from "react";
 import { Club } from "../../types";
 import "./styles.less";
 
-
 interface UpdateClubSportsAchievementsModalProps {
   setIsVisibleModal: (value: React.SetStateAction<boolean>) => void;
   form: FormInstance<any>;
@@ -39,7 +38,11 @@ export const UpdateClubSportsAchievementsModal = ({
         form: "club_sports_achievements_edit_form",
       }}
     >
-      <Form form={form} onFinish={onFinish} id="club_sports_achievements_edit_form">
+      <Form
+        form={form}
+        onFinish={onFinish}
+        id="club_sports_achievements_edit_form"
+      >
         <div className="image">
           <CameraOutlined className="edit_image_button" />
           <input
@@ -64,11 +67,8 @@ export const UpdateClubSportsAchievementsModal = ({
           </div>
         </div>
 
-        <Form.Item
-          name="totalWins"
-          label="Cantidad de logros obtenidos"
-        >
-          <Input type='number'/>
+        <Form.Item name="totalWins" label="Cantidad de logros obtenidos">
+          <Input type="number" />
         </Form.Item>
         <Form.Item
           name="maxIntGoal"

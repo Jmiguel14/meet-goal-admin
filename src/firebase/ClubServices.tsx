@@ -1,9 +1,5 @@
 import { firestore } from "./client";
-import {
-  Club,
-  ClubInstitutionalInfo,
-  ClubSportsAhievements,
-} from "../types";
+import { Club, ClubInstitutionalInfo, ClubSportsAhievements } from "../types";
 import { USER_TYPE } from "../constants/userType";
 
 export const listenLatestClubs = (callback: (newClubs: Club[]) => void) => {

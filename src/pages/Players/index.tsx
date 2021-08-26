@@ -33,7 +33,7 @@ const Players = () => {
   ] = useState(false);
 
   const [form] = Form.useForm();
-  const [playerPersonalInfoForm] = Form.useForm()
+  const [playerPersonalInfoForm] = Form.useForm();
 
   const [coverTask, setCoverTask] = useState<firebase.storage.UploadTask>();
   const [avatarTask, setAvatarTask] = useState<firebase.storage.UploadTask>();
@@ -116,35 +116,41 @@ const Players = () => {
       } catch (e) {
         message.error(`Ocurrio un error del tipo ${e}`);
       }
-      setIsVisibleModal(false)
+      setIsVisibleModal(false);
     }
   };
-
 
   const onUpdatePlayerPersonalInfo = async (values: PlayerPersonalInfo) => {
     const { name, phone, city, country, birth } = values;
 
-    const newBirth = moment(birth).toISOString()
-    const category = values.category ? values.category : ''
-    const contract  = values.contract ? values.contract : ''
+    const newBirth = moment(birth).toISOString();
+    const category = values.category ? values.category : "";
+    const contract = values.contract ? values.contract : "";
     if (
-      name !== "" && 
+      name !== "" &&
       phone !== "" &&
-      city !== "" && 
+      city !== "" &&
       country !== "" &&
-      birth !== "" 
-    ){
+      birth !== ""
+    ) {
       try {
-        await updatePlayerPersonalInfo(player?.id!, { name, phone, city, country, birth: newBirth, category, contract });
+        await updatePlayerPersonalInfo(player?.id!, {
+          name,
+          phone,
+          city,
+          country,
+          birth: newBirth,
+          category,
+          contract,
+        });
         message.success("Información personal actualizada exitosamente!");
         form.resetFields();
       } catch (e) {
         message.error(`Ocurrio un error del tipo ${e}`);
       }
-      setIsVisiblePlayerPersonalInfoModal(false)
+      setIsVisiblePlayerPersonalInfoModal(false);
     }
   };
-
 
   const handleCoverChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0];
@@ -176,7 +182,7 @@ const Players = () => {
 
   const showPlayerPersonalInfoModal = () => {
     setIsVisiblePlayerPersonalInfoModal(true);
-    const birth = moment(player?.birth)
+    const birth = moment(player?.birth);
     playerPersonalInfoForm.setFieldsValue({
       name: player?.name,
       phone: player?.phone,
@@ -184,7 +190,7 @@ const Players = () => {
       country: player?.country,
       birth: birth,
       category: player?.category,
-      contract: player?.contract
+      contract: player?.contract,
     });
   };
 
