@@ -3,21 +3,18 @@ import React from "react";
 import { PlayerInjury } from "../../../types";
 
 interface UpdatePlayerInjuryModalProps {
-  setIsVisiblePlayerInjuryModal: (
-    value: React.SetStateAction<boolean>
-  ) => void;
-  form: FormInstance<any>
-  isVisiblePlayerInjuryModal: boolean
-  onFinishPlayerInjuryForm: (values: PlayerInjury) => Promise<void>
+  setIsVisiblePlayerInjuryModal: (value: React.SetStateAction<boolean>) => void;
+  form: FormInstance<any>;
+  isVisiblePlayerInjuryModal: boolean;
+  onFinishPlayerInjuryForm: (values: PlayerInjury) => Promise<void>;
 }
 
 export const UpdatePlayerInjuryModal = ({
   setIsVisiblePlayerInjuryModal,
   form,
   isVisiblePlayerInjuryModal,
-  onFinishPlayerInjuryForm
+  onFinishPlayerInjuryForm,
 }: UpdatePlayerInjuryModalProps) => {
-
   return (
     <Modal
       bodyStyle={{ height: "100%" }}

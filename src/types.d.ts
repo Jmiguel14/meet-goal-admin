@@ -111,20 +111,20 @@ export interface ClubSportsAhievements {
 }
 
 export interface PlayerExperience {
-  A: number
-  G: number
-  PJ: number 
-  TA: number
-  TR: number
-  season: number
-  catTournament: string
-  clubName: string
-  countryClub: string
-  subPlayer: string
+  A: number;
+  G: number;
+  PJ: number;
+  TA: number;
+  TR: number;
+  season: number;
+  catTournament: string;
+  clubName: string;
+  countryClub: string;
+  subPlayer: string;
 }
 
 export interface PlayerInjury {
-  injuryName: string
-  recoveryTime: string
-  surgery: boolean
+  injuryName: string;
+  recoveryTime: string;
+  surgery: boolean;
 }

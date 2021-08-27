@@ -12,9 +12,9 @@ interface playerInnjuriesCollapseProps {
 }
 
 export const PlayerInjuriesCollapse = ({
-    playerInjuries,
-    onShowPlayerInjuryModal,
-    onShowDeleteConfirm,
+  playerInjuries,
+  onShowPlayerInjuryModal,
+  onShowDeleteConfirm,
 }: playerInnjuriesCollapseProps) => {
   const columns = [
     {
@@ -57,7 +57,7 @@ export const PlayerInjuriesCollapse = ({
   return (
     <Collapse
       defaultActiveKey={["1"]}
-      style={{ width: "100%", borderRadius: "10px", margin: "15px 0px"}}
+      style={{ width: "100%", borderRadius: "10px", margin: "15px 0px" }}
     >
       <Panel header={<Text strong={true}>Lesiones</Text>} key="1">
         <Table pagination={false} columns={columns} dataSource={data} />

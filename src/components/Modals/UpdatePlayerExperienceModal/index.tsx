@@ -6,18 +6,17 @@ interface UpdatePlayerExperienceModalProps {
   setIsVisiblePlayerExperienceModal: (
     value: React.SetStateAction<boolean>
   ) => void;
-  form: FormInstance<any>
-  isVisiblePlayerExperienceModal: boolean
-  onFinishPlayerExperinceForm: (values: PlayerExperience) => Promise<void>
+  form: FormInstance<any>;
+  isVisiblePlayerExperienceModal: boolean;
+  onFinishPlayerExperinceForm: (values: PlayerExperience) => Promise<void>;
 }
 
 export const UpdatePlayerExperienceModal = ({
   setIsVisiblePlayerExperienceModal,
   form,
   isVisiblePlayerExperienceModal,
-  onFinishPlayerExperinceForm
+  onFinishPlayerExperinceForm,
 }: UpdatePlayerExperienceModalProps) => {
-
   return (
     <Modal
       bodyStyle={{ height: "100%" }}
