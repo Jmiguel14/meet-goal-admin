@@ -1,5 +1,12 @@
 import { firestore } from "./client";
-import { Player, PlayerPersonalInfo, PlayerTacticalInfo } from "../types";
+import firebase from "firebase/app";
+
+import {
+  Player,
+  PlayerExperience,
+  PlayerPersonalInfo,
+  PlayerTacticalInfo,
+} from "../types";
 import { USER_TYPE } from "../constants/userType";
 
 export const listenLatestPlayers = (
@@ -96,5 +103,81 @@ export const updatePlayerPersonalInfo = (
     birth,
     category,
     contract,
+  });
+};
+
+export const updatePlayerExperience = async (
+  id: string,
+  {
+    A,
+    G,
+    PJ,
+    TA,
+    TR,
+    season,
+    catTournament,
+    clubName,
+    countryClub,
+    subPlayer,
+  }: PlayerExperience,
+  oldPlayerExperience: PlayerExperience | undefined
+) => {
+  const res = await firestore.collection("users").doc(id);
+  res.get().then((doc) => {
+    if (doc.exists) {
+      res.update({
+        clubs: firebase.firestore.FieldValue.arrayRemove(oldPlayerExperience),
+      });
+    }
+    res.update({
+      clubs: firebase.firestore.FieldValue.arrayUnion({
+        A,
+        G,
+        PJ,
+        TA,
+        TR,
+        catTournament,
+        clubName,
+        countryClub,
+        season,
+        subPlayer,
+      }),
+    });
+  });
+};
+
+export const deletePlayerExperience = async (
+  id: string,
+  {
+    A,
+    G,
+    PJ,
+    TA,
+    TR,
+    season,
+    catTournament,
+    clubName,
+    countryClub,
+    subPlayer,
+  }: PlayerExperience,
+) => {
+  const res = await firestore.collection("users").doc(id);
+  res.get().then((doc) => {
+    if (doc.exists) {
+      res.update({
+        clubs: firebase.firestore.FieldValue.arrayRemove({
+          A,
+          G,
+          PJ,
+          TA,
+          TR,
+          season,
+          catTournament,
+          clubName,
+          countryClub,
+          subPlayer,
+        }),
+      });
+    }
   });
 };

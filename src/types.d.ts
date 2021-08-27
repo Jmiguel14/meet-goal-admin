@@ -31,6 +31,7 @@ export interface Player {
   secondAttribute: string;
   thirdAttribute: string;
   fourthAttribute: string;
+  clubs: PlayerExperience[]
 }
 
 export interface PlayerPersonalInfo {
@@ -106,4 +107,17 @@ export interface ClubSportsAhievements {
   totalWins: string;
   avatarURL: string;
   coverURL: string;
+}
+
+export interface PlayerExperience {
+  A: number
+  G: number
+  PJ: number 
+  TA: number
+  TR: number
+  season: number
+  catTournament: string
+  clubName: string
+  countryClub: string
+  subPlayer: string
 }

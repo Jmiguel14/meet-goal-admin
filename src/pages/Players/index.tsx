@@ -1,14 +1,26 @@
-import { ArrowLeftOutlined } from "@ant-design/icons";
-import { Col, Form, message, Row, Typography } from "antd";
+import {
+  ArrowLeftOutlined,
+  ExclamationCircleOutlined,
+} from "@ant-design/icons";
+import {
+  Col,
+  Form,
+  message,
+  Modal,
+  Row,
+  Typography,
+} from "antd";
 import Avatar from "antd/lib/avatar/avatar";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import {
+  deletePlayerExperience,
   listeningSinglePlayer,
+  updatePlayerExperience,
   updatePlayerPersonalInfo,
   updatePlayerTacticalInfo,
 } from "../../firebase/PlayerServices";
-import { Player, PlayerPersonalInfo } from "../../types";
+import { Player, PlayerExperience, PlayerPersonalInfo } from "../../types";
 import firebase from "firebase/app";
 import "./styles.less";
 import { uploadImage } from "../../firebase/client";
@@ -17,11 +29,13 @@ import { UpdatePlayerTacticalInfoModal } from "../../components/UpdatePlayerTact
 import { PlayerTacticalInfo } from "../../components/PlayerTacticalInfo";
 import { UpdatePlayerPersonalInfoModal } from "../../components/UpdatePlayerPersonalInfoModal";
 import moment from "moment";
+import { PlayerExperienceCollapse } from "../../components/PlayerExperienceCollapse";
+import { UpdatePlayerExperienceModal } from "../../components/UpdatePlayerExperienceModal";
 
-const { Title } = Typography;
-
+const { Title } = Typography
 const Players = () => {
   const { id } = useParams<{ id: string }>();
+  const { confirm } = Modal;
 
   const [player, setPlayer] = useState<Player>();
   const [playerAttributes, setPlayerAattributes] =
@@ -32,13 +46,23 @@ const Players = () => {
     setIsVisiblePlayerPersonalInfoModal,
   ] = useState(false);
 
+  const [isVisiblePlayerExperienceModal, setIsVisiblePlayerExperienceModal] =
+    useState(false);
+
   const [form] = Form.useForm();
   const [playerPersonalInfoForm] = Form.useForm();
+  const [playerExperienceForm] = Form.useForm();
 
   const [coverTask, setCoverTask] = useState<firebase.storage.UploadTask>();
   const [avatarTask, setAvatarTask] = useState<firebase.storage.UploadTask>();
   const [coverURL, setCoverURL] = useState<string>("");
   const [avatarURL, setAvatarURL] = useState<string>("");
+
+  const [playerExperience, setPlayerExperience] = useState<
+    PlayerExperience[] | undefined
+  >([]);
+  const [singlePlayerExperience, setSinglePlayerExperience] =
+    useState<PlayerExperience>();
 
   useEffect(() => {
     if (coverTask) {
@@ -86,6 +110,7 @@ const Players = () => {
       player?.fourthAttribute,
     ];
     setPlayerAattributes(playerAttributes);
+    setPlayerExperience(player?.clubs);
   }, [player]);
 
   const onFinish = async (values: Player) => {
@@ -152,6 +177,35 @@ const Players = () => {
     }
   };
 
+  const onFinishPlayerExperinceForm = async (values: PlayerExperience) => {
+    const {
+      catTournament,
+      clubName,
+      countryClub,
+      subPlayer,
+    } = values;
+
+    if (
+      catTournament !== "" &&
+      clubName !== "" &&
+      countryClub !== "" &&
+      subPlayer !== ""
+    ) {
+      try {
+        await updatePlayerExperience(
+          player?.id!,
+          values,
+          singlePlayerExperience
+        );
+        message.success("Experiencia actualizada exitosamente!");
+        playerExperienceForm.resetFields();
+      } catch (e) {
+        message.error(`Ocurrio un error del tipo ${e}`);
+      }
+      setIsVisiblePlayerExperienceModal(false);
+    }
+  };
+
   const handleCoverChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0];
     const task = uploadImage(file);
@@ -191,6 +245,57 @@ const Players = () => {
       birth: birth,
       category: player?.category,
       contract: player?.contract,
+    });
+  };
+
+  const showPlayerExperienceModal = (experience: PlayerExperience) => {
+    setIsVisiblePlayerExperienceModal(true);
+    const assistances = experience.A !== undefined ? experience.A : 0;
+    const goals = experience.G !== undefined ? experience.G : 0;
+    const playedGames = experience.PJ !== undefined ? experience.PJ : 0;
+    const yellowCards = experience.TA !== undefined ? experience.TA : 0;
+    const redCards = experience.TR !== undefined ? experience.TR : 0;
+    const season = experience.season !== undefined ? experience.season : 0;
+
+    const singlePlayerExperience = {
+      A: assistances,
+      G: goals,
+      PJ: playedGames,
+      TA: yellowCards,
+      TR: redCards,
+      season: season,
+      catTournament: experience.catTournament,
+      clubName: experience.clubName,
+      countryClub: experience.countryClub,
+      subPlayer: experience.subPlayer,
+    };
+    playerExperienceForm.setFieldsValue(singlePlayerExperience);
+
+    setSinglePlayerExperience(singlePlayerExperience);
+  };
+
+  const handleDelete = async (singleExperience: PlayerExperience) => {
+    try {
+      await deletePlayerExperience(player?.id!, singleExperience);
+      message.success("Experiencia eliminada exitosamente!");
+    } catch (e) {
+      message.error(`Ocurrió un error de tipo ${e}`);
+    }
+  };
+
+  const showDeleteConfirm = (singleExperience: PlayerExperience) => {
+    confirm({
+      title: "¿Esta seguro que desea eliminar esta experiencia?",
+      icon: <ExclamationCircleOutlined />,
+      okText: "Sí",
+      okType: "danger",
+      cancelText: "No",
+      onOk() {
+        handleDelete(singleExperience);
+      },
+      onCancel() {
+        console.log("Cancel");
+      },
     });
   };
 
@@ -239,6 +344,21 @@ const Players = () => {
             onFinish={onFinish}
             onHandleCoverChange={handleCoverChange}
             onHandleAvatarChange={handleAvatarChange}
+          />
+
+          <PlayerExperienceCollapse
+            playerExperience={playerExperience}
+            onShowPlayerExperienceModal={showPlayerExperienceModal}
+            onShowDeleteConfirm={showDeleteConfirm}
+          />
+
+          <UpdatePlayerExperienceModal
+            setIsVisiblePlayerExperienceModal={
+              setIsVisiblePlayerExperienceModal
+            }
+            form={playerExperienceForm}
+            isVisiblePlayerExperienceModal={isVisiblePlayerExperienceModal}
+            onFinishPlayerExperinceForm={onFinishPlayerExperinceForm}
           />
         </div>
       </div>
