@@ -1,6 +1,6 @@
 import { DatePicker, Form, FormInstance, Input, Modal } from "antd";
 import React from "react";
-import { CallData } from "../../types";
+import { CallData } from "../../../types";
 
 interface UpdateCallInfoModalProps {
   setIsVisibleModal: (value: React.SetStateAction<boolean>) => void;

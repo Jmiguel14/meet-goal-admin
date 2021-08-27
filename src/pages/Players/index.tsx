@@ -1,27 +1,43 @@
-import { ArrowLeftOutlined } from "@ant-design/icons";
-import { Col, Form, message, Row, Typography } from "antd";
+import {
+  ArrowLeftOutlined,
+  ExclamationCircleOutlined,
+} from "@ant-design/icons";
+import { Col, Form, message, Modal, Row, Typography } from "antd";
 import Avatar from "antd/lib/avatar/avatar";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import {
+  deletePlayerExperience,
+  deletePlayerInjury,
   listeningSinglePlayer,
+  updatePlayerExperience,
+  updatePlayerInjury,
   updatePlayerPersonalInfo,
   updatePlayerTacticalInfo,
 } from "../../firebase/PlayerServices";
-import { Player, PlayerPersonalInfo } from "../../types";
+import {
+  Player,
+  PlayerExperience,
+  PlayerInjury,
+  PlayerPersonalInfo,
+} from "../../types";
 import firebase from "firebase/app";
 import "./styles.less";
 import { uploadImage } from "../../firebase/client";
 import { PlayerPersonalnfo } from "../../components/PlayerPersonalnfo";
-import { UpdatePlayerTacticalInfoModal } from "../../components/UpdatePlayerTacticalInfoModal";
+import { UpdatePlayerTacticalInfoModal } from "../../components/Modals/UpdatePlayerTacticalInfoModal";
 import { PlayerTacticalInfo } from "../../components/PlayerTacticalInfo";
-import { UpdatePlayerPersonalInfoModal } from "../../components/UpdatePlayerPersonalInfoModal";
+import { UpdatePlayerPersonalInfoModal } from "../../components/Modals/UpdatePlayerPersonalInfoModal";
 import moment from "moment";
+import { PlayerExperienceCollapse } from "../../components/PlayerExperienceCollapse";
+import { UpdatePlayerExperienceModal } from "../../components/Modals/UpdatePlayerExperienceModal";
+import { PlayerInjuriesCollapse } from "../../components/PlayerInjuriesCollapse";
+import { UpdatePlayerInjuryModal } from "../../components/Modals/UpdatePlayerInjuryModal";
 
 const { Title } = Typography;
-
 const Players = () => {
   const { id } = useParams<{ id: string }>();
+  const { confirm } = Modal;
 
   const [player, setPlayer] = useState<Player>();
   const [playerAttributes, setPlayerAattributes] =
@@ -32,14 +48,32 @@ const Players = () => {
     setIsVisiblePlayerPersonalInfoModal,
   ] = useState(false);
 
-  const [form] = Form.useForm();
+  const [isVisiblePlayerExperienceModal, setIsVisiblePlayerExperienceModal] =
+    useState(false);
+  const [isVisiblePlayerInjuryModal, setIsVisiblePlayerInjuryModal] =
+    useState(false);
+
+  const [playerTacticalInfoForm] = Form.useForm();
   const [playerPersonalInfoForm] = Form.useForm();
+  const [playerExperienceForm] = Form.useForm();
+  const [playerInjuryForm] = Form.useForm();
 
   const [coverTask, setCoverTask] = useState<firebase.storage.UploadTask>();
   const [avatarTask, setAvatarTask] = useState<firebase.storage.UploadTask>();
   const [coverURL, setCoverURL] = useState<string>("");
   const [avatarURL, setAvatarURL] = useState<string>("");
 
+  const [playerExperience, setPlayerExperience] = useState<
+    PlayerExperience[] | undefined
+  >([]);
+  const [singlePlayerExperience, setSinglePlayerExperience] =
+    useState<PlayerExperience>();
+  const [playerInjuries, setPlayerInjuries] = useState<
+    PlayerInjury[] | undefined
+  >([]);
+  const [playerInjury, setPlayerInjury] = useState<PlayerInjury>();
+  console.log("playerInjuries", playerInjuries);
+  console.log("playerInjury", playerInjury);
   useEffect(() => {
     if (coverTask) {
       const onProgress = () => {
@@ -86,9 +120,11 @@ const Players = () => {
       player?.fourthAttribute,
     ];
     setPlayerAattributes(playerAttributes);
+    setPlayerExperience(player?.clubs);
+    setPlayerInjuries(player?.injuries);
   }, [player]);
 
-  const onFinish = async (values: Player) => {
+  const onFinishPlayerTacticalInfoForm = async (values: Player) => {
     const { pospri, attributes } = values;
     const possec = values.possec ? values.possec : "";
 
@@ -112,7 +148,7 @@ const Players = () => {
       try {
         await updatePlayerTacticalInfo(player?.id!, settedValues);
         message.success("Información táctica actualizada exitosamente!");
-        form.resetFields();
+        playerTacticalInfoForm.resetFields();
       } catch (e) {
         message.error(`Ocurrio un error del tipo ${e}`);
       }
@@ -144,11 +180,54 @@ const Players = () => {
           contract,
         });
         message.success("Información personal actualizada exitosamente!");
-        form.resetFields();
+        playerPersonalInfoForm.resetFields();
       } catch (e) {
         message.error(`Ocurrio un error del tipo ${e}`);
       }
       setIsVisiblePlayerPersonalInfoModal(false);
+    }
+  };
+
+  const onFinishPlayerExperinceForm = async (values: PlayerExperience) => {
+    const { catTournament, clubName, countryClub, subPlayer } = values;
+
+    if (
+      catTournament !== "" &&
+      clubName !== "" &&
+      countryClub !== "" &&
+      subPlayer !== ""
+    ) {
+      try {
+        await updatePlayerExperience(
+          player?.id!,
+          values,
+          singlePlayerExperience
+        );
+        message.success("Experiencia actualizada exitosamente!");
+        playerExperienceForm.resetFields();
+      } catch (e) {
+        message.error(`Ocurrio un error del tipo ${e}`);
+      }
+      setIsVisiblePlayerExperienceModal(false);
+    }
+  };
+
+  const onFinishPlayerInjuryForm = async (values: PlayerInjury) => {
+    const { injuryName, recoveryTime, surgery } = values;
+
+    if (injuryName !== "" && recoveryTime !== "") {
+      try {
+        await updatePlayerInjury(
+          player?.id!,
+          { injuryName, recoveryTime, surgery },
+          playerInjury
+        );
+        message.success("Lesión actualizada exitosamente!");
+        playerExperienceForm.resetFields();
+      } catch (e) {
+        message.error(`Ocurrio un error del tipo ${e}`);
+      }
+      setIsVisiblePlayerInjuryModal(false);
     }
   };
 
@@ -164,11 +243,11 @@ const Players = () => {
     setAvatarTask(task);
   };
 
-  const showModal = () => {
+  const showPlayerTacticalInfoModal = () => {
     setIsVisibleModal(true);
     setCoverURL(player?.coverURL!);
     setAvatarURL(player?.avatarURL!);
-    form.setFieldsValue({
+    playerTacticalInfoForm.setFieldsValue({
       pospri: player?.pospri,
       possec: player?.possec,
       attributes: [
@@ -191,6 +270,92 @@ const Players = () => {
       birth: birth,
       category: player?.category,
       contract: player?.contract,
+    });
+  };
+
+  const showPlayerExperienceModal = (experience: PlayerExperience) => {
+    setIsVisiblePlayerExperienceModal(true);
+    const assistances = experience.A !== undefined ? experience.A : 0;
+    const goals = experience.G !== undefined ? experience.G : 0;
+    const playedGames = experience.PJ !== undefined ? experience.PJ : 0;
+    const yellowCards = experience.TA !== undefined ? experience.TA : 0;
+    const redCards = experience.TR !== undefined ? experience.TR : 0;
+    const season = experience.season !== undefined ? experience.season : 0;
+
+    const singlePlayerExperience = {
+      A: assistances,
+      G: goals,
+      PJ: playedGames,
+      TA: yellowCards,
+      TR: redCards,
+      season: season,
+      catTournament: experience.catTournament,
+      clubName: experience.clubName,
+      countryClub: experience.countryClub,
+      subPlayer: experience.subPlayer,
+    };
+    playerExperienceForm.setFieldsValue(singlePlayerExperience);
+
+    setSinglePlayerExperience(singlePlayerExperience);
+  };
+
+  const showPlayerInjuryModal = (injury: PlayerInjury) => {
+    setIsVisiblePlayerInjuryModal(true);
+    playerInjuryForm.setFieldsValue(injury);
+    setPlayerInjury(injury);
+  };
+
+  const handleDeletePlayerExperience = async (
+    singleExperience: PlayerExperience
+  ) => {
+    try {
+      await deletePlayerExperience(player?.id!, singleExperience);
+      message.success("Experiencia eliminada exitosamente!");
+    } catch (e) {
+      message.error(`Ocurrió un error de tipo ${e}`);
+    }
+  };
+
+  const showPlayerExperienceDeleteConfirm = (
+    singleExperience: PlayerExperience
+  ) => {
+    confirm({
+      title: "¿Esta seguro que desea eliminar esta experiencia?",
+      icon: <ExclamationCircleOutlined />,
+      okText: "Sí",
+      okType: "danger",
+      cancelText: "No",
+      onOk() {
+        handleDeletePlayerExperience(singleExperience);
+      },
+      onCancel() {
+        console.log("Cancel");
+      },
+    });
+  };
+
+  const handleDeletePlayerInjury = async (injury: PlayerInjury) => {
+    try {
+      await deletePlayerInjury(player?.id!, injury);
+      message.success("Lesión eliminada exitosamente!");
+    } catch (e) {
+      message.error(`Ocurrió un error de tipo ${e}`);
+    }
+  };
+
+  const showPlayerInjuryDeleteConfirm = (injury: PlayerInjury) => {
+    confirm({
+      title: "¿Esta seguro que desea eliminar esta lesión?",
+      icon: <ExclamationCircleOutlined />,
+      okText: "Sí",
+      okType: "danger",
+      cancelText: "No",
+      onOk() {
+        handleDeletePlayerInjury(injury);
+      },
+      onCancel() {
+        console.log("Cancel");
+      },
     });
   };
 
@@ -226,19 +391,47 @@ const Players = () => {
 
           <PlayerTacticalInfo
             player={player}
-            onShowModal={showModal}
+            onShowModal={showPlayerTacticalInfoModal}
             playerAttributes={playerAttributes}
           />
 
           <UpdatePlayerTacticalInfoModal
             setIsVisibleModal={setIsVisibleModal}
-            form={form}
+            form={playerTacticalInfoForm}
             isVisibleModal={isVisibleModal}
             coverURL={coverURL}
             avatarURL={avatarURL}
-            onFinish={onFinish}
+            onFinish={onFinishPlayerTacticalInfoForm}
             onHandleCoverChange={handleCoverChange}
             onHandleAvatarChange={handleAvatarChange}
+          />
+
+          <PlayerExperienceCollapse
+            playerExperience={playerExperience}
+            onShowPlayerExperienceModal={showPlayerExperienceModal}
+            onShowDeleteConfirm={showPlayerExperienceDeleteConfirm}
+          />
+
+          <UpdatePlayerExperienceModal
+            setIsVisiblePlayerExperienceModal={
+              setIsVisiblePlayerExperienceModal
+            }
+            form={playerExperienceForm}
+            isVisiblePlayerExperienceModal={isVisiblePlayerExperienceModal}
+            onFinishPlayerExperinceForm={onFinishPlayerExperinceForm}
+          />
+
+          <PlayerInjuriesCollapse
+            playerInjuries={playerInjuries}
+            onShowPlayerInjuryModal={showPlayerInjuryModal}
+            onShowDeleteConfirm={showPlayerInjuryDeleteConfirm}
+          />
+
+          <UpdatePlayerInjuryModal
+            setIsVisiblePlayerInjuryModal={setIsVisiblePlayerInjuryModal}
+            form={playerInjuryForm}
+            isVisiblePlayerInjuryModal={isVisiblePlayerInjuryModal}
+            onFinishPlayerInjuryForm={onFinishPlayerInjuryForm}
           />
         </div>
       </div>

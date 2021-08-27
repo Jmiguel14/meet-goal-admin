@@ -1,7 +1,7 @@
 import { CameraOutlined } from "@ant-design/icons";
 import { Avatar, Form, FormInstance, Input, Modal } from "antd";
 import React from "react";
-import { Club } from "../../types";
+import { Club } from "../../../types";
 import "./styles.less";
 
 interface UpdateClubSportsAchievementsModalProps {

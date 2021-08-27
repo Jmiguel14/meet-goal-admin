@@ -7,7 +7,7 @@ import "./styles.less";
 import { CallDatalnfo } from "../../components/CallDataInfo";
 import { ClubOwnInfo } from "../../components/ClubOwnInfo";
 import PostulantName from "../../components/PostulantName";
-import { UpdateCallInfoModal } from "../../components/UpdateCallInfoModal";
+import { UpdateCallInfoModal } from "../../components/Modals/UpdateCallInfoModal";
 import {
   listeningSingleCall,
   updateCallInfo,

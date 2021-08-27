@@ -1,7 +1,7 @@
 import { CameraOutlined } from "@ant-design/icons";
 import { Form, Modal, Input, FormInstance } from "antd";
 import React from "react";
-import { NewsFormValues } from "../../types";
+import { NewsFormValues } from "../../../types";
 import "./styles.less";
 
 interface UpdateNewsModalProps {
