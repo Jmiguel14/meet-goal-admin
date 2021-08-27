@@ -19,8 +19,8 @@ import {
 } from "../../firebase/ClubServices";
 import { ClubInstitutionallnfo } from "../../components/ClubInstitutionalInfo";
 import { ClubSportAchievements } from "../../components/ClubSportsAchievements";
-import { UpdateClubInstitutionalInfoModal } from "../../components/UpdateClubInstitutionalInfoModal";
-import { UpdateClubSportsAchievementsModal } from "../../components/UpdateClubSportsAhievements";
+import { UpdateClubInstitutionalInfoModal } from "../../components/Modals/UpdateClubInstitutionalInfoModal";
+import { UpdateClubSportsAchievementsModal } from "../../components/Modals/UpdateClubSportsAhievementsModal";
 
 const { Title } = Typography;
 

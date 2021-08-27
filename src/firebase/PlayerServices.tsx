@@ -4,6 +4,7 @@ import firebase from "firebase/app";
 import {
   Player,
   PlayerExperience,
+  PlayerInjury,
   PlayerPersonalInfo,
   PlayerTacticalInfo,
 } from "../types";
@@ -146,6 +147,28 @@ export const updatePlayerExperience = async (
   });
 };
 
+export const updatePlayerInjury = async (
+  id: string,
+  { injuryName, recoveryTime, surgery }: PlayerInjury,
+  oldPlayerInjury: PlayerInjury | undefined
+) => {
+  const res = await firestore.collection("users").doc(id);
+  res.get().then((doc) => {
+    if (doc.exists) {
+      res.update({
+        injuries: firebase.firestore.FieldValue.arrayRemove(oldPlayerInjury),
+      });
+    }
+    res.update({
+      injuries: firebase.firestore.FieldValue.arrayUnion({
+        injuryName,
+        recoveryTime,
+        surgery,
+      }),
+    });
+  });
+};
+
 export const deletePlayerExperience = async (
   id: string,
   {
@@ -159,7 +182,7 @@ export const deletePlayerExperience = async (
     clubName,
     countryClub,
     subPlayer,
-  }: PlayerExperience,
+  }: PlayerExperience
 ) => {
   const res = await firestore.collection("users").doc(id);
   res.get().then((doc) => {
@@ -176,6 +199,24 @@ export const deletePlayerExperience = async (
           clubName,
           countryClub,
           subPlayer,
+        }),
+      });
+    }
+  });
+};
+
+export const deletePlayerInjury = async (
+  id: string,
+  { injuryName, recoveryTime, surgery }: PlayerInjury
+) => {
+  const res = await firestore.collection("users").doc(id);
+  res.get().then((doc) => {
+    if (doc.exists) {
+      res.update({
+        injuries: firebase.firestore.FieldValue.arrayRemove({
+          injuryName,
+          recoveryTime,
+          surgery,
         }),
       });
     }

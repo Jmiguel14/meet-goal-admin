@@ -1,9 +1,9 @@
 import { CameraOutlined } from "@ant-design/icons";
 import { Avatar, Form, FormInstance, Modal, Select, Typography } from "antd";
 import React from "react";
-import { PLAYER_ATTRIBUTES } from "../../constants/playerAttributes";
-import { PLAYER_POSITIONS } from "../../constants/playerPositions";
-import { Player } from "../../types";
+import { PLAYER_ATTRIBUTES } from "../../../constants/playerAttributes";
+import { PLAYER_POSITIONS } from "../../../constants/playerPositions";
+import { Player } from "../../../types";
 import "./styles.less";
 
 const { Text } = Typography;

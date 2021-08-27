@@ -1,20 +1,20 @@
 import { DatePicker, Form, FormInstance, Input, Modal } from "antd";
 import React from "react";
-import { ClubInstitutionalInfo } from "../../types";
+import { PlayerPersonalInfo } from "../../../types";
 
-interface UpdateClubInstitutionalInfoModalProps {
+interface UpdatePlayerTacticalInfoModalProps {
   setIsVisibleModal: (value: React.SetStateAction<boolean>) => void;
   isVisibleModal: boolean;
   form: FormInstance<any>;
-  onFinish: (values: ClubInstitutionalInfo) => Promise<void>;
+  onFinish: (values: PlayerPersonalInfo) => Promise<void>;
 }
 
-export const UpdateClubInstitutionalInfoModal = ({
+export const UpdatePlayerPersonalInfoModal = ({
   setIsVisibleModal,
   isVisibleModal,
   form,
   onFinish,
-}: UpdateClubInstitutionalInfoModalProps) => {
+}: UpdatePlayerTacticalInfoModalProps) => {
   return (
     <Modal
       bodyStyle={{ height: "100%" }}
@@ -25,14 +25,10 @@ export const UpdateClubInstitutionalInfoModal = ({
       visible={isVisibleModal}
       okButtonProps={{
         htmlType: "submit",
-        form: "club_institutional_info_edit_form",
+        form: "player_personal_info_edit_form",
       }}
     >
-      <Form
-        form={form}
-        onFinish={onFinish}
-        id="club_institutional_info_edit_form"
-      >
+      <Form form={form} onFinish={onFinish} id="player_personal_info_edit_form">
         <Form.Item
           name="name"
           label="Nombre"
@@ -43,9 +39,6 @@ export const UpdateClubInstitutionalInfoModal = ({
             },
           ]}
         >
-          <Input />
-        </Form.Item>
-        <Form.Item name="socialName" label="Razón social">
           <Input />
         </Form.Item>
         <Form.Item
@@ -85,18 +78,23 @@ export const UpdateClubInstitutionalInfoModal = ({
           <Input />
         </Form.Item>
         <Form.Item
-          name="foundation"
-          label="Fecha de fundación"
+          name="birth"
+          label="Fecha de Nacimiento"
           rules={[
             {
               required: true,
-              message: "Por favor, ingrese la fecha de fundación",
+              message: "Por favor, ingrese la fecha de nacimiento",
             },
           ]}
         >
           <DatePicker />
         </Form.Item>
-        {/* <Form.ErrorList errors={errors}></Form.ErrorList> */}
+        <Form.Item name="category" label="Categoría">
+          <Input />
+        </Form.Item>
+        <Form.Item name="contract" label="Contrato">
+          <Input />
+        </Form.Item>
       </Form>
     </Modal>
   );

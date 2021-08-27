@@ -4,7 +4,7 @@ import firebase from "firebase";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { ListOfNews } from "../../components/ListOfNews";
-import { UpdateNewsModal } from "../../components/UpdateNewsModal";
+import { UpdateNewsModal } from "../../components/Modals/UpdateNewsModal";
 import { Routes } from "../../constants/routes";
 import { uploadImage } from "../../firebase/client";
 import {

@@ -31,7 +31,8 @@ export interface Player {
   secondAttribute: string;
   thirdAttribute: string;
   fourthAttribute: string;
-  clubs: PlayerExperience[]
+  clubs: PlayerExperience[];
+  injuries: PlayerInjury[];
 }
 
 export interface PlayerPersonalInfo {
@@ -120,4 +121,10 @@ export interface PlayerExperience {
   clubName: string
   countryClub: string
   subPlayer: string
+}
+
+export interface PlayerInjury {
+  injuryName: string
+  recoveryTime: string
+  surgery: boolean
 }

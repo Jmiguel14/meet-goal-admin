@@ -1,6 +1,6 @@
 import { Form, FormInstance, Input, Modal } from "antd";
 import React from "react";
-import { PlayerExperience } from "../../types";
+import { PlayerExperience } from "../../../types";
 
 interface UpdatePlayerExperienceModalProps {
   setIsVisiblePlayerExperienceModal: (
