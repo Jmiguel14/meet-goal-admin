@@ -1,6 +1,6 @@
 import * as React from "react";
 
-function NotFound(props: React.SVGProps<SVGSVGElement>) {
+function NotFoundPoster(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       data-name="Layer 1"
@@ -231,4 +231,4 @@ function NotFound(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-export default NotFound;
+export default NotFoundPoster;
