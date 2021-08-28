@@ -1,7 +1,9 @@
+import { ExclamationCircleOutlined } from "@ant-design/icons";
+import { message, Modal } from "antd";
 import { useEffect, useState } from "react";
 import { ListOfCalls } from "../../components/ListOfCalls";
 import { Search } from "../../components/Search";
-import { listenLatestCalls } from "../../firebase/CallServices";
+import { deleteCall, listenLatestCalls } from "../../firebase/CallServices";
 import { useCalls } from "../../hooks/usCalls";
 import { CallData } from "../../types";
 
@@ -11,11 +13,13 @@ const CallSearcher = () => {
   const [calls, setCalls] = useState<CallData[]>([]);
   const [callsToLowerCase, setCallsToLowerCase] = useState<CallData[]>([]);
   const [filteredCalls, setFilteredCalls] = useState<CallData[]>([]);
+  const [isVisibleModal, setIsVisibleModal] = useState(false);
 
   const [searchText, setSearchText] = useState("");
 
   const allCalls = useCalls();
 
+  const { confirm } = Modal;
   useEffect(() => {
     const unsubscribe = listenLatestCalls(setCalls);
     return () => unsubscribe && unsubscribe();
@@ -59,13 +63,36 @@ const CallSearcher = () => {
     }
   }, [callsToLowerCase, searchText, calls]);
 
+  const showModal = () => {
+    setIsVisibleModal(true);
+  };
+
+  const showDeleteConfirm = (id: string) => {
+    confirm({
+      title: "¿Esta seguro que desea eliminar la noticia?",
+      icon: <ExclamationCircleOutlined />,
+      okText: "Sí",
+      okType: "danger",
+      cancelText: "No",
+      onOk() {
+        deleteCall(id);
+        message.success("La convocatoria se elimino correctamente!");
+      },
+      visible: isVisibleModal,
+    });
+  };
+
   return (
     <>
       <Search
         onChange={(e) => setSearchText(e.target.value)}
         placeholder={"Buscar por categoria o posición"}
       />
-      <ListOfCalls calls={filteredCalls} />
+      <ListOfCalls
+        calls={filteredCalls}
+        onShowModal={showModal}
+        onShowDeleteConfirm={showDeleteConfirm}
+      />
     </>
   );
 };

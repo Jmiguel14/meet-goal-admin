@@ -4,27 +4,27 @@ import Title from "antd/lib/typography/Title";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { CallData } from "../../types";
-import { DeleteCallModal } from "../DeleteCallModal";
 import "./styles.less";
 
 const { Meta } = Card;
 
 interface ListOfCallsProps {
   calls: CallData[];
+  onShowDeleteConfirm: (id: string) => void;
+  onShowModal: () => void;
 }
 
-export const ListOfCalls = ({ calls }: ListOfCallsProps) => {
+export const ListOfCalls = ({
+  calls,
+  onShowDeleteConfirm,
+  onShowModal,
+}: ListOfCallsProps) => {
   const [loading, setLoading] = useState(false);
-  const [isVisibleModal, setIsVisibleModal] = useState(false);
-  const [callToDeleteId, setCallToDeleteId] = useState<string | undefined>();
+
   useEffect(() => {
     calls?.length === 0 ? setLoading(true) : setLoading(false);
   }, [calls]);
 
-  function openDeleteCall(callId: string | undefined) {
-    setIsVisibleModal(true);
-    setCallToDeleteId(callId);
-  }
   return (
     <div className="body_calls">
       <Row
@@ -62,7 +62,10 @@ export const ListOfCalls = ({ calls }: ListOfCallsProps) => {
                   <Link to={`/convocatorias/${call.id}`}>
                     <EyeOutlined key="watch" />
                   </Link>,
-                  <DeleteOutlined onClick={(e) => openDeleteCall(call.id)} />,
+                  <DeleteOutlined
+                    key="watch"
+                    onClick={() => onShowDeleteConfirm(call.id!)}
+                  />,
                 ]}
               >
                 <Skeleton loading={loading} active>
@@ -73,11 +76,6 @@ export const ListOfCalls = ({ calls }: ListOfCallsProps) => {
           );
         })}
       </Row>
-      <DeleteCallModal
-        setIsVisibleModal={setIsVisibleModal}
-        isVisibleModal={isVisibleModal}
-        callId={callToDeleteId}
-      />
     </div>
   );
 };
