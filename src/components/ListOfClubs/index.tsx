@@ -18,11 +18,26 @@ export const ListOfClubs = ({ clubs }: ListOfClubsProps) => {
   }, [clubs]);
 
   return (
-    <div>
-      <Row gutter={[16, 16]}>
+    <div className="list_of_clubs">
+      <Row
+        gutter={[16, 16]}
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
         {clubs.map((club: Club, index: number) => {
           return (
-            <Col md={{ span: "6" }} xs={{ span: "24" }} key={index}>
+            <Col
+              md={{ span: "6" }}
+              xs={{ span: "24" }}
+              key={index}
+              style={{
+                justifyContent: "center",
+                display: "flex",
+              }}
+            >
               <Card
                 className="clubs_card"
                 key={index}
