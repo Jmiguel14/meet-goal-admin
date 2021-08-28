@@ -114,7 +114,9 @@ export const Navigation = ({ mode }: NavigationProps) => {
           </Item>
         </>
       ) : (
-        <Item key="void"></Item>
+        <Item key="goHome">
+          <Link to={Routes.HOME}>Ir al inicio</Link>
+        </Item>
       )}
     </Menu>
   );

@@ -3,6 +3,9 @@ import { Routes } from "../constants/routes";
 import { PrivateRoutes } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
 import loadable from "@loadable/component";
+import { Col, Row } from "antd";
+import NotFound from "../icons/NotFound";
+import Title from "antd/lib/typography/Title";
 
 const AsyncLogin = loadable(() => import("../pages/Login"));
 const AsyncNews = loadable(() => import("../pages/News"));
@@ -44,7 +47,20 @@ export const AppRouter = () => {
       <Route exact path="/">
         <Redirect to={Routes.NEWS} />
       </Route>
-      <Route>No found</Route>
+      <Route>
+        <div style={{ justifyContent: "center", display: "flex" }}>
+          <Col>
+            <Row justify="center">
+              <Title level={1} style={{ color: "#99ff98" }}>
+                Ups..!! Página no encontrada
+              </Title>
+            </Row>
+            <Row justify="center">
+              <NotFound />
+            </Row>
+          </Col>
+        </div>
+      </Route>
     </Switch>
   );
 };
