@@ -9,7 +9,7 @@ interface LoginFormProps {
   onReset: React.MouseEventHandler<HTMLElement> | undefined;
 }
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 export const LoginForm = ({ form, onFinish, onReset }: LoginFormProps) => {
   return (
@@ -61,12 +61,6 @@ export const LoginForm = ({ form, onFinish, onReset }: LoginFormProps) => {
         </Col>
       </Row>
       <br />
-
-      <Row justify="center">
-        <Col>
-          <Text type="secondary">¿Olvidó su contraseña?</Text>
-        </Col>
-      </Row>
     </>
   );
 };
