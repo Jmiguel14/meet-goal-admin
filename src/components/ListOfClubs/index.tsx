@@ -24,7 +24,7 @@ export const ListOfClubs = ({ clubs }: ListOfClubsProps) => {
           return (
             <Col md={{ span: "6" }} xs={{ span: "24" }} key={index}>
               <Card
-                className="card"
+                className="clubs_card"
                 key={index}
                 cover={
                   loading ? (

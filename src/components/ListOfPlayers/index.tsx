@@ -24,7 +24,7 @@ export const ListOfPlayers = ({ players }: ListOfPlayersProps) => {
           return (
             <Col md={{ span: "6" }} xs={{ span: "24" }} key={index}>
               <Card
-                className="card"
+                className="players_card"
                 key={index}
                 cover={
                   loading ? (
