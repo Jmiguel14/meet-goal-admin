@@ -50,7 +50,7 @@ export const ListOfClubs = ({ clubs }: ListOfClubsProps) => {
                 }
                 actions={[
                   <Link to={`/clubes/${club.id}`}>
-                    <EyeOutlined key="watch" />,
+                    <EyeOutlined key="watch" />
                   </Link>,
                 ]}
               >
