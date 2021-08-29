@@ -35,58 +35,31 @@ Web App that allows managing the [Meet Goal mobile app](https://github.com/Jmigu
 - Club managment
 ![club managment](https://user-images.githubusercontent.com/56648593/131259251-af6f6ab3-efc5-48e7-83ee-eb77c0e078e6.png)
 
+- Calls managment
+![calls managment](https://user-images.githubusercontent.com/56648593/131259389-59d35bdf-6942-4dbc-88ea-a2756defefed.png)
 
 ## 👨‍💻 Technologies
 
-- [Ionic 5.5.0](https://ionicframework.com/)
 - [React 17.0.1](https://reactjs.org/)
 - [Firebase 8.6.8](https://firebase.google.com/docs)
-- [Capacitor 3.0.0](https://capacitorjs.com/)
-- [react-hook-form 7.8.8](https://react-hook-form.com/)
-- [Yup 0.32.9](https://github.com/jquense/yup)
+- [AntDesign 4.16.9](https://ant.design/docs/react/getting-started)
 
 ## ⚙️ Setup
 
 - Clone the repo
 - `npm i` or `npm install`
-- `ionic cap open android`
 
 ## 🤖 Features
 
-- Filter the best palyers for calls
-- Let the clubs know your skills.
+- Manage the mobile app of Meet Goal
 
   ### To do
 
-  ### All users:
-
-  - Create an account
-  - Create an account with Google or Facebook:
   - Login with the account previusly created
-  - Reset password
-  - Register profile information
-  - Update profile information
-  - Search players
-  - View profile players
-  - View notifications:
-  - Send and receive messages:
-
-  ### Players:
-
-  - Search calls
-  - View calls
-  - Apply for calls
-  - View calls applied
-  - Search clubs
-  - View profile clubs
-
-  ### Clubs:
-
-  - Create calls
-  - Update calls created
-  - Select players of a call:
+  - Search, view, update, and delete user's profile information
+  - Search, view, update, and delete call's profile information
+  - Search, view, update, and delete news' profile information
 
 ## 📆 Status
 
-This app is still being developed, but its develop will have finished by the end of August.
-Coming soon in Play Store 😲
+Now available on ![Meet Goal Admin](https://meet-goal-development.web.app/inicio)
