@@ -15,9 +15,12 @@ App created using [React](https://reactjs.org/) and [firebase](https://firebase.
 
 ## ℹ️ General info
 
-Mobile App that allows sports clubs to filter their players through calls, and it gives to players the chance to let the clubs know their skills. The App is being built with Ionic, React, and Firebase.
+Web App that allows managing the [Meet Goal mobile app](https://github.com/Jmiguel14/meet-goal-project). This App was built with React and Firebase.
 
 ## 📷 Screenshots
+
+- Landing Page
+![image](https://user-images.githubusercontent.com/56648593/131257407-65c99f0c-e6f6-41c6-a6a5-b5bbc94c1967.png)
 
 - Authentication
 
