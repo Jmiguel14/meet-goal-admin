@@ -1,46 +1,87 @@
-# Getting Started with Create React App
+# :zap: Meet Goal Admin
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![logo](https://user-images.githubusercontent.com/56648593/127076823-cba7b816-e329-4a32-a917-c20635c5838e.png)
 
-## Available Scripts
+App created using [React](https://reactjs.org/) and [firebase](https://firebase.google.com/docs).
 
-In the project directory, you can run:
+## :page_facing_up: Table of contents
 
-### `npm start`
+- [General info](#ℹ%EF%B8%8F-general-info)
+- [Screenshots](#-screenshots)
+- [Technologies](#-technologies)
+- [Setup](#%EF%B8%8F-setup)
+- [Features](#-features)
+- [Status](#-status)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## ℹ️ General info
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Mobile App that allows sports clubs to filter their players through calls, and it gives to players the chance to let the clubs know their skills. The App is being built with Ionic, React, and Firebase.
 
-### `npm test`
+## 📷 Screenshots
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Authentication
 
-### `npm run build`
+![1](https://user-images.githubusercontent.com/56648593/127067231-9de728a9-ebfc-48c3-aaff-a2cfb04892a4.png) ![3](https://user-images.githubusercontent.com/56648593/127071720-4d8878e5-e1de-4628-896d-6357c1af4fe0.png) ![2](https://user-images.githubusercontent.com/56648593/127067238-def5e220-3a5b-4e7a-8c64-a4cc8df2eacc.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Player user
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![5](https://user-images.githubusercontent.com/56648593/127086540-ad7582ce-870c-48c2-8e4f-7addc81c8031.png) ![6](https://user-images.githubusercontent.com/56648593/127086576-835e0cce-af19-4fa7-a658-da301b903854.png) ![7](https://user-images.githubusercontent.com/56648593/127086844-525f018d-b18b-4413-aea4-1f005eaef87d.png) ![8](https://user-images.githubusercontent.com/56648593/127086886-c579c6e1-a0e7-4276-92f9-779396ae5a6b.png) ![9](https://user-images.githubusercontent.com/56648593/127087019-2187cfef-34e3-4191-b91d-b346d1eb9162.png) ![10](https://user-images.githubusercontent.com/56648593/127087060-6e9240f4-ff45-4e42-abb8-2ce00ea21675.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Club user
 
-### `npm run eject`
+![11](https://user-images.githubusercontent.com/56648593/127087471-38690307-adb9-4645-85d8-6e1cab63cf48.png) ![12](https://user-images.githubusercontent.com/56648593/127087548-6d8e0734-0656-4453-bb4b-a71d2841eb94.png) ![13](https://user-images.githubusercontent.com/56648593/127087709-34965d0e-49c8-4d2a-ac99-45dd4c41f709.png) ![14](https://user-images.githubusercontent.com/56648593/127087745-fee06dd9-7a02-4c09-9bbe-41b5a92adcb9.png) ![15](https://user-images.githubusercontent.com/56648593/127087768-743da96d-ae78-4c52-bc34-8404a34a8448.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 👨‍💻 Technologies
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- [Ionic 5.5.0](https://ionicframework.com/)
+- [React 17.0.1](https://reactjs.org/)
+- [Firebase 8.6.8](https://firebase.google.com/docs)
+- [Capacitor 3.0.0](https://capacitorjs.com/)
+- [react-hook-form 7.8.8](https://react-hook-form.com/)
+- [Yup 0.32.9](https://github.com/jquense/yup)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## ⚙️ Setup
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Clone the repo
+- `npm i` or `npm install`
+- `ionic cap open android`
 
-## Learn More
+## 🤖 Features
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Filter the best palyers for calls
+- Let the clubs know your skills.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+  ### To do
+
+  ### All users:
+
+  - Create an account
+  - Create an account with Google or Facebook:
+  - Login with the account previusly created
+  - Reset password
+  - Register profile information
+  - Update profile information
+  - Search players
+  - View profile players
+  - View notifications:
+  - Send and receive messages:
+
+  ### Players:
+
+  - Search calls
+  - View calls
+  - Apply for calls
+  - View calls applied
+  - Search clubs
+  - View profile clubs
+
+  ### Clubs:
+
+  - Create calls
+  - Update calls created
+  - Select players of a call:
+
+## 📆 Status
+
+This app is still being developed, but its develop will have finished by the end of August.
+Coming soon in Play Store 😲
