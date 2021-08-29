@@ -18,13 +18,28 @@ export const ListOfPlayers = ({ players }: ListOfPlayersProps) => {
   }, [players]);
 
   return (
-    <div>
-      <Row gutter={[16, 16]}>
+    <div className="list_of_players">
+      <Row
+        gutter={[16, 16]}
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
         {players.map((player: Player, index: number) => {
           return (
-            <Col md={{ span: "6" }} xs={{ span: "24" }} key={index}>
+            <Col
+              md={{ span: "6" }}
+              xs={{ span: "24" }}
+              key={index}
+              style={{
+                justifyContent: "center",
+                display: "flex",
+              }}
+            >
               <Card
-                className="card"
+                className="players_card"
                 key={index}
                 cover={
                   loading ? (
@@ -40,7 +55,7 @@ export const ListOfPlayers = ({ players }: ListOfPlayersProps) => {
                 ]}
               >
                 <Skeleton loading={loading} active>
-                  <Meta title={player.name} description={player.email} />
+                  <Meta title={player.name} description={player.pospri} />
                 </Skeleton>
               </Card>
             </Col>

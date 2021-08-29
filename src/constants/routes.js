@@ -10,7 +10,6 @@ const PrivateRoutes = {
   NEWS: "/noticias",
   PLAYERS: "/jugadores/:id",
   CLUBS: "/clubes/:id",
-  PROFILE: "/perfil",
   CREATE_NEWS: "/crear-noticia",
   PLAYERS_SEARCHER: "/buscar-jugadores",
   CALLS: "/convocatorias/:id",

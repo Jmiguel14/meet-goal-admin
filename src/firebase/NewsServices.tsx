@@ -22,6 +22,7 @@ export const listenLatestNews = (
 ) => {
   return firestore
     .collection("news")
+    .limit(15)
     .orderBy("createdAt", "desc")
     .onSnapshot(({ docs }) => {
       const newNews = docs.map((doc) => {

@@ -1,6 +1,7 @@
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { Col, Row, Form, Button, message, Modal } from "antd";
 import firebase from "firebase";
+import { Search } from "../../components/Search";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { ListOfNews } from "../../components/ListOfNews";
@@ -14,10 +15,16 @@ import {
 } from "../../firebase/NewsServices";
 import { NewsFormValues } from "../../types";
 import "./styles.less";
+import { toTitleCase } from "../../utils/toTitleCase";
 
 const News = () => {
   const [news, setNews] = useState<firebase.firestore.DocumentData>();
   const [isVisibleModal, setIsVisibleModal] = useState(false);
+  const [searchText, setSearchText] = useState("");
+  const [newsToLowerCase, setNewsToLowerCase] = useState<NewsFormValues[]>([]);
+  const [filteredNews, setFilteredNews] = useState<
+    NewsFormValues[] | undefined | firebase.firestore.DocumentData
+  >([]);
   const [newsItem, setNewsItem] = useState<NewsFormValues>(
     {} as NewsFormValues
   );
@@ -34,6 +41,38 @@ const News = () => {
     const unsubscribe = listenLatestNews(setNews);
     return () => unsubscribe && unsubscribe();
   }, []);
+
+  useEffect(() => {
+    const newsToLowerCase = news?.map((newData: NewsFormValues) => {
+      const { title } = newData;
+      const titleToLowerCase = title?.toLowerCase();
+      return {
+        ...newData,
+        title: titleToLowerCase,
+      };
+    });
+    setNewsToLowerCase(newsToLowerCase);
+  }, [news]);
+
+  useEffect(() => {
+    if (searchText) {
+      const newListOfNews = newsToLowerCase?.filter((newData) =>
+        newData.title?.includes(searchText.toLowerCase())
+      );
+
+      const newListMapped = newListOfNews?.map((newData) => {
+        const { title } = newData;
+        const titleToTitleCase = toTitleCase(title)!;
+        return {
+          ...newData,
+          title: titleToTitleCase,
+        };
+      });
+      setFilteredNews(newListMapped);
+    } else {
+      setFilteredNews(news);
+    }
+  }, [newsToLowerCase, searchText, news]);
 
   useEffect(() => {
     if (task) {
@@ -129,8 +168,13 @@ const News = () => {
         </Col>
       </Row>
 
+      <Search
+        onChange={(e) => setSearchText(e.target.value)}
+        placeholder="Buscar por titulo"
+      />
+
       <ListOfNews
-        news={news}
+        news={filteredNews}
         onShowModal={showModal}
         onShowDeleteConfirm={showDeleteConfirm}
       />

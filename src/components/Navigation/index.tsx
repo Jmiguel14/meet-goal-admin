@@ -85,9 +85,6 @@ export const Navigation = ({ mode }: NavigationProps) => {
               <Link to={Routes.CALLS_SEARCHER}>Convocatorias</Link>
             </Item>
             <SubMenu icon={<UserOutlined />} title="Admin" key="Admin">
-              <Item key={Routes.PROFILE}>
-                <Link to={Routes.PROFILE}>Perfil</Link>
-              </Item>
               <Item onClick={handleSigout} key="signout">
                 Cerrar sesión
               </Item>
@@ -117,7 +114,9 @@ export const Navigation = ({ mode }: NavigationProps) => {
           </Item>
         </>
       ) : (
-        <Item key="void"></Item>
+        <Item key="goHome">
+          <Link to={Routes.HOME}>Ir al inicio</Link>
+        </Item>
       )}
     </Menu>
   );
