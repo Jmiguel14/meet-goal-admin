@@ -32,6 +32,9 @@ Web App that allows managing the [Meet Goal mobile app](https://github.com/Jmigu
 - Player managment
 ![player managment](https://user-images.githubusercontent.com/56648593/131259122-22680dba-9071-4e7a-a0a4-dec03776a0bd.png)
 
+- Club managment
+![club managment](https://user-images.githubusercontent.com/56648593/131259251-af6f6ab3-efc5-48e7-83ee-eb77c0e078e6.png)
+
 
 ## 👨‍💻 Technologies
 
