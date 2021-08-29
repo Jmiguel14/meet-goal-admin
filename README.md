@@ -62,4 +62,4 @@ Web App that allows managing the [Meet Goal mobile app](https://github.com/Jmigu
 
 ## 📆 Status
 
-Now available on ![Meet Goal Admin](https://meet-goal-development.web.app/inicio)
+Now available on [Meet Goal Admin](https://meet-goal-development.web.app/inicio)
