@@ -55,7 +55,7 @@ export const ListOfPlayers = ({ players }: ListOfPlayersProps) => {
                 ]}
               >
                 <Skeleton loading={loading} active>
-                  <Meta title={player.name} description={player.email} />
+                  <Meta title={player.name} description={player.pospri} />
                 </Skeleton>
               </Card>
             </Col>
