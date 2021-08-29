@@ -23,12 +23,12 @@ Web App that allows managing the [Meet Goal mobile app](https://github.com/Jmigu
 ![image](https://user-images.githubusercontent.com/56648593/131257479-93e4426e-55f4-42de-8783-ffab59104b9f.png)
 
 - Authentication
-
 ![image](https://user-images.githubusercontent.com/56648593/131257572-ee96f82c-957f-43a6-b3bc-e47f0ce61280.png)
 
-- Player user
-
-![5](https://user-images.githubusercontent.com/56648593/127086540-ad7582ce-870c-48c2-8e4f-7addc81c8031.png) ![6](https://user-images.githubusercontent.com/56648593/127086576-835e0cce-af19-4fa7-a658-da301b903854.png) ![7](https://user-images.githubusercontent.com/56648593/127086844-525f018d-b18b-4413-aea4-1f005eaef87d.png) ![8](https://user-images.githubusercontent.com/56648593/127086886-c579c6e1-a0e7-4276-92f9-779396ae5a6b.png) ![9](https://user-images.githubusercontent.com/56648593/127087019-2187cfef-34e3-4191-b91d-b346d1eb9162.png) ![10](https://user-images.githubusercontent.com/56648593/127087060-6e9240f4-ff45-4e42-abb8-2ce00ea21675.png)
+- News managment
+![image](https://user-images.githubusercontent.com/56648593/131257783-667441a0-8f4d-478c-8e68-bc293542d4fd.png)
+![image](https://user-images.githubusercontent.com/56648593/131257854-0a5b3d43-e1cd-4220-a37e-a4f8d190964c.png)
+![image](https://user-images.githubusercontent.com/56648593/131257874-d439badc-c62f-4d69-a56b-1d2f76f9b504.png)
 
 - Club user
 
