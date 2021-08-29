@@ -23,7 +23,7 @@ Web App that allows managing the [Meet Goal mobile app](https://github.com/Jmigu
 ![landing](https://user-images.githubusercontent.com/56648593/131258817-93ae0877-8e8f-41db-a187-f23d82179c05.png)
 
 - Authentication
-![image](https://user-images.githubusercontent.com/56648593/131257572-ee96f82c-957f-43a6-b3bc-e47f0ce61280.png)
+![auth](https://user-images.githubusercontent.com/56648593/131258882-1daebd09-b862-48a9-ab71-1b4777be8497.png)
 
 - News managment
 ![News managment](https://user-images.githubusercontent.com/56648593/131258771-0d0b1dd3-9c57-4902-b5aa-d5acdceb11d8.png)
