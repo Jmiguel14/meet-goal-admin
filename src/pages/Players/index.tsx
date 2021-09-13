@@ -72,8 +72,6 @@ const Players = () => {
     PlayerInjury[] | undefined
   >([]);
   const [playerInjury, setPlayerInjury] = useState<PlayerInjury>();
-  console.log("playerInjuries", playerInjuries);
-  console.log("playerInjury", playerInjury);
   useEffect(() => {
     if (coverTask) {
       const onProgress = () => {

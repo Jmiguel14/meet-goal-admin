@@ -62,7 +62,6 @@ const CreateNews = () => {
     const task = uploadNewsImage(file, id);
     setTask(task);
   };
-  console.log(id);
 
   const handleDragEnter = (e: React.DragEvent<HTMLInputElement>) => {
     e.preventDefault();
