@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 import { ListOfNews } from "../../components/ListOfNews";
 import { UpdateNewsModal } from "../../components/Modals/UpdateNewsModal";
 import { Routes } from "../../constants/routes";
-import { uploadImage } from "../../firebase/client";
+import { uploadImage, uploadNewsImage } from "../../firebase/client";
 import {
   deleteNewsItem,
   listenLatestNews,
@@ -105,7 +105,7 @@ const News = () => {
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0];
-    const task = uploadImage(file);
+    const task = uploadNewsImage(file, newsItem.id!);
     setTask(task);
   };
 
