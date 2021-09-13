@@ -23,7 +23,7 @@ import {
 } from "../../types";
 import firebase from "firebase/app";
 import "./styles.less";
-import { uploadImage } from "../../firebase/client";
+import { uploadImage, uploadProfilesImage } from "../../firebase/client";
 import { PlayerPersonalnfo } from "../../components/PlayerPersonalnfo";
 import { UpdatePlayerTacticalInfoModal } from "../../components/Modals/UpdatePlayerTacticalInfoModal";
 import { PlayerTacticalInfo } from "../../components/PlayerTacticalInfo";
@@ -233,13 +233,13 @@ const Players = () => {
 
   const handleCoverChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0];
-    const task = uploadImage(file);
+    const task = uploadProfilesImage(file, id, "cover");
     setCoverTask(task);
   };
 
   const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0];
-    const task = uploadImage(file);
+    const task = uploadProfilesImage(file, id, "avatar");
     setAvatarTask(task);
   };
 
