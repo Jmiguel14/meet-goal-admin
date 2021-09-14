@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 import { ListOfNews } from "../../components/ListOfNews";
 import { UpdateNewsModal } from "../../components/Modals/UpdateNewsModal";
 import { Routes } from "../../constants/routes";
-import { uploadImage, uploadNewsImage } from "../../firebase/client";
+import { uploadNewsImage } from "../../firebase/client";
 import {
   deleteNewsItem,
   listenLatestNews,

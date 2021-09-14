@@ -2,7 +2,7 @@ import { Col, Row, Form, message } from "antd";
 import React, { useEffect, useState } from "react";
 import firebase from "firebase";
 import "./styles.less";
-import { firestore, uploadImage, uploadNewsImage } from "../../firebase/client";
+import { uploadNewsImage } from "../../firebase/client";
 import { addNewsItem } from "../../firebase/NewsServices";
 import { NewsFormValues } from "../../types";
 import { CreateNewsForm } from "../../components/CreateNewsForm";

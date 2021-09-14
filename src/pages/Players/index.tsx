@@ -23,7 +23,7 @@ import {
 } from "../../types";
 import firebase from "firebase/app";
 import "./styles.less";
-import { uploadImage, uploadProfilesImage } from "../../firebase/client";
+import { uploadProfilesImage } from "../../firebase/client";
 import { PlayerPersonalnfo } from "../../components/PlayerPersonalnfo";
 import { UpdatePlayerTacticalInfoModal } from "../../components/Modals/UpdatePlayerTacticalInfoModal";
 import { PlayerTacticalInfo } from "../../components/PlayerTacticalInfo";

@@ -10,7 +10,7 @@ import {
 } from "../../types";
 import firebase from "firebase/app";
 import "./styles.less";
-import { uploadImage, uploadProfilesImage } from "../../firebase/client";
+import { uploadProfilesImage } from "../../firebase/client";
 import moment from "moment";
 import {
   listeningSingleClub,
