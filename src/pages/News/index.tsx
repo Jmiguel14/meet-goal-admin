@@ -11,6 +11,7 @@ import { uploadNewsImage } from "../../firebase/client";
 import {
   deleteNewsItem,
   listenLatestNews,
+  updateNewsCover,
   updateNewsItem,
 } from "../../firebase/NewsServices";
 import { NewsFormValues } from "../../types";
@@ -84,7 +85,11 @@ const News = () => {
       };
       const onComplete = () => {
         console.log("onComplete");
-        task.snapshot.ref.getDownloadURL().then(setImgURL);
+        task.snapshot.ref.getDownloadURL().then((url) => {
+          setImgURL(url);
+          updateNewsCover(newsItem.id!, url);
+        });
+        message.success("La imagen se ha cambiado exitosamente!");
       };
 
       task.on("state_changed", onProgress, onError, onComplete);

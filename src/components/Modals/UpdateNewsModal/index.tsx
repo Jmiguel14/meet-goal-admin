@@ -1,5 +1,5 @@
-import { CameraOutlined } from "@ant-design/icons";
-import { Form, Modal, Input, FormInstance } from "antd";
+import { CameraOutlined, CaretRightOutlined } from "@ant-design/icons";
+import { Form, Modal, Input, FormInstance, Collapse, Alert } from "antd";
 import React from "react";
 import { NewsFormValues } from "../../../types";
 import "./styles.less";
@@ -25,6 +25,7 @@ export const UpdateNewsModal = ({
   newsItem,
   imgURL,
 }: UpdateNewsModalProps) => {
+  const { Panel } = Collapse;
   return (
     <Modal
       onOk={() => onSetIsVisibleModal(false)}
@@ -32,6 +33,7 @@ export const UpdateNewsModal = ({
       visible={isVisibleModal}
       okButtonProps={{ htmlType: "submit", form: "news_edit_form" }}
     >
+      <br />
       <Form
         form={form}
         onFinish={onFinish}
@@ -41,26 +43,49 @@ export const UpdateNewsModal = ({
           description: newsItem?.description,
         }}
       >
-        <div className="image">
-          <CameraOutlined className="edit_image_button" />
-          <input
-            className="file_input"
-            type="file"
-            onChange={onHandleImageChange}
-          />
+        <Collapse
+          defaultActiveKey={1}
+          expandIcon={({ isActive }) => (
+            <CaretRightOutlined rotate={isActive ? 90 : 0} />
+          )}
+        >
+          <Panel
+            className="edit-section-title"
+            header="Editar los detalles de la noticia"
+            key="1"
+          >
+            <Form.Item name="title">
+              <Input />
+            </Form.Item>
+            <Form.Item name="description">
+              <Input />
+            </Form.Item>
+            <Form.Item name="source">
+              <Input />
+            </Form.Item>
+          </Panel>
+          <Panel
+            className="edit-section-title"
+            header="Editar la foto de la noticia"
+            key="2"
+          >
+            <Alert
+              message="La imagen se cambia automáticamente"
+              type="warning"
+              showIcon
+            />
+            <div className="image">
+              <CameraOutlined className="edit_image_button" />
+              <input
+                className="file_input"
+                type="file"
+                onChange={onHandleImageChange}
+              />
 
-          <img alt="" className="edit_image" src={imgURL} />
-        </div>
-
-        <Form.Item name="title">
-          <Input />
-        </Form.Item>
-        <Form.Item name="description">
-          <Input />
-        </Form.Item>
-        <Form.Item name="source">
-          <Input />
-        </Form.Item>
+              <img alt="" className="edit_image" src={imgURL} />
+            </div>
+          </Panel>
+        </Collapse>
       </Form>
     </Modal>
   );
