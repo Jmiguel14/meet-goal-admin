@@ -54,13 +54,13 @@ export const UpdateNewsModal = ({
             header="Editar los detalles de la noticia"
             key="1"
           >
-            <Form.Item name="title">
+            <Form.Item name="title" label="Título de la noticia">
               <Input />
             </Form.Item>
-            <Form.Item name="description">
+            <Form.Item name="description" label="Descripción de la noticia">
               <Input />
             </Form.Item>
-            <Form.Item name="source">
+            <Form.Item name="source" label="Fuente de la noticia">
               <Input />
             </Form.Item>
           </Panel>

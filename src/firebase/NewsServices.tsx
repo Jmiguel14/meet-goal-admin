@@ -53,12 +53,6 @@ export const updateNewsItem = (
   });
 };
 
-export const updateNewsCover = (id: string, image: string) => {
-  return firestore.collection("news").doc(id).update({
-    image,
-  });
-};
-
 export const deleteNewsItem = (id: string) => {
   return firestore.collection("news").doc(id).delete();
 };

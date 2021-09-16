@@ -55,7 +55,16 @@ const Clubs = () => {
       };
       const onComplete = () => {
         console.log("onComplete");
-        coverTask.snapshot.ref.getDownloadURL().then(setCoverURL);
+        coverTask.snapshot.ref.getDownloadURL().then((url) => {
+          setCoverURL(url);
+          updateClubSportsAchievements(id, {
+            totalWins: club?.totalWins!,
+            maxIntGoal: club?.maxIntGoal!,
+            maxNacGoal: club?.maxNacGoal!,
+            avatarURL: club?.avatarURL!,
+            coverURL: url,
+          });
+        });
       };
 
       coverTask.on("state_changed", onProgress, onError, onComplete);
@@ -69,11 +78,21 @@ const Clubs = () => {
       };
       const onComplete = () => {
         console.log("onComplete");
-        avatarTask.snapshot.ref.getDownloadURL().then(setAvatarURL);
+        avatarTask.snapshot.ref.getDownloadURL().then((url) => {
+          setAvatarURL(url);
+          updateClubSportsAchievements(id, {
+            totalWins: club?.totalWins!,
+            maxIntGoal: club?.maxIntGoal!,
+            maxNacGoal: club?.maxNacGoal!,
+            avatarURL: url,
+            coverURL: club?.coverURL!,
+          });
+        });
       };
 
       avatarTask.on("state_changed", onProgress, onError, onComplete);
     }
+    message.success("Imagen actualizada exitosamente!");
   }, [coverTask, avatarTask]);
 
   const history = useHistory();

@@ -82,7 +82,19 @@ const Players = () => {
       };
       const onComplete = () => {
         console.log("onComplete");
-        coverTask.snapshot.ref.getDownloadURL().then(setCoverURL);
+        coverTask.snapshot.ref.getDownloadURL().then((url) => {
+          setCoverURL(url);
+          updatePlayerTacticalInfo(id, {
+            pospri: player?.pospri,
+            possec: player?.possec!,
+            firstAttribute: player?.firstAttribute!,
+            secondAttribute: player?.secondAttribute!,
+            thirdAttribute: player?.thirdAttribute!,
+            fourthAttribute: player?.fourthAttribute!,
+            coverURL: url,
+            avatarURL: player?.avatarURL!,
+          });
+        });
       };
 
       coverTask.on("state_changed", onProgress, onError, onComplete);
@@ -96,11 +108,23 @@ const Players = () => {
       };
       const onComplete = () => {
         console.log("onComplete");
-        avatarTask.snapshot.ref.getDownloadURL().then(setAvatarURL);
+        avatarTask.snapshot.ref.getDownloadURL().then((url) => {
+          setAvatarURL(url);
+          updatePlayerTacticalInfo(id, {
+            pospri: player?.pospri,
+            possec: player?.possec!,
+            firstAttribute: player?.firstAttribute!,
+            secondAttribute: player?.secondAttribute!,
+            thirdAttribute: player?.thirdAttribute!,
+            fourthAttribute: player?.fourthAttribute!,
+            coverURL: player?.coverURL!,
+            avatarURL: url,
+          });
+        });
       };
-
       avatarTask.on("state_changed", onProgress, onError, onComplete);
     }
+    message.success("Imagen guardada exitosamente!");
   }, [coverTask, avatarTask]);
 
   const history = useHistory();
