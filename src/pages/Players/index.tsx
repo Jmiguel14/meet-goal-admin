@@ -94,6 +94,7 @@ const Players = () => {
             coverURL: url,
             avatarURL: player?.avatarURL!,
           });
+          message.success("Imagen guardada exitosamente!");
         });
       };
 
@@ -120,11 +121,11 @@ const Players = () => {
             coverURL: player?.coverURL!,
             avatarURL: url,
           });
+          message.success("Imagen guardada exitosamente!");
         });
       };
       avatarTask.on("state_changed", onProgress, onError, onComplete);
     }
-    message.success("Imagen guardada exitosamente!");
   }, [coverTask, avatarTask]);
 
   const history = useHistory();

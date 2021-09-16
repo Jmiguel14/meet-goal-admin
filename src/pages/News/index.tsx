@@ -92,8 +92,8 @@ const News = () => {
             source: newsItem.source,
             image: url,
           });
+          message.success("La imagen se ha cambiado exitosamente!");
         });
-        message.success("La imagen se ha cambiado exitosamente!");
       };
 
       task.on("state_changed", onProgress, onError, onComplete);

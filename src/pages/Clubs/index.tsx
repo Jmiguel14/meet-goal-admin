@@ -64,6 +64,7 @@ const Clubs = () => {
             avatarURL: club?.avatarURL!,
             coverURL: url,
           });
+          message.success("Imagen actualizada exitosamente!");
         });
       };
 
@@ -87,12 +88,12 @@ const Clubs = () => {
             avatarURL: url,
             coverURL: club?.coverURL!,
           });
+          message.success("Imagen actualizada exitosamente!");
         });
       };
 
       avatarTask.on("state_changed", onProgress, onError, onComplete);
     }
-    message.success("Imagen actualizada exitosamente!");
   }, [coverTask, avatarTask]);
 
   const history = useHistory();
