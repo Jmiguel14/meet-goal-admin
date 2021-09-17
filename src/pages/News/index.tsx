@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 import { ListOfNews } from "../../components/ListOfNews";
 import { UpdateNewsModal } from "../../components/Modals/UpdateNewsModal";
 import { Routes } from "../../constants/routes";
-import { uploadImage } from "../../firebase/client";
+import { uploadNewsImage } from "../../firebase/client";
 import {
   deleteNewsItem,
   listenLatestNews,
@@ -84,7 +84,16 @@ const News = () => {
       };
       const onComplete = () => {
         console.log("onComplete");
-        task.snapshot.ref.getDownloadURL().then(setImgURL);
+        task.snapshot.ref.getDownloadURL().then((url) => {
+          setImgURL(url);
+          updateNewsItem(newsItem.id!, {
+            title: newsItem.title,
+            description: newsItem.description,
+            source: newsItem.source,
+            image: url,
+          });
+          message.success("La imagen se ha cambiado exitosamente!");
+        });
       };
 
       task.on("state_changed", onProgress, onError, onComplete);
@@ -105,7 +114,7 @@ const News = () => {
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0];
-    const task = uploadImage(file);
+    const task = uploadNewsImage(file, newsItem.id!);
     setTask(task);
   };
 

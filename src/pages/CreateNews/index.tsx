@@ -2,7 +2,7 @@ import { Col, Row, Form, message } from "antd";
 import React, { useEffect, useState } from "react";
 import firebase from "firebase";
 import "./styles.less";
-import { uploadImage } from "../../firebase/client";
+import { uploadNewsImage } from "../../firebase/client";
 import { addNewsItem } from "../../firebase/NewsServices";
 import { NewsFormValues } from "../../types";
 import { CreateNewsForm } from "../../components/CreateNewsForm";
@@ -23,8 +23,13 @@ const CreateNews = () => {
   const [imgURL, setImgURL] = useState<string>("");
   const [file, setFile] = useState<File | null>(null);
   const [drag, setDrag] = useState(DRAG_IMAGE_STATES.NONE);
+  const [id, setId] = useState("");
   const [form] = Form.useForm();
   const history = useHistory();
+
+  useEffect(() => {
+    setId(Date.now().toString());
+  }, []);
 
   useEffect(() => {
     if (task) {
@@ -47,14 +52,14 @@ const CreateNews = () => {
     setDrag(DRAG_IMAGE_STATES.NONE);
     const file = e.dataTransfer.files[0];
     setFile(file);
-    const task = uploadImage(file);
+    const task = uploadNewsImage(file, id);
     setTask(task);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0];
     setFile(file);
-    const task = uploadImage(file);
+    const task = uploadNewsImage(file, id);
     setTask(task);
   };
 
@@ -79,7 +84,7 @@ const CreateNews = () => {
   const onFinish = (values: NewsFormValues) => {
     const { title, description, source } = values;
     try {
-      addNewsItem({ title, description, source, image: imgURL });
+      addNewsItem({ id, title, description, source, image: imgURL });
       message.success("Noticia creada con éxito");
       form.resetFields();
       setImgURL("");

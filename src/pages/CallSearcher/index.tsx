@@ -69,14 +69,14 @@ const CallSearcher = () => {
 
   const showDeleteConfirm = (id: string) => {
     confirm({
-      title: "¿Esta seguro que desea eliminar la noticia?",
+      title: "¿Esta seguro que desea eliminar la convocatoria?",
       icon: <ExclamationCircleOutlined />,
       okText: "Sí",
       okType: "danger",
       cancelText: "No",
       onOk() {
         deleteCall(id);
-        message.success("La convocatoria se elimino correctamente!");
+        message.success("La convocatoria se eliminó correctamente!");
       },
       visible: isVisibleModal,
     });

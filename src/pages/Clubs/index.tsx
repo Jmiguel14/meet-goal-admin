@@ -10,7 +10,7 @@ import {
 } from "../../types";
 import firebase from "firebase/app";
 import "./styles.less";
-import { uploadImage } from "../../firebase/client";
+import { uploadProfilesImage } from "../../firebase/client";
 import moment from "moment";
 import {
   listeningSingleClub,
@@ -55,7 +55,17 @@ const Clubs = () => {
       };
       const onComplete = () => {
         console.log("onComplete");
-        coverTask.snapshot.ref.getDownloadURL().then(setCoverURL);
+        coverTask.snapshot.ref.getDownloadURL().then((url) => {
+          setCoverURL(url);
+          updateClubSportsAchievements(id, {
+            totalWins: club?.totalWins!,
+            maxIntGoal: club?.maxIntGoal!,
+            maxNacGoal: club?.maxNacGoal!,
+            avatarURL: club?.avatarURL!,
+            coverURL: url,
+          });
+          message.success("Imagen actualizada exitosamente!");
+        });
       };
 
       coverTask.on("state_changed", onProgress, onError, onComplete);
@@ -69,7 +79,17 @@ const Clubs = () => {
       };
       const onComplete = () => {
         console.log("onComplete");
-        avatarTask.snapshot.ref.getDownloadURL().then(setAvatarURL);
+        avatarTask.snapshot.ref.getDownloadURL().then((url) => {
+          setAvatarURL(url);
+          updateClubSportsAchievements(id, {
+            totalWins: club?.totalWins!,
+            maxIntGoal: club?.maxIntGoal!,
+            maxNacGoal: club?.maxNacGoal!,
+            avatarURL: url,
+            coverURL: club?.coverURL!,
+          });
+          message.success("Imagen actualizada exitosamente!");
+        });
       };
 
       avatarTask.on("state_changed", onProgress, onError, onComplete);
@@ -141,13 +161,13 @@ const Clubs = () => {
 
   const handleCoverChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0];
-    const task = uploadImage(file);
+    const task = uploadProfilesImage(file, id, "cover");
     setCoverTask(task);
   };
 
   const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0];
-    const task = uploadImage(file);
+    const task = uploadProfilesImage(file, id, "avatar");
     setAvatarTask(task);
   };
 

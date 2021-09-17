@@ -3,18 +3,22 @@ import firebase from "firebase/app";
 import { NewsFormValues } from "../types";
 
 export const addNewsItem = ({
+  id,
   title,
   description,
   source,
   image,
 }: NewsFormValues) => {
-  return firestore.collection("news").add({
-    title,
-    description,
-    source,
-    image,
-    createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
-  });
+  return firestore
+    .collection("news")
+    .doc(id)
+    .set({
+      title,
+      description,
+      source,
+      image,
+      createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
+    });
 };
 
 export const listenLatestNews = (

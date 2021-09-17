@@ -23,7 +23,7 @@ import {
 } from "../../types";
 import firebase from "firebase/app";
 import "./styles.less";
-import { uploadImage } from "../../firebase/client";
+import { uploadProfilesImage } from "../../firebase/client";
 import { PlayerPersonalnfo } from "../../components/PlayerPersonalnfo";
 import { UpdatePlayerTacticalInfoModal } from "../../components/Modals/UpdatePlayerTacticalInfoModal";
 import { PlayerTacticalInfo } from "../../components/PlayerTacticalInfo";
@@ -72,8 +72,6 @@ const Players = () => {
     PlayerInjury[] | undefined
   >([]);
   const [playerInjury, setPlayerInjury] = useState<PlayerInjury>();
-  console.log("playerInjuries", playerInjuries);
-  console.log("playerInjury", playerInjury);
   useEffect(() => {
     if (coverTask) {
       const onProgress = () => {
@@ -84,7 +82,20 @@ const Players = () => {
       };
       const onComplete = () => {
         console.log("onComplete");
-        coverTask.snapshot.ref.getDownloadURL().then(setCoverURL);
+        coverTask.snapshot.ref.getDownloadURL().then((url) => {
+          setCoverURL(url);
+          updatePlayerTacticalInfo(id, {
+            pospri: player?.pospri,
+            possec: player?.possec!,
+            firstAttribute: player?.firstAttribute!,
+            secondAttribute: player?.secondAttribute!,
+            thirdAttribute: player?.thirdAttribute!,
+            fourthAttribute: player?.fourthAttribute!,
+            coverURL: url,
+            avatarURL: player?.avatarURL!,
+          });
+          message.success("Imagen guardada exitosamente!");
+        });
       };
 
       coverTask.on("state_changed", onProgress, onError, onComplete);
@@ -98,9 +109,21 @@ const Players = () => {
       };
       const onComplete = () => {
         console.log("onComplete");
-        avatarTask.snapshot.ref.getDownloadURL().then(setAvatarURL);
+        avatarTask.snapshot.ref.getDownloadURL().then((url) => {
+          setAvatarURL(url);
+          updatePlayerTacticalInfo(id, {
+            pospri: player?.pospri,
+            possec: player?.possec!,
+            firstAttribute: player?.firstAttribute!,
+            secondAttribute: player?.secondAttribute!,
+            thirdAttribute: player?.thirdAttribute!,
+            fourthAttribute: player?.fourthAttribute!,
+            coverURL: player?.coverURL!,
+            avatarURL: url,
+          });
+          message.success("Imagen guardada exitosamente!");
+        });
       };
-
       avatarTask.on("state_changed", onProgress, onError, onComplete);
     }
   }, [coverTask, avatarTask]);
@@ -233,13 +256,13 @@ const Players = () => {
 
   const handleCoverChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0];
-    const task = uploadImage(file);
+    const task = uploadProfilesImage(file, id, "cover");
     setCoverTask(task);
   };
 
   const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0];
-    const task = uploadImage(file);
+    const task = uploadProfilesImage(file, id, "avatar");
     setAvatarTask(task);
   };
 

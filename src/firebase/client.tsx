@@ -23,3 +23,14 @@ export const uploadImage = (file: File) => {
   const task = ref.put(file);
   return task;
 };
+
+export const uploadProfilesImage = (file: File, id: string, name: string) => {
+  const ref = firebase.storage().ref(`images/${id}/${name}`);
+  const task = ref.put(file);
+  return task;
+};
+export const uploadNewsImage = (file: File, id: string) => {
+  const ref = firebase.storage().ref(`images/${id}/${"cover"}`);
+  const task = ref.put(file);
+  return task;
+};

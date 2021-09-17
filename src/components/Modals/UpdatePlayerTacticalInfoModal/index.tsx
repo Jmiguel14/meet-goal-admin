@@ -1,5 +1,14 @@
-import { CameraOutlined } from "@ant-design/icons";
-import { Avatar, Form, FormInstance, Modal, Select, Typography } from "antd";
+import { CameraOutlined, CaretRightOutlined } from "@ant-design/icons";
+import {
+  Alert,
+  Avatar,
+  Collapse,
+  Form,
+  FormInstance,
+  Modal,
+  Select,
+  Typography,
+} from "antd";
 import React from "react";
 import { PLAYER_ATTRIBUTES } from "../../../constants/playerAttributes";
 import { PLAYER_POSITIONS } from "../../../constants/playerPositions";
@@ -71,6 +80,7 @@ export const UpdatePlayerTacticalInfoModal = ({
   onHandleCoverChange,
   onHandleAvatarChange,
 }: UpdatePlayerTacticalInfoModalProps) => {
+  const { Panel } = Collapse;
   return (
     <Modal
       bodyStyle={{ height: "100%" }}
@@ -84,50 +94,76 @@ export const UpdatePlayerTacticalInfoModal = ({
         form: "player_tactical_info_edit_form",
       }}
     >
+      <br />
       <Form form={form} onFinish={onFinish} id="player_tactical_info_edit_form">
-        <div className="image">
-          <CameraOutlined className="edit_image_button" />
-          <input
-            className="file_input"
-            type="file"
-            accept="image/png, image/jpeg"
-            onChange={onHandleCoverChange}
-          />
-
-          <img alt="" className="edit_image" src={coverURL} />
-          <figure className="edit_avatar">
-            <Avatar className="edit_avatar_content" src={avatarURL} />
-          </figure>
-          <div className="edit_avatar_button">
-            <input
-              className="file_input_avatar"
-              type="file"
-              accept="image/png, image/jpeg"
-              onChange={onHandleAvatarChange}
-            />
-            <CameraOutlined />
-          </div>
-        </div>
-
-        <Form.Item
-          name="pospri"
-          label="Posición principal"
-          rules={[
-            {
-              required: true,
-              message: "Por favor, ingrese la posición principal!",
-            },
-          ]}
+        <Collapse
+          accordion
+          defaultActiveKey={1}
+          expandIcon={({ isActive }) => (
+            <CaretRightOutlined rotate={isActive ? 90 : 0} />
+          )}
         >
-          <Select options={PLAYER_POSITIONS_OPTIONS}></Select>
-        </Form.Item>
-        <Form.Item name="possec" label="Posición secundaria">
-          <Select options={PLAYER_POSITIONS_OPTIONS}></Select>
-        </Form.Item>
-        <Text style={{ fontWeight: "bold" }}>Atributos</Text>
-        <Form.Item name="attributes">
-          <Select mode="tags" options={PLAYER_ATTRIBUTES_OPTIONS}></Select>
-        </Form.Item>
+          <Panel
+            className="edit-section-title"
+            header="Editar información táctica"
+            key="1"
+          >
+            <Form.Item
+              name="pospri"
+              label="Posición principal"
+              rules={[
+                {
+                  required: true,
+                  message: "Por favor, ingrese la posición principal!",
+                },
+              ]}
+            >
+              <Select options={PLAYER_POSITIONS_OPTIONS}></Select>
+            </Form.Item>
+            <Form.Item name="possec" label="Posición secundaria">
+              <Select options={PLAYER_POSITIONS_OPTIONS}></Select>
+            </Form.Item>
+            <Text style={{ fontWeight: "bold" }}>Atributos</Text>
+            <Form.Item name="attributes">
+              <Select mode="tags" options={PLAYER_ATTRIBUTES_OPTIONS}></Select>
+            </Form.Item>
+          </Panel>
+          <Panel
+            className="edit-section-title"
+            header="Editar imágenes del futbolista"
+            key="2"
+          >
+            <Alert
+              message="La imagen se cambia automáticamente"
+              type="warning"
+              showIcon
+            />
+            <br />
+            <div className="image">
+              <CameraOutlined className="edit_image_button" />
+              <input
+                className="file_input"
+                type="file"
+                accept="image/png, image/jpeg"
+                onChange={onHandleCoverChange}
+              />
+
+              <img alt="" className="edit_image" src={coverURL} />
+              <figure className="edit_avatar">
+                <Avatar className="edit_avatar_content" src={avatarURL} />
+              </figure>
+              <div className="edit_avatar_button">
+                <input
+                  className="file_input_avatar"
+                  type="file"
+                  accept="image/png, image/jpeg"
+                  onChange={onHandleAvatarChange}
+                />
+                <CameraOutlined />
+              </div>
+            </div>
+          </Panel>
+        </Collapse>
       </Form>
     </Modal>
   );
