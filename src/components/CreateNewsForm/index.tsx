@@ -19,6 +19,10 @@ export const CreateNewsForm = ({ form, onFinish }: CreateNewsFormProps) => {
             required: true,
             message: "Por favor, ingrese el título de la noticia!",
           },
+          {
+            pattern: /^[A-Za-z0-9!@#$%_\-^&*]+/,
+            message: "Entrada no válida",
+          },
         ]}
       >
         <Input placeholder="Título de la noticia" />
@@ -31,11 +35,24 @@ export const CreateNewsForm = ({ form, onFinish }: CreateNewsFormProps) => {
             required: true,
             message: "Por favor, ingrese la descripción de la noticia!",
           },
+          {
+            pattern: /^[A-Za-z0-9!@#$%_\-^&*]+/,
+            message: "Entrada no válida",
+          },
         ]}
       >
         <TextArea placeholder="Descripción de la noticia" />
       </Form.Item>
-      <Form.Item name="source" label="Fuente">
+      <Form.Item
+        name="source"
+        label="Fuente"
+        rules={[
+          {
+            pattern: /^[A-Za-z0-9!@#$%_\-^&*]+/,
+            message: "Entrada no válida",
+          },
+        ]}
+      >
         <Input placeholder="Ejm: www.instagram.com" />
       </Form.Item>
       <Row justify="center">
