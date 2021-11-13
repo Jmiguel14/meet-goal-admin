@@ -35,6 +35,7 @@ export const UpdatePlayerExperienceModal = ({
         onFinish={onFinishPlayerExperinceForm}
         id="player_experience_edit_form"
       >
+        <br />
         <Form.Item
           name="clubName"
           label="Nombre de club"
@@ -42,6 +43,10 @@ export const UpdatePlayerExperienceModal = ({
             {
               required: true,
               message: "Por favor, ingrese el nombre de club",
+            },
+            {
+              pattern: /^[A-Za-z0-9!@#$%_\-^&*]+/,
+              message: "Entrada no válida",
             },
           ]}
         >
@@ -55,6 +60,10 @@ export const UpdatePlayerExperienceModal = ({
               required: true,
               message: "Por favor, ingrese el país del club",
             },
+            {
+              pattern: /^[A-Za-z0-9!@#$%_\-^&*]+/,
+              message: "Entrada no válida",
+            },
           ]}
         >
           <Input />
@@ -66,6 +75,14 @@ export const UpdatePlayerExperienceModal = ({
             {
               required: true,
               message: "Por favor, ingrese la temporada",
+            },
+            {
+              pattern: /^\d+$/,
+              message: "Digite un número",
+            },
+            {
+              max: 4,
+              message: "Ingrese el año de temporada",
             },
           ]}
         >
@@ -79,6 +96,14 @@ export const UpdatePlayerExperienceModal = ({
               required: true,
               message: "Por favor, ingrese total de asistencias",
             },
+            {
+              pattern: /^\d+$/,
+              message: "Digite un número",
+            },
+            {
+              max: 4,
+              message: "Ingrese una cantidad correcta",
+            },
           ]}
         >
           <Input />
@@ -90,6 +115,14 @@ export const UpdatePlayerExperienceModal = ({
             {
               required: true,
               message: "Por favor, ingrese el total de goles",
+            },
+            {
+              pattern: /^\d+$/,
+              message: "Digite un número",
+            },
+            {
+              max: 4,
+              message: "Ingrese una cantidad correcta",
             },
           ]}
         >
@@ -103,6 +136,14 @@ export const UpdatePlayerExperienceModal = ({
               required: true,
               message: "Por favor, ingrese los partidos jugados",
             },
+            {
+              pattern: /^\d+$/,
+              message: "Digite un número",
+            },
+            {
+              max: 4,
+              message: "Ingrese una cantidad correcta",
+            },
           ]}
         >
           <Input />
@@ -115,6 +156,14 @@ export const UpdatePlayerExperienceModal = ({
               required: true,
               message: "Por favor, ingrese el total de tarjetas amarillas",
             },
+            {
+              pattern: /^\d+$/,
+              message: "Digite un número",
+            },
+            {
+              max: 4,
+              message: "Ingrese una cantidad correcta",
+            },
           ]}
         >
           <Input />
@@ -126,6 +175,14 @@ export const UpdatePlayerExperienceModal = ({
             {
               required: true,
               message: "Por favor, ingrese el total de tarjetas rojas",
+            },
+            {
+              pattern: /^\d+$/,
+              message: "Digite un número",
+            },
+            {
+              max: 4,
+              message: "Ingrese una cantidad correcta",
             },
           ]}
         >
@@ -140,6 +197,10 @@ export const UpdatePlayerExperienceModal = ({
               required: true,
               message: "Por favor, ingrese el nivel de competencia",
             },
+            {
+              pattern: /^[A-Za-z0-9!@#$%_\-^&*]+/,
+              message: "Entrada no válida",
+            },
           ]}
         >
           <Input />
@@ -152,6 +213,10 @@ export const UpdatePlayerExperienceModal = ({
             {
               required: true,
               message: "Por favor, ingrese la categoría del jugador",
+            },
+            {
+              pattern: /^[A-Za-z0-9!@#$%_\-^&*]+/,
+              message: "Entrada no válida",
             },
           ]}
         >

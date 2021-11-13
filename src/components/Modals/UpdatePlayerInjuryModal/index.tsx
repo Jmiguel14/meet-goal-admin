@@ -33,6 +33,7 @@ export const UpdatePlayerInjuryModal = ({
         onFinish={onFinishPlayerInjuryForm}
         id="player_injury_edit_form"
       >
+        <br />
         <Form.Item
           name="injuryName"
           label="Nombre de lesión"
@@ -40,6 +41,10 @@ export const UpdatePlayerInjuryModal = ({
             {
               required: true,
               message: "Por favor, ingrese el nombre de la lesión",
+            },
+            {
+              pattern: /^[A-Za-z0-9!@#$%_\-^&*]+/,
+              message: "Entrada no válida",
             },
           ]}
         >
@@ -53,6 +58,10 @@ export const UpdatePlayerInjuryModal = ({
               required: true,
               message: "Por favor, ingrese el tiempo de recuperación",
             },
+            {
+              pattern: /^[A-Za-z0-9!@#$%_\-^&*]+/,
+              message: "Entrada no válida",
+            },
           ]}
         >
           <Input />
@@ -64,6 +73,10 @@ export const UpdatePlayerInjuryModal = ({
             {
               required: true,
               message: "Por favor, marque si hubo cirugía",
+            },
+            {
+              pattern: /^[A-Za-z0-9!@#$%_\-^&*]+/,
+              message: "Entrada no válida",
             },
           ]}
         >
