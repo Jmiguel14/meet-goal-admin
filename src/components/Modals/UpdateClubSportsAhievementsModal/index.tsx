@@ -65,7 +65,20 @@ export const UpdateClubSportsAchievementsModal = ({
             header="Editar información de logros"
             key="1"
           >
-            <Form.Item name="totalWins" label="Cantidad de logros obtenidos">
+            <Form.Item
+              name="totalWins"
+              label="Cantidad de logros obtenidos"
+              rules={[
+                {
+                  required: true,
+                  message: "Por favor, ingrese la cantidad de logros obtenidos",
+                },
+                {
+                  max: 4,
+                  message: "Ingrese una cantidad correcta",
+                },
+              ]}
+            >
               <Input type="number" />
             </Form.Item>
             <Form.Item
@@ -75,6 +88,10 @@ export const UpdateClubSportsAchievementsModal = ({
                 {
                   required: true,
                   message: "Por favor, ingrese el máximo logro internacional",
+                },
+                {
+                  pattern: /^[A-Za-z0-9!@#$%_\-^&*]+/,
+                  message: "Entrada no válida",
                 },
               ]}
             >
@@ -87,6 +104,10 @@ export const UpdateClubSportsAchievementsModal = ({
                 {
                   required: true,
                   message: "Por favor, ingrese el máximo logro nacional",
+                },
+                {
+                  pattern: /^[A-Za-z0-9!@#$%_\-^&*]+/,
+                  message: "Entrada no válida",
                 },
               ]}
             >

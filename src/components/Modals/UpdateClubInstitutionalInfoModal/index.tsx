@@ -33,6 +33,7 @@ export const UpdateClubInstitutionalInfoModal = ({
         onFinish={onFinish}
         id="club_institutional_info_edit_form"
       >
+        <br />
         <Form.Item
           name="name"
           label="Nombre"
@@ -41,11 +42,28 @@ export const UpdateClubInstitutionalInfoModal = ({
               required: true,
               message: "Por favor, ingrese un nombre",
             },
+            {
+              pattern: /^[A-Za-z0-9!@#$%_\-^&*]+/,
+              message: "Entrada no válida",
+            },
           ]}
         >
           <Input />
         </Form.Item>
-        <Form.Item name="socialName" label="Razón social">
+        <Form.Item
+          name="socialName"
+          label="Razón social"
+          rules={[
+            {
+              required: true,
+              message: "Por favor, ingrese un nombre",
+            },
+            {
+              pattern: /^[A-Za-z0-9!@#$%_\-^&*]+/,
+              message: "Entrada no válida",
+            },
+          ]}
+        >
           <Input />
         </Form.Item>
         <Form.Item
@@ -55,6 +73,14 @@ export const UpdateClubInstitutionalInfoModal = ({
             {
               required: true,
               message: "Por favor, ingrese el teléfono",
+            },
+            {
+              pattern: /^\d+$/,
+              message: "Número no válido",
+            },
+            {
+              max: 12,
+              message: "Número no válido",
             },
           ]}
         >
@@ -68,6 +94,10 @@ export const UpdateClubInstitutionalInfoModal = ({
               required: true,
               message: "Por favor, ingrese la ciudad",
             },
+            {
+              pattern: /^[A-Za-z0-9!@#$%_\-^&*]+/,
+              message: "Entrada no válida",
+            },
           ]}
         >
           <Input />
@@ -79,6 +109,10 @@ export const UpdateClubInstitutionalInfoModal = ({
             {
               required: true,
               message: "Por favor, ingrese el país",
+            },
+            {
+              pattern: /^[A-Za-z0-9!@#$%_\-^&*]+/,
+              message: "Entrada no válida",
             },
           ]}
         >
