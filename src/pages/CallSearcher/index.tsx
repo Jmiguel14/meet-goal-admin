@@ -1,5 +1,5 @@
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import { message, Modal } from "antd";
+import { Alert, message, Modal } from "antd";
 import { useEffect, useState } from "react";
 import { ListOfCalls } from "../../components/ListOfCalls";
 import { Search } from "../../components/Search";
@@ -88,6 +88,19 @@ const CallSearcher = () => {
         onChange={(e) => setSearchText(e.target.value)}
         placeholder={"Buscar por categoria o posición"}
       />
+      <div
+        style={{
+          justifyContent: "center",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <Alert
+          message="Solo existe la opción de eliminar para aquellas convocatorias que no tienen jugadores postulantes"
+          type="warning"
+        />
+      </div>
+      <br />
       <ListOfCalls
         calls={filteredCalls}
         onShowModal={showModal}
