@@ -1,4 +1,4 @@
-import { Form, FormInstance, Input, Modal } from "antd";
+import { Form, FormInstance, Input, Modal, Switch } from "antd";
 import React from "react";
 import { PlayerInjury } from "../../../types";
 
@@ -15,6 +15,9 @@ export const UpdatePlayerInjuryModal = ({
   isVisiblePlayerInjuryModal,
   onFinishPlayerInjuryForm,
 }: UpdatePlayerInjuryModalProps) => {
+  function onChange(checked: boolean) {
+    console.log(`switch to ${checked}`);
+  }
   return (
     <Modal
       bodyStyle={{ height: "100%" }}
@@ -33,6 +36,7 @@ export const UpdatePlayerInjuryModal = ({
         onFinish={onFinishPlayerInjuryForm}
         id="player_injury_edit_form"
       >
+        <br />
         <Form.Item
           name="injuryName"
           label="Nombre de lesión"
@@ -60,14 +64,14 @@ export const UpdatePlayerInjuryModal = ({
         <Form.Item
           name="surgery"
           label="Cirugía"
+          valuePropName="checked"
           rules={[
             {
               required: true,
-              message: "Por favor, marque si hubo cirugía",
             },
           ]}
         >
-          <Input />
+          <Switch onChange={onChange}></Switch>
         </Form.Item>
       </Form>
     </Modal>
