@@ -35,6 +35,7 @@ export const UpdatePlayerExperienceModal = ({
         onFinish={onFinishPlayerExperinceForm}
         id="player_experience_edit_form"
       >
+        <br />
         <Form.Item
           name="clubName"
           label="Nombre de club"
