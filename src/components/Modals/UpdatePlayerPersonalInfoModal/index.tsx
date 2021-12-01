@@ -60,7 +60,7 @@ export const UpdatePlayerPersonalInfoModal = ({
             },
             {
               max: 12,
-              message: "Número no válido",
+              message: "Longitud del número incorrecta",
             },
           ]}
         >
