@@ -62,10 +62,16 @@ export const ListOfCalls = ({
                   <Link to={`/convocatorias/${call.id}`}>
                     <EyeOutlined key="watch" />
                   </Link>,
-                  <DeleteOutlined
-                    key="watch"
-                    onClick={() => onShowDeleteConfirm(call.id!)}
-                  />,
+                  Object.keys(call.postulatedPlayers).length === 0 ? (
+                    <>
+                      <DeleteOutlined
+                        key="watch"
+                        onClick={() => onShowDeleteConfirm(call.id!)}
+                      />
+                    </>
+                  ) : (
+                    ""
+                  ),
                 ]}
               >
                 <Skeleton loading={loading} active>

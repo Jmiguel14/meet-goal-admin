@@ -45,6 +45,10 @@ export const UpdatePlayerInjuryModal = ({
               required: true,
               message: "Por favor, ingrese el nombre de la lesión",
             },
+            {
+              pattern: /^[A-Za-z0-9!@#$%_\-^&*]+/,
+              message: "Entrada no válida",
+            },
           ]}
         >
           <Input />
@@ -57,6 +61,10 @@ export const UpdatePlayerInjuryModal = ({
               required: true,
               message: "Por favor, ingrese el tiempo de recuperación",
             },
+            {
+              pattern: /^[A-Za-z0-9!@#$%_\-^&*]+/,
+              message: "Entrada no válida",
+            },
           ]}
         >
           <Input />
@@ -68,6 +76,10 @@ export const UpdatePlayerInjuryModal = ({
           rules={[
             {
               required: true,
+            },
+            {
+              pattern: /^[A-Za-z0-9!@#$%_\-^&*]+/,
+              message: "Entrada no válida",
             },
           ]}
         >

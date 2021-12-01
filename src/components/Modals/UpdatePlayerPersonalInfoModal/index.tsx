@@ -29,6 +29,7 @@ export const UpdatePlayerPersonalInfoModal = ({
       }}
     >
       <Form form={form} onFinish={onFinish} id="player_personal_info_edit_form">
+        <br />
         <Form.Item
           name="name"
           label="Nombre"
@@ -36,6 +37,10 @@ export const UpdatePlayerPersonalInfoModal = ({
             {
               required: true,
               message: "Por favor, ingrese un nombre",
+            },
+            {
+              pattern: /^[A-Za-z0-9!@#$%_\-^&*]+/,
+              message: "Entrada no válida",
             },
           ]}
         >
@@ -49,6 +54,14 @@ export const UpdatePlayerPersonalInfoModal = ({
               required: true,
               message: "Por favor, ingrese el teléfono",
             },
+            {
+              pattern: /^\d+$/,
+              message: "Número no válido",
+            },
+            {
+              max: 12,
+              message: "Número no válido",
+            },
           ]}
         >
           <Input />
@@ -61,6 +74,10 @@ export const UpdatePlayerPersonalInfoModal = ({
               required: true,
               message: "Por favor, ingrese la ciudad",
             },
+            {
+              pattern: /^[A-Za-z0-9!@#$%_\-^&*]+/,
+              message: "Entrada no válida",
+            },
           ]}
         >
           <Input />
@@ -72,6 +89,10 @@ export const UpdatePlayerPersonalInfoModal = ({
             {
               required: true,
               message: "Por favor, ingrese el país",
+            },
+            {
+              pattern: /^[A-Za-z0-9!@#$%_\-^&*]+/,
+              message: "Entrada no válida",
             },
           ]}
         >
@@ -89,10 +110,28 @@ export const UpdatePlayerPersonalInfoModal = ({
         >
           <DatePicker />
         </Form.Item>
-        <Form.Item name="category" label="Categoría">
+        <Form.Item
+          name="category"
+          label="Categoría"
+          rules={[
+            {
+              pattern: /^[A-Za-z0-9!@#$%_\-^&*]+/,
+              message: "Entrada no válida",
+            },
+          ]}
+        >
           <Input />
         </Form.Item>
-        <Form.Item name="contract" label="Contrato">
+        <Form.Item
+          name="contract"
+          label="Contrato"
+          rules={[
+            {
+              pattern: /^[A-Za-z0-9!@#$%_\-^&*]+/,
+              message: "Entrada no válida",
+            },
+          ]}
+        >
           <Input />
         </Form.Item>
       </Form>

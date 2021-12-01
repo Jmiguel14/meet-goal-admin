@@ -54,13 +54,48 @@ export const UpdateNewsModal = ({
             header="Editar los detalles de la noticia"
             key="1"
           >
-            <Form.Item name="title" label="Título de la noticia">
+            <Form.Item
+              name="title"
+              label="Título de la noticia"
+              rules={[
+                {
+                  required: true,
+                  message: "Por favor, ingrese el título de la noticia",
+                },
+                {
+                  pattern: /^[A-Za-z0-9!@#$%_\-^&*]+/,
+                  message: "Entrada no válida",
+                },
+              ]}
+            >
               <Input />
             </Form.Item>
-            <Form.Item name="description" label="Descripción de la noticia">
+            <Form.Item
+              name="description"
+              label="Descripción de la noticia"
+              rules={[
+                {
+                  required: true,
+                  message: "Por favor, ingrese la descripción de la noticia",
+                },
+                {
+                  pattern: /^[A-Za-z0-9!@#$%_\-^&*]+/,
+                  message: "Entrada no válida",
+                },
+              ]}
+            >
               <Input />
             </Form.Item>
-            <Form.Item name="source" label="Fuente de la noticia">
+            <Form.Item
+              name="source"
+              label="Fuente de la noticia"
+              rules={[
+                {
+                  pattern: /^[A-Za-z0-9!@#$%_\-^&*]+/,
+                  message: "Entrada no válida",
+                },
+              ]}
+            >
               <Input />
             </Form.Item>
           </Panel>

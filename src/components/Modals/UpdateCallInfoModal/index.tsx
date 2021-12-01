@@ -38,6 +38,10 @@ export const UpdateCallInfoModal = ({
               required: true,
               message: "Por favor, ingrese los detalles",
             },
+            {
+              pattern: /^[A-Za-z0-9!@#$%_\-^&*]+/,
+              message: "Entrada no válida",
+            },
           ]}
         >
           <Input />
