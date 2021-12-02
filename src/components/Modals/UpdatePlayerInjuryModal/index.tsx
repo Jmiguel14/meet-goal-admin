@@ -77,10 +77,6 @@ export const UpdatePlayerInjuryModal = ({
             {
               required: true,
             },
-            {
-              pattern: /^[A-Za-z0-9!@#$%_\-^&*]+/,
-              message: "Entrada no válida",
-            },
           ]}
         >
           <Switch onChange={onChange}></Switch>
